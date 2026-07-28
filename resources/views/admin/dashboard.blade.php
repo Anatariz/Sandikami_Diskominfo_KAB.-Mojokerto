@@ -20,6 +20,12 @@
         <strong>Perhatian:</strong> Halaman ini adalah area admin untuk melihat pengajuan layanan dan pengaduan.
     </div>
 
+    @if(session('success'))
+    <div class="alert alert-success mb-4" style="background-color: #2ecc71; color: white; padding: 15px; border-radius: 8px; border: none;">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <h2 class="mb-3">Daftar Pengajuan Layanan</h2>
     <div class="card p-0 mb-5" style="overflow-x: auto;">
         <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
@@ -42,8 +48,13 @@
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $l->perangkat_daerah }}</td>
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);"><span class="badge badge-secondary">{{ $l->status }}</span></td>
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">
-                        <!-- Tombol Detail dummy -->
-                        <a href="#" onclick="alert('Fitur detail akan datang pada pengembangan sistem ticketing.')" class="btn btn-sm btn-primary" style="padding: 5px 10px; font-size: 0.8rem;">Lihat Detail</a>
+                        <a href="{{ route('admin.layanan.show', $l->id) }}" class="btn btn-sm btn-info" style="padding: 5px 10px; font-size: 0.8rem; background-color: #3498db; border-color: #3498db; color: white;">Detail</a>
+                        <a href="{{ route('admin.layanan.edit', $l->id) }}" class="btn btn-sm btn-warning" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f1c40f; border-color: #f1c40f; color: black;">Edit</a>
+                        <form action="{{ route('admin.layanan.destroy', $l->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c; border-color: #e74c3c; color: white;">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @empty

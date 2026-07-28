@@ -2,14 +2,14 @@
 
 :root {
   /* Colors */
-  --color-primary: #0A192F; /* Deep Navy */
-  --color-primary-light: #112240;
-  --color-primary-lighter: #233554;
-  --color-secondary: #00D8FF; /* Cyan Accent */
+  --color-primary: #004b87; /* Kominfo Blue */
+  --color-primary-light: #005c9e;
+  --color-primary-lighter: #006eb8;
+  --color-secondary: #00a8e8; /* Lighter Blue Accent */
   --color-accent: #FFC107; /* Gold Accent */
-  --color-bg: #020C1B;
-  --color-text: #CCD6F6;
-  --color-text-muted: #8892B0;
+  --color-bg: #001a33; /* Dark Blue Background */
+  --color-text: #e0f2fe;
+  --color-text-muted: #93c5fd;
   --color-white: #FFFFFF;
   
   --color-success: #10B981;
@@ -24,7 +24,7 @@
   --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  --glass-bg: rgba(17, 34, 64, 0.7);
+  --glass-bg: rgba(0, 75, 135, 0.7);
   --glass-border: rgba(255, 255, 255, 0.1);
 
   /* Transitions */
@@ -103,7 +103,7 @@ img {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(2, 12, 27, 0.85);
+  background: rgba(0, 26, 51, 0.85);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--glass-border);
   transition: all var(--transition-normal);

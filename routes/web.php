@@ -43,4 +43,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 use App\Http\Controllers\AdminController;
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/layanan/{id}', [AdminController::class, 'showLayanan'])->name('admin.layanan.show');
+    Route::get('/admin/layanan/{id}/edit', [AdminController::class, 'editLayanan'])->name('admin.layanan.edit');
+    Route::put('/admin/layanan/{id}', [AdminController::class, 'updateLayanan'])->name('admin.layanan.update');
+    Route::delete('/admin/layanan/{id}', [AdminController::class, 'destroyLayanan'])->name('admin.layanan.destroy');
 });
