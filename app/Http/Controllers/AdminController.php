@@ -48,4 +48,41 @@ class AdminController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Data layanan berhasil dihapus.');
     }
+
+    public function showPengaduan($id)
+    {
+        $pengaduan = Pengaduan::findOrFail($id);
+        return view('admin.pengaduan.show', compact('pengaduan'));
+    }
+
+    public function editPengaduan($id)
+    {
+        $pengaduan = Pengaduan::findOrFail($id);
+        return view('admin.pengaduan.edit', compact('pengaduan'));
+    }
+
+    public function updatePengaduan(Request $request, $id)
+    {
+        $pengaduan = Pengaduan::findOrFail($id);
+        
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            'wa' => 'required|string|max:20',
+            'kategori' => 'required|string|max:255',
+            'pesan' => 'required|string',
+        ]);
+
+        $pengaduan->update($request->all());
+
+        return redirect()->route('admin.dashboard')->with('success', 'Data pengaduan berhasil diperbarui.');
+    }
+
+    public function destroyPengaduan($id)
+    {
+        $pengaduan = Pengaduan::findOrFail($id);
+        $pengaduan->delete();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Data pengaduan berhasil dihapus.');
+    }
 }

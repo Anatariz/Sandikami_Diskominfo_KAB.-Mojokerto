@@ -16,9 +16,6 @@
         </div>
     </div>
     
-    <div class="alert alert-info mb-4" style="background-color: var(--color-primary-lighter); padding: 15px; border-radius: 8px;">
-        <strong>Perhatian:</strong> Halaman ini adalah area admin untuk melihat pengajuan layanan dan pengaduan.
-    </div>
 
     @if(session('success'))
     <div class="alert alert-success mb-4" style="background-color: #2ecc71; color: white; padding: 15px; border-radius: 8px; border: none;">
@@ -76,6 +73,7 @@
                     <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">Judul</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">Pelapor</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">No WA</th>
+                    <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,10 +84,19 @@
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $p->judul }}</td>
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $p->nama }}</td>
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $p->wa }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">
+                        <a href="{{ route('admin.pengaduan.show', $p->id) }}" class="btn btn-sm btn-info" style="padding: 5px 10px; font-size: 0.8rem; background-color: #3498db; border-color: #3498db; color: white; min-width: 70px; text-align: center; display: inline-block;">Detail</a>
+                        <a href="{{ route('admin.pengaduan.edit', $p->id) }}" class="btn btn-sm btn-warning" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f1c40f; border-color: #f1c40f; color: black; min-width: 70px; text-align: center; display: inline-block;">Edit</a>
+                        <form action="{{ route('admin.pengaduan.destroy', $p->id) }}" method="POST" style="display: inline-block; margin: 0;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c; border-color: #e74c3c; color: white; min-width: 70px; text-align: center; display: inline-block;">Hapus</button>
+                        </form>
+                    </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" style="padding: 12px; text-align: center; border-bottom: 1px solid var(--glass-border);">Belum ada pengaduan.</td>
+                    <td colspan="6" style="padding: 12px; text-align: center; border-bottom: 1px solid var(--glass-border);">Belum ada pengaduan.</td>
                 </tr>
                 @endforelse
             </tbody>

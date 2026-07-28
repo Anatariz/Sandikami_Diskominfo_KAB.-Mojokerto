@@ -47,4 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/layanan/{id}/edit', [AdminController::class, 'editLayanan'])->name('admin.layanan.edit');
     Route::put('/admin/layanan/{id}', [AdminController::class, 'updateLayanan'])->name('admin.layanan.update');
     Route::delete('/admin/layanan/{id}', [AdminController::class, 'destroyLayanan'])->name('admin.layanan.destroy');
+
+    Route::get('/admin/pengaduan/{id}', [AdminController::class, 'showPengaduan'])->name('admin.pengaduan.show');
+    Route::get('/admin/pengaduan/{id}/edit', [AdminController::class, 'editPengaduan'])->name('admin.pengaduan.edit');
+    Route::put('/admin/pengaduan/{id}', [AdminController::class, 'updatePengaduan'])->name('admin.pengaduan.update');
+    Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
 });
