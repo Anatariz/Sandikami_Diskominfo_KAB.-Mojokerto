@@ -24,7 +24,7 @@
         </div>
         <div>
           <span class="logo-text">SANDIKAMI</span>
-          <span class="logo-sub">Diskominfo Kab. Mojokerto</span>
+          <span class="logo-sub">Dinas Komunikasi Dan Informatika Kab. Mojokerto</span>
         </div>
       </a>
       

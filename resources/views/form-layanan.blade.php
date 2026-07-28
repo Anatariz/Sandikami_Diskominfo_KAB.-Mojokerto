@@ -48,5 +48,5 @@
   // Mengambil tipe form dari controller
   const formType = '{{ $type }}';
 </script>
-<script src="{{ asset('js/forms.js') }}"></script>
+<script src="{{ asset('js/forms.js') }}?v={{ time() }}"></script>
 @endpush

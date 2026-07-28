@@ -123,8 +123,8 @@ const formData = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const type = urlParams.get('type') || 'email'; // default to email
+  // formType is defined in form-layanan.blade.php
+  const type = typeof formType !== 'undefined' ? formType : 'email';
   
   const formConfig = formData[type];
   if (!formConfig) {

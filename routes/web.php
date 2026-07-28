@@ -32,3 +32,15 @@ Route::post('/layanan/{type}/submit', [LayananController::class, 'submit'])->nam
 // Pengaduan
 Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan');
 Route::post('/pengaduan/submit', [PengaduanController::class, 'submit'])->name('pengaduan.submit');
+
+// Auth Routes
+use App\Http\Controllers\AuthController;
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Admin Dashboard
+use App\Http\Controllers\AdminController;
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+});

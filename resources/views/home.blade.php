@@ -22,7 +22,7 @@
 <section class="section">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="page-title">Ringkasan <span>Layanan</span></h2>
+      <h2 class="page-title">Layanan <span>Kami</span></h2>
       <p class="page-subtitle">Berbagai layanan kami untuk menjamin keamanan sistem dan informasi Pemerintah Kabupaten Mojokerto.</p>
     </div>
     
@@ -56,7 +56,6 @@
       </div>
     </div>
     <div class="text-center mt-5">
-      <a href="{{ route('layanan') }}" class="btn btn-primary">Lihat Semua Layanan</a>
     </div>
   </div>
 </section>
@@ -89,7 +88,7 @@
 <section class="section">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="page-title">Berita & <span>Panduan</span></h2>
+      <h2 class="page-title">Berita</span></h2>
       <p class="page-subtitle">Informasi terbaru seputar keamanan informasi dan panduan teknis layanan.</p>
     </div>
     
