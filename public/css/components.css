@@ -1,0 +1,204 @@
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: 1px solid transparent;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: transparent;
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 10px rgba(0, 216, 255, 0.1);
+}
+
+.btn-primary:hover {
+  background-color: rgba(0, 216, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 216, 255, 0.2);
+  transform: translateY(-2px);
+  color: var(--color-secondary);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  border-color: var(--color-accent);
+}
+
+.btn-accent:hover {
+  background-color: transparent;
+  color: var(--color-accent);
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+/* Glass Cards */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 30px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -15px var(--color-secondary);
+  border-color: rgba(0, 216, 255, 0.3);
+}
+
+/* Forms */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: rgba(2, 12, 27, 0.5);
+  border: 1px solid var(--color-primary-lighter);
+  border-radius: 6px;
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  transition: all var(--transition-fast);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(0, 216, 255, 0.1);
+  background-color: rgba(17, 34, 64, 0.8);
+}
+
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23CCD6F6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+select.form-control option {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.form-check-input {
+  margin-top: 5px;
+  accent-color: var(--color-secondary);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.form-text {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+/* File Input Custom */
+.file-upload-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+.file-upload-wrapper input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+}
+.file-upload-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 2px dashed var(--color-primary-lighter);
+  border-radius: 6px;
+  background-color: rgba(2, 12, 27, 0.3);
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+.file-upload-wrapper:hover .file-upload-display {
+  border-color: var(--color-secondary);
+  background-color: rgba(0, 216, 255, 0.05);
+}
+
+/* Utilities */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.badge-secondary {
+  background-color: rgba(0, 216, 255, 0.1);
+  color: var(--color-secondary);
+}
+
+/* Page Header */
+.page-header {
+  padding: 120px 0 60px;
+  text-align: center;
+  background: linear-gradient(to bottom, rgba(2, 12, 27, 0.9), var(--color-bg)),
+              url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="1" fill="%23233554"/></svg>');
+}
+
+.page-title {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  color: var(--color-text);
+}
+.page-title span {
+  color: var(--color-secondary);
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
