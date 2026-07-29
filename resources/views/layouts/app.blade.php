@@ -50,14 +50,13 @@
             Layanan <i class="ri-arrow-down-s-line"></i>
           </a>
           <div class="dropdown-menu">
-            <a href="{{ route('layanan.form', ['type' => 'email']) }}" class="dropdown-item">Penerbitan Email Pemda</a>
-            <a href="{{ route('layanan.form', ['type' => 'tte']) }}" class="dropdown-item">Pengajuan Tanda Tangan Elektronik</a>
-            <a href="{{ route('layanan.form', ['type' => 'pentest']) }}" class="dropdown-item">Pengujian Keamanan Aplikasi</a>
-            <a href="{{ route('layanan.form', ['type' => 'ssl']) }}" class="dropdown-item">Permohonan SSL</a>
-            <a href="{{ route('layanan.form', ['type' => 'csirt']) }}" class="dropdown-item">Layanan CSIRT</a>
-            <a href="{{ route('layanan.form', ['type' => 'awareness']) }}" class="dropdown-item">Security Awareness</a>
-            <a href="{{ route('layanan.form', ['type' => 'konsultasi']) }}" class="dropdown-item">Konsultasi Keamanan Informasi</a>
-            <a href="{{ route('layanan.form', ['type' => 'jamming']) }}" class="dropdown-item">Layanan Jamming</a>
+            @if(isset($global_layanans) && count($global_layanans) > 0)
+              @foreach($global_layanans as $layanan)
+                <a href="{{ route('layanan.form', ['type' => $layanan->jenis_layanan]) }}" class="dropdown-item">{{ $layanan->nama_layanan }}</a>
+              @endforeach
+            @else
+              <a href="#" class="dropdown-item">Tidak ada layanan</a>
+            @endif
           </div>
         </div>
         <div class="dropdown">

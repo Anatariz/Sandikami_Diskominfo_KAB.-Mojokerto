@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Support\Facades\View::composer(['layouts.app', 'layanan'], function ($view) {
+            $view->with('global_layanans', \App\Models\LayananKatalog::where('status', 'active')->get());
+        });
     }
 }

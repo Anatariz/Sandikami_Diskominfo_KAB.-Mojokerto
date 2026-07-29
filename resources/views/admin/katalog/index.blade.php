@@ -10,48 +10,67 @@
         <p class="text-text-muted mb-0" style="font-size: 0.9rem;">Konfigurasi jenis layanan yang tersedia beserta field formulirnya.</p>
     </div>
     <div>
-        <button class="btn btn-primary" onclick="alert('Fitur Drag & Drop Form Builder akan hadir di versi mendatang!')"><i class="ri-add-line mr-1"></i> Tambah Layanan</button>
+        <a href="{{ route('admin.katalog.create') }}" class="btn btn-primary"><i class="ri-add-line mr-1"></i> Tambah Layanan</a>
     </div>
 </div>
 
-<div class="alert alert-info mb-4" style="background-color: rgba(0, 216, 255, 0.1); color: var(--color-text); border-left: 4px solid var(--color-secondary);">
-    <i class="ri-information-line"></i> Saat ini, struktur formulir (JSON Schema) dimuat secara dinamis dari database. 
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
 </div>
+@endif
 
 <div class="card p-0" style="overflow-x: auto;">
-    <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
+    <table class="table">
         <thead>
-            <tr style="background-color: rgba(255,255,255,0.1);">
-                <th style="padding: 15px; border-bottom: 1px solid var(--glass-border);">Ikon</th>
-                <th style="padding: 15px; border-bottom: 1px solid var(--glass-border);">Nama Layanan</th>
-                <th style="padding: 15px; border-bottom: 1px solid var(--glass-border);">Jumlah Field</th>
-                <th style="padding: 15px; border-bottom: 1px solid var(--glass-border);">Status</th>
-                <th style="padding: 15px; border-bottom: 1px solid var(--glass-border); text-align: right;">Aksi</th>
+            <tr>
+                <th>Layanan</th>
+                <th>Jenis (Slug)</th>
+                <th>Total Kolom Form</th>
+                <th>Status</th>
+                <th width="150">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($layanans as $layanan)
+            @forelse($layanans as $layanan)
             <tr>
-                <td style="padding: 15px; border-bottom: 1px solid var(--glass-border);"><i class="{{ $layanan->ikon }}" style="font-size: 1.5rem; color: var(--color-secondary);"></i></td>
-                <td style="padding: 15px; border-bottom: 1px solid var(--glass-border);">
-                    <strong>{{ $layanan->nama_layanan }}</strong><br>
-                    <small style="color: var(--color-text-muted);">{{ $layanan->deskripsi }}</small>
+                <td>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="{{ $layanan->ikon }}" style="font-size: 1.2rem; color: var(--primary);"></i>
+                        <div>
+                            <strong>{{ $layanan->nama_layanan }}</strong>
+                        </div>
+                    </div>
                 </td>
-                <td style="padding: 15px; border-bottom: 1px solid var(--glass-border);">
-                    {{ count($layanan->form_schema) }} Field Tambahan
+                <td><span style="background-color: rgba(0,0,0,0.2); padding: 3px 8px; border-radius: 4px; font-size: 0.8rem; font-family: monospace;">{{ $layanan->jenis_layanan }}</span></td>
+                <td>
+                    <span style="font-size: 0.9rem;">
+                        {{ is_array($layanan->form_schema) ? count($layanan->form_schema) : 0 }} Kolom
+                    </span>
                 </td>
-                <td style="padding: 15px; border-bottom: 1px solid var(--glass-border);">
-                    @if($layanan->status === 'active')
-                        <span class="badge" style="background-color: #2ecc71; color: white;">Aktif</span>
+                <td>
+                    @if($layanan->status == 'active')
+                        <span style="color: #10B981; font-weight: 500; font-size: 0.85rem;"><i class="ri-checkbox-circle-line"></i> Aktif</span>
                     @else
-                        <span class="badge badge-secondary">Nonaktif</span>
+                        <span style="color: var(--text-muted); font-size: 0.85rem;"><i class="ri-close-circle-line"></i> Nonaktif</span>
                     @endif
                 </td>
-                <td style="padding: 15px; border-bottom: 1px solid var(--glass-border); text-align: right;">
-                    <button class="btn btn-sm btn-info" onclick="alert('Fitur Edit JSON Schema sedang dalam pengembangan.')" style="background-color: #3498db; color: white; padding: 6px 12px; font-size: 0.8rem;">Edit Schema</button>
+                <td>
+                    <div style="display: flex; gap: 5px;">
+                        <a href="{{ route('admin.katalog.edit', $layanan->id) }}" class="btn btn-sm btn-info" style="background-color: #3b82f6; color: white; padding: 5px 10px; font-size: 0.8rem; border: none;"><i class="ri-edit-line"></i> Edit</a>
+                        <form action="{{ route('admin.katalog.destroy', $layanan->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus layanan ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger" style="padding: 5px 10px; font-size: 0.8rem;"><i class="ri-delete-bin-line"></i> Hapus</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="5" class="text-center">Belum ada layanan.</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

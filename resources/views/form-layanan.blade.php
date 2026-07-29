@@ -34,43 +34,35 @@
       <form action="{{ route('layanan.submit', ['type' => $type]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         
+        @php
+            $schemaPemohon = isset($layanan->form_schema['pemohon']) ? $layanan->form_schema['pemohon'] : [];
+            $schemaLayanan = isset($layanan->form_schema['layanan']) ? $layanan->form_schema['layanan'] : (isset($layanan->form_schema[0]) ? $layanan->form_schema : []);
+        @endphp
+
+        @if(count($schemaPemohon) > 0)
         <h3 class="form-section-title"><i class="ri-user-line mr-2"></i>Data Pemohon</h3>
+        
         <div class="grid-2-cols">
-            <div class="form-group mb-4">
-                <label class="form-label" for="nama">Nama Lengkap Pemohon *</label>
-                <input type="text" id="nama" name="nama" class="form-control" required placeholder="Contoh: Budi Santoso, S.Kom">
-            </div>
-            <div class="form-group mb-4">
-                <label class="form-label" for="nip">NIP / NIK</label>
-                <input type="text" id="nip" name="nip" class="form-control" placeholder="Contoh: 198001012005011002">
-            </div>
+            @foreach($schemaPemohon as $index => $field)
+                <div class="form-group mb-4" @if(in_array($field['name'], ['perangkat_daerah', 'no_wa'])) style="grid-column: 1 / -1;" @endif>
+                    <label class="form-label" for="{{ $field['name'] }}">{{ $field['label'] }} {!! $field['required'] ? '*' : '' !!}</label>
+                    
+                    @if($field['type'] === 'textarea')
+                        <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" rows="4" {{ $field['required'] ? 'required' : '' }}></textarea>
+                    @elseif($field['type'] === 'file')
+                        <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" {{ $field['required'] ? 'required' : '' }}>
+                    @else
+                        <input type="{{ $field['type'] }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" {{ $field['required'] ? 'required' : '' }}>
+                    @endif
+                </div>
+            @endforeach
         </div>
+        @endif
 
-        <div class="grid-2-cols">
-            <div class="form-group mb-4">
-                <label class="form-label" for="jabatan">Jabatan</label>
-                <input type="text" id="jabatan" name="jabatan" class="form-control">
-            </div>
-            <div class="form-group mb-4">
-                <label class="form-label" for="pangkat">Pangkat / Golongan</label>
-                <input type="text" id="pangkat" name="pangkat" class="form-control">
-            </div>
-        </div>
-
-        <div class="form-group mb-4">
-            <label class="form-label" for="opd">Perangkat Daerah / Unit Kerja *</label>
-            <input type="text" id="opd" name="opd" class="form-control" required placeholder="Contoh: Dinas Komunikasi dan Informatika">
-        </div>
-
-        <div class="form-group mb-4">
-            <label class="form-label" for="wa">Nomor WhatsApp Aktif *</label>
-            <input type="tel" id="wa" name="wa" class="form-control" required placeholder="Contoh: 081234567890">
-            <small style="color: var(--color-text-muted); font-size: 0.8rem; margin-top: 5px; display: block;">Untuk keperluan koordinasi teknis (wajib nomor aktif).</small>
-        </div>
-
+        @if(count($schemaLayanan) > 0)
         <h3 class="form-section-title"><i class="ri-file-list-3-line mr-2"></i>Detail Layanan Spesifik</h3>
         
-        @foreach($layanan->form_schema as $field)
+        @foreach($schemaLayanan as $field)
             <div class="form-group mb-4">
                 <label class="form-label" for="{{ $field['name'] }}">{{ $field['label'] }} {!! $field['required'] ? '*' : '' !!}</label>
                 
@@ -83,6 +75,7 @@
                 @endif
             </div>
         @endforeach
+        @endif
 
         <h3 class="form-section-title"><i class="ri-shield-check-line mr-2"></i>Pernyataan Persetujuan</h3>
         <div class="mb-3">
