@@ -21,6 +21,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin Sandikami',
             'email' => 'admin@mojokertokab.go.id',
             'password' => bcrypt('admin123'),
+            'role' => 'admin',
+        ]);
+
+        $this->call([
+            LayananKatalogSeeder::class,
+            PageContentSeeder::class,
         ]);
     }
 }

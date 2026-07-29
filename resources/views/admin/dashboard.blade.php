@@ -1,27 +1,50 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
 @section('title', 'Admin Dashboard - Sandikami')
+@section('page_title', 'Panel Kontrol Administrator')
+
 @section('content')
-<div class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-        <h1 class="mb-0">Admin Dashboard</h1>
-        
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <span>Halo, <strong>{{ auth()->user()->name ?? 'Admin' }}</strong></span>
-            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                @csrf
-                <button type="submit" class="btn btn-sm btn-danger" style="background-color: #e74c3c; border-color: #e74c3c; padding: 8px 15px;">
-                    <i class="ri-logout-box-line mr-1"></i> Keluar
-                </button>
-            </form>
-        </div>
-    </div>
-    
 
     @if(session('success'))
-    <div class="alert alert-success mb-4" style="background-color: #2ecc71; color: white; padding: 15px; border-radius: 8px; border: none;">
+    <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px;">
+        <!-- Card 1 -->
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--primary);">
+            <div>
+                <p style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px;">TOTAL PENGAJUAN</p>
+                <h3 style="font-size: 1.8rem; color: var(--primary);">0</h3>
+            </div>
+            <div style="color: var(--primary); font-size: 1.5rem; opacity: 0.5;">
+                <i class="ri-file-list-3-line"></i>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #f39c12;">
+            <div>
+                <p style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px;">BERITA AKTIF</p>
+                <h3 style="font-size: 1.8rem; color: #f39c12;">{{ \App\Models\Berita::where('status', 'published')->count() }}</h3>
+            </div>
+            <div style="color: #f39c12; font-size: 1.5rem; opacity: 0.5;">
+                <i class="ri-article-line"></i>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #e74c3c;">
+            <div>
+                <p style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px;">PENGADUAN BARU</p>
+                <h3 style="font-size: 1.8rem; color: #e74c3c;">0</h3>
+            </div>
+            <div style="color: #e74c3c; font-size: 1.5rem; opacity: 0.5;">
+                <i class="ri-feedback-line"></i>
+            </div>
+        </div>
+    </div>
 
     <h2 class="mb-3">Daftar Pengajuan Layanan</h2>
     <div class="card p-0 mb-5" style="overflow-x: auto;">
@@ -102,5 +125,5 @@
             </tbody>
         </table>
     </div>
-</div>
+
 @endsection

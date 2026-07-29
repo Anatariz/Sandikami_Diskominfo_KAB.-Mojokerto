@@ -36,6 +36,10 @@
         <button type="submit" class="btn btn-accent btn-block" style="padding: 15px; font-size: 1.1rem; margin-top: 10px;">
             <i class="ri-login-circle-line mr-2"></i> Masuk
         </button>
+        
+        <div class="text-center mt-4">
+            <p class="text-text-muted">Belum punya akun? <a href="{{ route('register') }}" class="text-primary">Daftar di sini</a></p>
+        </div>
       </form>
     </div>
   </div>

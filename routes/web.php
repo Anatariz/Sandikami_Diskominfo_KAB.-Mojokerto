@@ -5,7 +5,15 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PengaduanController;
 
-// Halaman Statis
+// Rute Publik (Auth)
+use App\Http\Controllers\AuthController;
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Halaman Publik (Tanpa Login)
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/berita', [PageController::class, 'berita'])->name('berita');
 Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
@@ -24,24 +32,21 @@ Route::prefix('panduan')->name('panduan.')->group(function () {
     Route::get('/produk-hukum', [PageController::class, 'panduanProdukHukum'])->name('produk-hukum');
 });
 
-// Layanan
-Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
-Route::get('/layanan/{type}', [LayananController::class, 'form'])->name('layanan.form');
-Route::post('/layanan/{type}/submit', [LayananController::class, 'submit'])->name('layanan.submit');
+// Rute Terlindungi (Pengunjung harus login untuk pengajuan dan layanan)
+Route::middleware('auth')->group(function () {
+    // Layanan
+    Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
+    Route::get('/layanan/{type}', [LayananController::class, 'form'])->name('layanan.form');
+    Route::post('/layanan/{type}/submit', [LayananController::class, 'submit'])->name('layanan.submit');
 
-// Pengaduan
-Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan');
-Route::post('/pengaduan/submit', [PengaduanController::class, 'submit'])->name('pengaduan.submit');
-
-// Auth Routes
-use App\Http\Controllers\AuthController;
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // Pengaduan
+    Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan');
+    Route::post('/pengaduan/submit', [PengaduanController::class, 'submit'])->name('pengaduan.submit');
+});
 
 // Admin Dashboard
 use App\Http\Controllers\AdminController;
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/layanan/{id}', [AdminController::class, 'showLayanan'])->name('admin.layanan.show');
     Route::get('/admin/layanan/{id}/edit', [AdminController::class, 'editLayanan'])->name('admin.layanan.edit');
@@ -52,4 +57,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/pengaduan/{id}/edit', [AdminController::class, 'editPengaduan'])->name('admin.pengaduan.edit');
     Route::put('/admin/pengaduan/{id}', [AdminController::class, 'updatePengaduan'])->name('admin.pengaduan.update');
     Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
+
+    // CMS Berita
+    Route::resource('admin/berita', \App\Http\Controllers\Admin\BeritaController::class, ['as' => 'admin']);
+
+    // CMS Layanan Katalog
+    Route::resource('admin/katalog', \App\Http\Controllers\Admin\KatalogController::class, ['as' => 'admin']);
+
+    // CMS Profil (Tentang, Tugas Fungsi, Program Kerja)
+    Route::resource('admin/profil', \App\Http\Controllers\Admin\ProfilController::class, ['as' => 'admin'])->only(['index', 'edit', 'update']);
 });
+
+

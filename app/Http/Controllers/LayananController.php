@@ -15,19 +15,13 @@ class LayananController extends Controller
 
     public function form($type)
     {
-        $validTypes = ['email', 'tte', 'pentest', 'ssl', 'csirt', 'awareness', 'konsultasi', 'jamming'];
-        if (!in_array($type, $validTypes)) {
-            abort(404);
-        }
-        return view("form-layanan", compact('type'));
+        $layanan = \App\Models\LayananKatalog::where('jenis_layanan', $type)->where('status', 'active')->firstOrFail();
+        return view("form-layanan", compact('type', 'layanan'));
     }
 
     public function submit(Request $request, $type)
     {
-        $validTypes = ['email', 'tte', 'pentest', 'ssl', 'csirt', 'awareness', 'konsultasi', 'jamming'];
-        if (!in_array($type, $validTypes)) {
-            abort(404);
-        }
+        $layanan = \App\Models\LayananKatalog::where('jenis_layanan', $type)->where('status', 'active')->firstOrFail();
 
         // Common validation mapping names from forms.js
         $rules = [

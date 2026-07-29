@@ -8,22 +8,27 @@ class PageController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $beritaTerbaru = \App\Models\Berita::where('status', 'published')->latest()->take(3)->get();
+        $layanans = \App\Models\LayananKatalog::where('status', 'active')->get();
+        return view('home', compact('beritaTerbaru', 'layanans'));
     }
 
     public function profilTentang()
     {
-        return view('profil.tentang');
+        $content = \App\Models\PageContent::where('slug', 'tentang-sandikami')->first();
+        return view('profil.tentang', compact('content'));
     }
 
     public function profilTugasFungsi()
     {
-        return view('profil.tugas-fungsi');
+        $content = \App\Models\PageContent::where('slug', 'tugas-fungsi')->first();
+        return view('profil.tugas-fungsi', compact('content'));
     }
 
     public function profilProgramKerja()
     {
-        return view('profil.program-kerja');
+        $content = \App\Models\PageContent::where('slug', 'program-kerja')->first();
+        return view('profil.program-kerja', compact('content'));
     }
 
     public function berita()

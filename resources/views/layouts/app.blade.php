@@ -72,6 +72,20 @@
         </div>
         <a href="{{ route('pengaduan') }}" class="{{ request()->routeIs('pengaduan') ? 'active' : '' }}">Pengaduan</a>
         <a href="{{ route('kontak') }}" class="{{ request()->routeIs('kontak') ? 'active' : '' }}">Kontak</a>
+
+        @auth
+          <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px;">
+            <span style="font-weight: 500; color: var(--color-secondary); margin-right: 15px;">Halo, {{ auth()->user()->name }}</span>
+            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn btn-sm btn-danger" style="background-color: #e74c3c; border-color: #e74c3c; padding: 5px 15px;">Keluar</button>
+            </form>
+          </div>
+        @else
+          <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px;">
+            <a href="{{ route('login') }}" class="btn btn-sm btn-primary">Masuk</a>
+          </div>
+        @endauth
       </div>
     </div>
   </nav>

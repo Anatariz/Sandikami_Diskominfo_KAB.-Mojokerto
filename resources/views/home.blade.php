@@ -27,33 +27,18 @@
     </div>
     
     <div class="services-grid">
+      @forelse($layanans as $layanan)
       <div class="glass-card service-card">
-        <div class="service-icon"><i class="ri-mail-secure-line"></i></div>
-        <h3>E-Mail Pemda</h3>
-        <p class="mb-3 text-text-muted">Penerbitan akun surat elektronik resmi @mojokertokab.go.id</p>
-        <a href="{{ route('layanan.form', ['type'=>'email']) }}" class="text-primary">Selengkapnya &rarr;</a>
+        <div class="service-icon"><i class="{{ $layanan->ikon }}"></i></div>
+        <h3>{{ $layanan->nama_layanan }}</h3>
+        <p class="mb-3 text-text-muted">{{ $layanan->deskripsi }}</p>
+        <a href="{{ route('layanan.form', ['type' => $layanan->jenis_layanan]) }}" class="text-primary">Selengkapnya &rarr;</a>
       </div>
-      
-      <div class="glass-card service-card">
-        <div class="service-icon"><i class="ri-fingerprint-line"></i></div>
-        <h3>Tanda Tangan Elektronik</h3>
-        <p class="mb-3 text-text-muted">Penerbitan sertifikat elektronik untuk pengesahan dokumen.</p>
-        <a href="{{ route('layanan.form', ['type'=>'tte']) }}" class="text-primary">Selengkapnya &rarr;</a>
-      </div>
-      
-      <div class="glass-card service-card">
-        <div class="service-icon"><i class="ri-bug-line"></i></div>
-        <h3>Security Assessment</h3>
-        <p class="mb-3 text-text-muted">Pengujian kerentanan (Vulnerability Assessment) aplikasi pemda.</p>
-        <a href="{{ route('layanan.form', ['type'=>'assessment']) }}" class="text-primary">Selengkapnya &rarr;</a>
-      </div>
-      
-      <div class="glass-card service-card">
-        <div class="service-icon"><i class="ri-macbook-line"></i></div>
-        <h3>Layanan CSIRT</h3>
-        <p class="mb-3 text-text-muted">Penanganan insiden keamanan informasi di lingkungan pemda.</p>
-        <a href="{{ route('layanan.form', ['type'=>'csirt']) }}" class="text-primary">Selengkapnya &rarr;</a>
-      </div>
+      @empty
+        <div style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted); padding: 40px;">
+            Belum ada layanan yang tersedia.
+        </div>
+      @endforelse
     </div>
     <div class="text-center mt-5">
     </div>
@@ -93,44 +78,27 @@
     </div>
     
     <div class="news-grid">
-      <!-- News Item 1 -->
+      @forelse($beritaTerbaru as $berita)
       <div class="glass-card news-card">
         <div class="news-img">
-          <i class="ri-image-line" style="font-size: 3rem;"></i>
+          @if($berita->gambar)
+            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" style="width: 100%; height: 100%; object-fit: cover;">
+          @else
+            <i class="ri-image-line" style="font-size: 3rem;"></i>
+          @endif
         </div>
         <div class="news-content">
-          <span class="news-date">12 Okt 2026</span>
-          <h3 class="mb-2">Sosialisasi Keamanan Informasi Tingkat Desa</h3>
-          <p class="text-text-muted mb-3">Diskominfo Kabupaten Mojokerto menggelar sosialisasi kesadaran keamanan informasi...</p>
-          <a href="{{ route('berita') }}" class="text-primary">Baca Selengkapnya &rarr;</a>
+          <span class="news-date">{{ $berita->created_at->format('d M Y') }}</span>
+          <h3 class="mb-2">{{ $berita->judul }}</h3>
+          <p class="text-text-muted mb-3">{{ $berita->ringkasan }}</p>
+          <a href="#" class="text-primary">Baca Selengkapnya &rarr;</a>
         </div>
       </div>
-      
-      <!-- News Item 2 -->
-      <div class="glass-card news-card">
-        <div class="news-img">
-          <i class="ri-file-list-3-line" style="font-size: 3rem;"></i>
+      @empty
+        <div style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted); padding: 40px;">
+            Belum ada berita yang diterbitkan.
         </div>
-        <div class="news-content">
-          <span class="badge badge-secondary mb-2">Panduan Populer</span>
-          <h3 class="mb-2">SOP Penanganan Insiden Web Defacement</h3>
-          <p class="text-text-muted mb-3">Langkah-langkah taktis saat website SKPD mengalami peretasan berupa perubahan halaman utama.</p>
-          <a href="{{ route('panduan.sop') }}" class="text-primary">Lihat Panduan &rarr;</a>
-        </div>
-      </div>
-      
-      <!-- News Item 3 -->
-      <div class="glass-card news-card">
-        <div class="news-img">
-          <i class="ri-file-list-3-line" style="font-size: 3rem;"></i>
-        </div>
-        <div class="news-content">
-          <span class="badge badge-secondary mb-2">Panduan Populer</span>
-          <h3 class="mb-2">Panduan Pendaftaran TTE BeSign</h3>
-          <p class="text-text-muted mb-3">Tutorial lengkap langkah pendaftaran dan aktivasi sertifikat elektronik menggunakan aplikasi BeSign.</p>
-          <a href="{{ route('panduan.sop') }}" class="text-primary">Lihat Panduan &rarr;</a>
-        </div>
-      </div>
+      @endforelse
     </div>
   </div>
 </section>
