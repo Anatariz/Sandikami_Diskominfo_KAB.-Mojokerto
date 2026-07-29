@@ -10,10 +10,22 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $layanans = LayananRequest::orderBy('created_at', 'desc')->get();
-        $pengaduans = Pengaduan::orderBy('created_at', 'desc')->get();
+        $layanans = LayananRequest::orderBy('created_at', 'desc')->take(5)->get();
+        $pengaduans = Pengaduan::orderBy('created_at', 'desc')->take(5)->get();
         
         return view('admin.dashboard', compact('layanans', 'pengaduans'));
+    }
+
+    public function indexLayanan()
+    {
+        $layanans = LayananRequest::orderBy('created_at', 'desc')->get();
+        return view('admin.layanan.index', compact('layanans'));
+    }
+
+    public function indexPengaduan()
+    {
+        $pengaduans = Pengaduan::orderBy('created_at', 'desc')->get();
+        return view('admin.pengaduan.index', compact('pengaduans'));
     }
 
     public function showLayanan($id)

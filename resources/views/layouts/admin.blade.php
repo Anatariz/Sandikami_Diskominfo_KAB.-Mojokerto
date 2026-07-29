@@ -265,12 +265,12 @@
 
             <li class="menu-heading">Layanan & Pengaduan</li>
             <li>
-                <a href="#" onclick="alert('Fitur pantauan laporan sedang dikembangkan')">
+                <a href="{{ route('admin.layanan.index') }}" class="{{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
                     <i class="ri-file-list-3-line"></i> Pantau Pengajuan
                 </a>
             </li>
             <li>
-                <a href="#" onclick="alert('Fitur pantauan laporan sedang dikembangkan')">
+                <a href="{{ route('admin.pengaduan.index') }}" class="{{ request()->routeIs('admin.pengaduan.*') ? 'active' : '' }}">
                     <i class="ri-feedback-line"></i> Laporan Pengaduan
                 </a>
             </li>

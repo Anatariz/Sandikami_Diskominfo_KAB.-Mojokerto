@@ -69,12 +69,6 @@
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);"><span class="badge badge-secondary">{{ $l->status }}</span></td>
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">
                         <a href="{{ route('admin.layanan.show', $l->id) }}" class="btn btn-sm btn-info" style="padding: 5px 10px; font-size: 0.8rem; background-color: #3498db; border-color: #3498db; color: white;">Detail</a>
-                        <a href="{{ route('admin.layanan.edit', $l->id) }}" class="btn btn-sm btn-warning" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f1c40f; border-color: #f1c40f; color: black;">Edit</a>
-                        <form action="{{ route('admin.layanan.destroy', $l->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c; border-color: #e74c3c; color: white;">Hapus</button>
-                        </form>
                     </td>
                 </tr>
                 @empty
@@ -109,12 +103,6 @@
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $p->wa }}</td>
                     <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">
                         <a href="{{ route('admin.pengaduan.show', $p->id) }}" class="btn btn-sm btn-info" style="padding: 5px 10px; font-size: 0.8rem; background-color: #3498db; border-color: #3498db; color: white; min-width: 70px; text-align: center; display: inline-block;">Detail</a>
-                        <a href="{{ route('admin.pengaduan.edit', $p->id) }}" class="btn btn-sm btn-warning" style="padding: 5px 10px; font-size: 0.8rem; background-color: #f1c40f; border-color: #f1c40f; color: black; min-width: 70px; text-align: center; display: inline-block;">Edit</a>
-                        <form action="{{ route('admin.pengaduan.destroy', $p->id) }}" method="POST" style="display: inline-block; margin: 0;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" style="padding: 5px 10px; font-size: 0.8rem; background-color: #e74c3c; border-color: #e74c3c; color: white; min-width: 70px; text-align: center; display: inline-block;">Hapus</button>
-                        </form>
                     </td>
                 </tr>
                 @empty
