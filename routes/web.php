@@ -35,7 +35,6 @@ Route::prefix('panduan')->name('panduan.')->group(function () {
 // Rute Terlindungi (Pengunjung harus login untuk pengajuan dan layanan)
 Route::middleware('auth')->group(function () {
     // Layanan
-    Route::get('/layanan', [LayananController::class, 'index'])->name('layanan');
     Route::get('/layanan/{type}', [LayananController::class, 'form'])->name('layanan.form');
     Route::post('/layanan/{type}/submit', [LayananController::class, 'submit'])->name('layanan.submit');
 

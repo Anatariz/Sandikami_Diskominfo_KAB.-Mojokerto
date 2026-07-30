@@ -8,10 +8,6 @@ use App\Models\LayananRequest;
 
 class LayananController extends Controller
 {
-    public function index()
-    {
-        return view('layanan');
-    }
 
     public function form($type)
     {

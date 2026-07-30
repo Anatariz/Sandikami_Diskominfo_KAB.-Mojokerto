@@ -9,7 +9,7 @@ class PageController extends Controller
     public function index()
     {
         $beritaTerbaru = \App\Models\Berita::where('status', 'published')->latest()->take(3)->get();
-        $layanans = \App\Models\LayananKatalog::where('status', 'active')->get();
+        $layanans = \App\Models\LayananKatalog::where('status', 'active')->take(3)->get();
         return view('home', compact('beritaTerbaru', 'layanans'));
     }
 

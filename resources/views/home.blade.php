@@ -11,7 +11,7 @@
       <h1 class="hero-title">Layanan Persandian & Keamanan Informasi</h1>
       <p class="hero-subtitle">Mewujudkan komunikasi dan informasi pemerintahan yang aman, terpercaya, dan andal di lingkungan Pemerintah Kabupaten Mojokerto.</p>
       <div class="hero-actions">
-        <a href="{{ route('layanan') }}" class="btn btn-accent">Ajukan Layanan</a>
+        <a href="#layanan-kami" class="btn btn-accent">Ajukan Layanan</a>
         <a href="{{ route('pengaduan') }}" class="btn btn-primary">Lapor Insiden</a>
       </div>
     </div>
@@ -19,7 +19,7 @@
 </section>
 
 <!-- Ringkasan Layanan -->
-<section class="section">
+<section class="section" id="layanan-kami">
   <div class="container">
     <div class="text-center mb-5">
       <h2 class="page-title">Layanan <span>Kami</span></h2>

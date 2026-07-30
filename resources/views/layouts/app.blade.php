@@ -74,10 +74,9 @@
 
         @auth
           <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px;">
-            <span style="font-weight: 500; color: var(--color-secondary); margin-right: 15px;">Halo, {{ auth()->user()->name }}</span>
             <form action="{{ route('logout') }}" method="POST" style="display: inline;">
                 @csrf
-                <button type="submit" class="btn btn-sm btn-danger" style="background-color: #e74c3c; border-color: #e74c3c; padding: 5px 15px;">Keluar</button>
+                <button type="submit" class="btn btn-sm btn-danger" style="background-color: #e74c3c; border-color: #e74c3c; padding: 5px 15px;">Logout</button>
             </form>
           </div>
         @else
@@ -111,7 +110,6 @@
           <h4 class="footer-title">Tautan Cepat</h4>
           <ul class="footer-links">
             <li><a href="{{ route('profil.tentang') }}">Profil Sandikami</a></li>
-            <li><a href="{{ route('layanan') }}">Katalog Layanan</a></li>
             <li><a href="{{ route('panduan.sop') }}">SOP & Panduan</a></li>
             <li><a href="{{ route('pengaduan') }}">Lapor Insiden (CSIRT)</a></li>
           </ul>
