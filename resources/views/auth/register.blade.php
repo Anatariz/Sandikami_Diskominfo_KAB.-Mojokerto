@@ -29,6 +29,11 @@
         </div>
 
         <div class="form-group">
+          <label class="form-label" for="bidang">Divisi</label>
+          <input type="bidang" id="bidang" name="bidang" class="form-control" value="{{ old('bidang') }}" required>
+        </div>
+
+        <div class="form-group">
           <label class="form-label" for="email">Alamat Email</label>
           <input type="email" id="email" name="email" class="form-control" value="{{ old('email') }}" required>
         </div>

@@ -28,11 +28,7 @@
                     <textarea id="deskripsi" name="deskripsi" class="form-control" rows="3" required placeholder="Layanan untuk pendaftaran email resmi bagi pegawai..."></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label class="form-label" for="ikon">Class Icon (RemixIcon)</label>
-                    <input type="text" id="ikon" name="ikon" class="form-control" placeholder="Contoh: ri-mail-send-line" value="ri-file-list-3-line">
-                    <small style="color: var(--text-muted); font-size: 0.8rem; margin-top: 5px; display: block;">Lihat ikon di <a href="https://remixicon.com/" target="_blank">RemixIcon</a></small>
-                </div>
+
             </div>
         </div>
 

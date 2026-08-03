@@ -43,7 +43,6 @@
             background-attachment: fixed;
         }
 
-        /* Sidebar */
         .admin-sidebar {
             width: 260px;
             background-color: rgba(0, 75, 135, 0.6);
@@ -56,6 +55,60 @@
             display: flex;
             flex-direction: column;
             z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.sidebar-hidden .admin-sidebar {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-toggle-btn {
+            position: fixed;
+            top: 90px;
+            left: 0;
+            background-color: var(--primary); /* Menggunakan warna aksen tema (biru) */
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        body:not(.sidebar-hidden) .sidebar-toggle-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-100%);
+        }
+
+        .sidebar-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 101;
+        }
+
+        .sidebar-close-btn:hover {
+            background: rgba(16, 40, 202, 0.2);
+            color: #2117d7ff;
         }
 
         .sidebar-brand {
@@ -153,6 +206,11 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.sidebar-hidden .admin-main {
+            margin-left: 0;
         }
 
         .admin-topbar {
@@ -184,6 +242,9 @@
         .admin-content {
             padding: 30px;
             flex-grow: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         /* Utilities */
@@ -248,9 +309,18 @@
     @stack('styles')
 </head>
 <body>
+    <!-- Toggle Button for Hidden Sidebar -->
+    <button id="sidebar-toggle" class="sidebar-toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')">
+        <i class="ri-menu-line"></i>
+    </button>
 
     <!-- Sidebar -->
     <aside class="admin-sidebar">
+        <!-- Close Button for Sidebar -->
+        <button id="sidebar-close" class="sidebar-close-btn" onclick="document.body.classList.toggle('sidebar-hidden')">
+            <i class="ri-close-line"></i>
+        </button>
+
         <div class="sidebar-brand">
             <i class="ri-shield-keyhole-fill"></i> Sandikami
         </div>
@@ -292,26 +362,9 @@
                 </a>
             </li>
 
-            <li class="menu-heading">Akun</li>
-            <li>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();" style="color: #e74c3c;">
-                    <i class="ri-logout-box-line"></i> Keluar (Log Out)
-                </a>
-                <form id="logout-form-admin" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </li>
+
         </ul>
 
-        <div class="sidebar-user">
-            <div class="sidebar-user-avatar">
-                {{ substr(auth()->user()->name ?? 'A', 0, 1) }}
-            </div>
-            <div class="sidebar-user-info">
-                <div>{{ auth()->user()->name ?? 'Administrator' }}</div>
-                <small>SUPER ADMIN</small>
-            </div>
-        </div>
     </aside>
 
     <!-- Main Content -->
@@ -320,6 +373,12 @@
             <div class="topbar-title">@yield('page_title', 'Panel Kontrol Administrator')</div>
             <div class="topbar-actions">
                 <a href="{{ route('home') }}" target="_blank" class="btn btn-secondary"><i class="ri-external-link-line mr-1"></i> Lihat Portal</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();" class="btn btn-danger" style="margin-left: 10px; padding: 8px 16px;">
+                    <i class="ri-logout-box-line"></i> Logout
+                </a>
+                <form id="logout-form-admin" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </header>
 

@@ -36,7 +36,7 @@
             <tr>
                 <td>
                     <div style="display: flex; align-items: center; gap: 10px;">
-                        <i class="{{ $layanan->ikon }}" style="font-size: 1.2rem; color: var(--primary);"></i>
+
                         <div>
                             <strong>{{ $layanan->nama_layanan }}</strong>
                         </div>

@@ -29,7 +29,7 @@
     <div class="services-grid">
       @forelse($layanans as $layanan)
       <div class="glass-card service-card">
-        <div class="service-icon"><i class="{{ $layanan->ikon }}"></i></div>
+
         <h3>{{ $layanan->nama_layanan }}</h3>
         <p class="mb-3 text-text-muted">{{ $layanan->deskripsi }}</p>
         <a href="{{ route('layanan.form', ['type' => $layanan->jenis_layanan]) }}" class="text-primary">Selengkapnya &rarr;</a>

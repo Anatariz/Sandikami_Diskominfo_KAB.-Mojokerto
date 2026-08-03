@@ -7,8 +7,8 @@
   <div class="container">
     <div class="glass-card" style="max-width: 450px; margin: 0 auto;">
       <div class="text-center mb-4">
-        <h2 style="color: var(--color-accent); font-size: 2rem; margin-bottom: 10px;">Login Admin</h2>
-        <p class="text-text-muted">Masuk untuk mengelola portal Sandikami.</p>
+        <h2 style="color: var(--color-accent); font-size: 2rem; margin-bottom: 10px;">Welcome to SandiKami</h2>
+        <p class="text-text-muted">Masuk ke SandiKami.</p>
       </div>
       
       @if($errors->any())
