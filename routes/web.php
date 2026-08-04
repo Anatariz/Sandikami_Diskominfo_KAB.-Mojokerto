@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin Dashboard
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\AdminController;
 Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     
