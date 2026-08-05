@@ -68,6 +68,9 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 
     // CMS Profil (Tentang, Tugas Fungsi, Program Kerja)
     Route::resource('admin/profil', \App\Http\Controllers\Admin\ProfilController::class, ['as' => 'admin'])->only(['index', 'edit', 'update']);
+
+    // CMS Panduan (Insiden, SOP, Produk Hukum)
+    Route::resource('admin/panduan', \App\Http\Controllers\Admin\PanduanController::class, ['as' => 'admin'])->only(['index', 'edit', 'update']);
 });
 
 

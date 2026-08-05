@@ -24,6 +24,18 @@ class PageContentSeeder extends Seeder
             [
                 'slug' => 'program-kerja',
                 'content' => '<h2>Program Kerja</h2><p>Program kerja yang sedang dan akan dilaksanakan...</p>'
+            ],
+            [
+                'slug' => 'panduan-insiden',
+                'content' => '<h2>Panduan Penanganan Insiden</h2><p>Dokumen panduan penanganan insiden keamanan siber.</p>'
+            ],
+            [
+                'slug' => 'panduan-sop',
+                'content' => '<h2>SOP Keamanan</h2><p>Standar Operasional Prosedur keamanan informasi.</p>'
+            ],
+            [
+                'slug' => 'panduan-produk-hukum',
+                'content' => '<h2>Produk Hukum</h2><p>Daftar produk hukum terkait keamanan informasi.</p>'
             ]
         ];
 

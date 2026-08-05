@@ -38,17 +38,20 @@ class PageController extends Controller
 
     public function panduanInsiden()
     {
-        return view('panduan.insiden');
+        $content = \App\Models\PageContent::where('slug', 'panduan-insiden')->first();
+        return view('panduan.insiden', compact('content'));
     }
 
     public function panduanSop()
     {
-        return view('panduan.sop');
+        $content = \App\Models\PageContent::where('slug', 'panduan-sop')->first();
+        return view('panduan.sop', compact('content'));
     }
 
     public function panduanProdukHukum()
     {
-        return view('panduan.produk-hukum');
+        $content = \App\Models\PageContent::where('slug', 'panduan-produk-hukum')->first();
+        return view('panduan.produk-hukum', compact('content'));
     }
 
     public function kontak()

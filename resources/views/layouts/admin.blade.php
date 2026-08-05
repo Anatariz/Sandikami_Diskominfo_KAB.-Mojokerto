@@ -361,6 +361,11 @@
                     <i class="ri-pages-line"></i> Edit Profil Web
                 </a>
             </li>
+            <li>
+                <a href="{{ route('admin.panduan.index') }}" class="{{ request()->routeIs('admin.panduan.*') ? 'active' : '' }}">
+                    <i class="ri-book-read-line"></i> Edit Panduan
+                </a>
+            </li>
 
 
         </ul>
