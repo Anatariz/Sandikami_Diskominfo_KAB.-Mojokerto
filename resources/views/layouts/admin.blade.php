@@ -177,16 +177,18 @@
         }
 
         .sidebar-user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
+            background-color: var(--color-primary);
             border-radius: 50%;
-            background-color: var(--sidebar-active-bg);
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-weight: bold;
+            align-items: center;
+            font-size: 1.5rem;
             color: white;
-        }
+            box-shadow: 0 4px 10px rgba(0, 168, 232, 0.3);
+            overflow: hidden;
+        }    
 
         .sidebar-user-info div {
             font-weight: 600;
@@ -254,7 +256,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
-            padding: 20px;
+            padding: 30px;
             margin-bottom: 20px;
         }
 
@@ -305,16 +307,28 @@
         }
         .alert-success { background-color: rgba(16, 185, 129, 0.1); color: #10B981; border-color: rgba(16, 185, 129, 0.2); }
 
+        /* Dropdown */
+        .admin-dropdown { position: relative; display: inline-flex; align-items: center; }
+        .admin-dropdown-content {
+            display: none; position: absolute; top: 100%; right: 0; background-color: var(--sidebar-hover);
+            min-width: 280px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 100; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); padding: 15px; margin-top: 10px;
+        }
+        .admin-dropdown:hover .admin-dropdown-content,
+        .admin-dropdown:focus-within .admin-dropdown-content { display: block; }
+
     </style>
     @stack('styles')
 </head>
 <body>
+    @if(!request()->routeIs('profile.*'))
     <!-- Toggle Button for Hidden Sidebar -->
     <button id="sidebar-toggle" class="sidebar-toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')">
         <i class="ri-menu-line"></i>
     </button>
+    @endif
 
     <!-- Sidebar -->
+    @if(!request()->routeIs('profile.*'))
     <aside class="admin-sidebar">
         <!-- Close Button for Sidebar -->
         <button id="sidebar-close" class="sidebar-close-btn" onclick="document.body.classList.toggle('sidebar-hidden')">
@@ -324,7 +338,7 @@
         <div class="sidebar-brand">
             <i class="ri-shield-keyhole-fill"></i> Sandikami
         </div>
-        
+
         <ul class="sidebar-menu">
             <li class="menu-heading">Utama</li>
             <li>
@@ -347,11 +361,6 @@
 
             <li class="menu-heading">Manajemen Konten (CMS)</li>
             <li>
-                <a href="{{ route('admin.berita.index') }}" class="{{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
-                    <i class="ri-article-line"></i> Kelola Berita
-                </a>
-            </li>
-            <li>
                 <a href="{{ route('admin.katalog.index') }}" class="{{ request()->routeIs('admin.katalog.*') ? 'active' : '' }}">
                     <i class="ri-list-check-2"></i> Katalog Layanan
                 </a>
@@ -371,23 +380,59 @@
         </ul>
 
     </aside>
+    @endif
 
     <!-- Main Content -->
-    <main class="admin-main">
+    <main class="admin-main" style="{{ request()->routeIs('profile.*') ? 'margin-left: 0;' : '' }}">
+        @if(!request()->routeIs('profile.*'))
         <header class="admin-topbar">
             <div class="topbar-title">@yield('page_title', 'Panel Kontrol Administrator')</div>
-            <div class="topbar-actions">
+            <div class="topbar-actions" style="display: flex; align-items: center; gap: 15px;">
                 <a href="{{ route('home') }}" target="_blank" class="btn btn-secondary"><i class="ri-external-link-line mr-1"></i> Lihat Portal</a>
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();" class="btn btn-danger" style="margin-left: 10px; padding: 8px 16px;">
-                    <i class="ri-logout-box-line"></i> Logout
-                </a>
-                <form id="logout-form-admin" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+
+                <div class="admin-dropdown">
+                    <a href="#" style="color: white; text-decoration: none; width: 40px; height: 40px; background-color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 2px solid rgba(255,255,255,0.2);">
+                        @if(auth()->user()->avatar)
+                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                        @else
+                            <i class="ri-user-fill" style="font-size: 1.2rem;"></i>
+                        @endif
+                    </a>
+                    
+                    <div class="admin-dropdown-content">
+                        <!-- Profile Info -->
+                        <div style="display: flex; gap: 15px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 10px;">
+                            <div style="width: 50px; height: 50px; background-color: var(--primary); border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.2);">
+                                @if(auth()->user()->avatar)
+                                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                                @else
+                                    <i class="ri-user-fill" style="color: white; font-size: 1.5rem;"></i>
+                                @endif
+                            </div>
+                            <div style="overflow: hidden; color: white;">
+                                <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->email }}</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <a href="{{ route('profile.show') }}" style="display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; margin-bottom: 5px; color: white; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.backgroundColor='rgba(0, 216, 255, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+                            <i class="ri-user-settings-line"></i> Profil Akun
+                        </a>
+                        
+                        <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+                            @csrf
+                            <button type="submit" style="display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: #ef4444; padding: 10px; border-radius: 6px; font-family: inherit; font-size: inherit; transition: background 0.2s;" onmouseover="this.style.backgroundColor='rgba(239, 68, 68, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+                                <i class="ri-logout-box-line"></i> Sign out
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </header>
+        @endif
 
-        <div class="admin-content">
+        <div class="admin-content" style="{{ request()->routeIs('profile.*') ? 'display: flex; flex-direction: column; min-height: 100vh; padding: 60px 20px;' : '' }}">
             @yield('content')
         </div>
     </main>

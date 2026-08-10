@@ -15,7 +15,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Halaman Publik (Tanpa Login)
 Route::get('/', [PageController::class, 'index'])->name('home');
-Route::get('/berita', [PageController::class, 'berita'])->name('berita');
 Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
 
 // Profil
@@ -41,6 +40,11 @@ Route::middleware('auth')->group(function () {
     // Pengaduan
     Route::get('/pengaduan', [PengaduanController::class, 'index'])->name('pengaduan');
     Route::post('/pengaduan/submit', [PengaduanController::class, 'submit'])->name('pengaduan.submit');
+
+    // Profil Akun User
+    Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 });
 
 // Admin Dashboard
@@ -59,9 +63,6 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/admin/pengaduan/{id}/edit', [AdminController::class, 'editPengaduan'])->name('admin.pengaduan.edit');
     Route::put('/admin/pengaduan/{id}', [AdminController::class, 'updatePengaduan'])->name('admin.pengaduan.update');
     Route::delete('/admin/pengaduan/{id}', [AdminController::class, 'destroyPengaduan'])->name('admin.pengaduan.destroy');
-
-    // CMS Berita
-    Route::resource('admin/berita', \App\Http\Controllers\Admin\BeritaController::class, ['as' => 'admin']);
 
     // CMS Layanan Katalog
     Route::resource('admin/katalog', \App\Http\Controllers\Admin\KatalogController::class, ['as' => 'admin']);

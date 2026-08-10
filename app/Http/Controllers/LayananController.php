@@ -72,6 +72,7 @@ class LayananController extends Controller
         }
 
         LayananRequest::create([
+            'user_id' => auth()->id(),
             'jenis_layanan' => $type,
             'nama_lengkap' => $dataTambahan['nama_lengkap'] ?? $dataTambahan['nama'] ?? 'Tanpa Nama',
             'nip_nik' => $dataTambahan['nip_nik'] ?? $dataTambahan['nip'] ?? null,

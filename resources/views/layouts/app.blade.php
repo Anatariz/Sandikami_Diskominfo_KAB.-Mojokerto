@@ -35,7 +35,7 @@
       <div class="nav-links">
         <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Beranda</a>
         <div class="dropdown">
-          <a href="#" class="dropdown-toggle {{ request()->routeIs('profil*') ? 'active' : '' }}">
+          <a href="#" class="dropdown-toggle {{ request()->routeIs('profil.*') ? 'active' : '' }}">
             Profil <i class="ri-arrow-down-s-line"></i>
           </a>
           <div class="dropdown-menu">
@@ -44,7 +44,6 @@
             <a href="{{ route('profil.program-kerja') }}" class="dropdown-item">Program Kerja</a>
           </div>
         </div>
-        <a href="{{ route('berita') }}" class="{{ request()->routeIs('berita') ? 'active' : '' }}">Berita</a>
         <div class="dropdown">
           <a href="#" class="dropdown-toggle {{ request()->routeIs('layanan*') ? 'active' : '' }}">
             Layanan <i class="ri-arrow-down-s-line"></i>
@@ -73,11 +72,44 @@
         <a href="{{ route('kontak') }}" class="{{ request()->routeIs('kontak') ? 'active' : '' }}">Kontak</a>
 
         @auth
-          <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px;">
-            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                @csrf
-                <button type="submit" class="btn btn-sm btn-danger" style="background-color: #e74c3c; border-color: #e74c3c; padding: 5px 15px; color: white;">Logout</button>
-            </form>
+          <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px; display: flex; align-items: center;">
+            <div class="dropdown">
+              <a href="#" class="dropdown-toggle" style="color: white; text-decoration: none; width: 35px; height: 35px; background-color: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease; overflow: hidden;">
+                  @if(auth()->user()->avatar)
+                      <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                  @else
+                      <i class="ri-user-fill"></i>
+                  @endif
+              </a>
+              <div class="dropdown-menu" style="right: 0; left: auto; padding: 15px; width: 280px; margin-top: 15px;">
+                <!-- Profile Info -->
+                <div style="display: flex; gap: 15px; align-items: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; margin-bottom: 10px;">
+                    <div style="width: 50px; height: 50px; background-color: var(--color-primary); border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+                        @if(auth()->user()->avatar)
+                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                        @else
+                            <i class="ri-user-fill" style="color: white; font-size: 1.5rem;"></i>
+                        @endif
+                    </div>
+                    <div style="overflow: hidden;">
+                        <div style="font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
+                        <div style="font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->email }}</div>
+                    </div>
+                </div>
+                
+                <!-- Actions -->
+                <a href="{{ route('profile.show') }}" class="dropdown-item" style="padding: 10px; border-radius: 6px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px;">
+                    <i class="ri-user-settings-line"></i> Profil Akun
+                </a>
+                
+                <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+                    @csrf
+                    <button type="submit" class="dropdown-item" style="text-align: left; background: none; border: none; cursor: pointer; color: #ef4444; padding: 10px; border-radius: 6px; width: 100%; display: flex; align-items: center; gap: 10px; font-family: inherit; font-size: inherit;">
+                        <i class="ri-logout-box-line"></i> Sign out
+                    </button>
+                </form>
+              </div>
+            </div>
           </div>
         @else
           <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px;">

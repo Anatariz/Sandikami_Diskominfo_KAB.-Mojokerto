@@ -46,7 +46,7 @@
 </section>
 
 <!-- Statistik -->
-<section class="section stats-section">
+<section class="section stats-section" style="margin-bottom: 4rem;">
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item">
@@ -69,39 +69,7 @@
   </div>
 </section>
 
-<!-- Berita & Panduan Populer -->
-<section class="section">
-  <div class="container">
-    <div class="text-center mb-5">
-      <h2 class="page-title">Berita</span></h2>
-      <p class="page-subtitle">Informasi terbaru seputar keamanan informasi dan panduan teknis layanan.</p>
-    </div>
-    
-    <div class="news-grid">
-      @forelse($beritaTerbaru as $berita)
-      <div class="glass-card news-card">
-        <div class="news-img">
-          @if($berita->gambar)
-            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" style="width: 100%; height: 100%; object-fit: cover;">
-          @else
-            <i class="ri-image-line" style="font-size: 3rem;"></i>
-          @endif
-        </div>
-        <div class="news-content">
-          <span class="news-date">{{ $berita->created_at->format('d M Y') }}</span>
-          <h3 class="mb-2">{{ $berita->judul }}</h3>
-          <p class="text-text-muted mb-3">{{ $berita->ringkasan }}</p>
-          <a href="#" class="text-primary">Baca Selengkapnya &rarr;</a>
-        </div>
-      </div>
-      @empty
-        <div style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted); padding: 40px;">
-            Belum ada berita yang diterbitkan.
-        </div>
-      @endforelse
-    </div>
-  </div>
-</section>
+<!-- Panduan Populer Removed -->
 
 @endsection
 

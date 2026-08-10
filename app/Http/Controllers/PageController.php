@@ -8,9 +8,8 @@ class PageController extends Controller
 {
     public function index()
     {
-        $beritaTerbaru = \App\Models\Berita::where('status', 'published')->latest()->take(3)->get();
         $layanans = \App\Models\LayananKatalog::where('status', 'active')->take(3)->get();
-        return view('home', compact('beritaTerbaru', 'layanans'));
+        return view('home', compact('layanans'));
     }
 
     public function profilTentang()
@@ -31,10 +30,7 @@ class PageController extends Controller
         return view('profil.program-kerja', compact('content'));
     }
 
-    public function berita()
-    {
-        return view('berita');
-    }
+    // Berita removed
 
     public function panduanInsiden()
     {

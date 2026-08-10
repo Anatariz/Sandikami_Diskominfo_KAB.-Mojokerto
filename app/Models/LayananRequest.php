@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class LayananRequest extends Model
 {
     protected $fillable = [
+        'user_id',
         'jenis_layanan',
         'nama_lengkap',
         'nip_nik',
@@ -22,4 +23,9 @@ class LayananRequest extends Model
     protected $casts = [
         'data_tambahan' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

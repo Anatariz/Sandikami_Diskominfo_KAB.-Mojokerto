@@ -23,16 +23,7 @@
             </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #f39c12;">
-            <div>
-                <p style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px;">BERITA AKTIF</p>
-                <h3 style="font-size: 1.8rem; color: #f39c12;">{{ \App\Models\Berita::where('status', 'published')->count() }}</h3>
-            </div>
-            <div style="color: #f39c12; font-size: 1.5rem; opacity: 0.5;">
-                <i class="ri-article-line"></i>
-            </div>
-        </div>
+        <!-- Card 2 Removed -->
 
         <!-- Card 3 -->
         <div class="card" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #e74c3c;">
