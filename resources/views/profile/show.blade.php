@@ -93,11 +93,11 @@
             </a>
             @endif
             @if(auth()->user()->role === 'admin')
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary" style="background-color: transparent; border: 1px solid var(--color-secondary); color: var(--color-secondary); padding: 8px 20px; border-radius: 30px; transition: all 0.3s ease;">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary" style="background-color: transparent; border: 1px solid var(--color-secondary, #00d8ff); color: var(--color-secondary, #00d8ff); padding: 8px 20px; border-radius: 30px; transition: all 0.3s ease; text-decoration: none;">
                 <i class="ri-arrow-left-line"></i> Kembali ke Dashboard
             </a>
             @else
-            <a href="{{ route('home') }}" class="btn btn-secondary" style="background-color: transparent; border: 1px solid var(--color-secondary); color: var(--color-secondary); padding: 8px 20px; border-radius: 30px; transition: all 0.3s ease;">
+            <a href="{{ route('home') }}" class="btn btn-secondary" style="background-color: transparent; border: 1px solid var(--color-secondary, #00d8ff); color: var(--color-secondary, #00d8ff); padding: 8px 20px; border-radius: 30px; transition: all 0.3s ease; text-decoration: none;">
                 <i class="ri-arrow-left-line"></i> Kembali ke Beranda
             </a>
             @endif

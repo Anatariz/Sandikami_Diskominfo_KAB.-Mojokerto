@@ -128,14 +128,15 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="navbar-brand mb-3">
-            <i class="ri-shield-keyhole-line" style="font-size: 1.5rem; color: var(--color-secondary);"></i>
-            <div>
-              <span class="logo-text" style="font-size: 1.2rem;">SANDIKAMI</span>
-            </div>
-          </div>
-          <p class="text-text-muted mb-3">Dinas Komunikasi dan Informatika<br>Kabupaten Mojokerto</p>
-          <p class="text-text-muted">Bidang Persandian dan Keamanan Informasi.</p>
+          <h4 class="footer-title" style="margin-top: 0; margin-bottom: 20px; position: relative; padding-left: 32px;">
+            <i class="ri-shield-keyhole-line" style="font-size: 1.5rem; color: var(--color-secondary); position: absolute; left: 0; top: -4px;"></i>
+            <span class="logo-text" style="font-size: 1.2rem; font-weight: 700; color: white;">SANDIKAMI</span>
+          </h4>
+          <ul class="footer-links text-text-muted">
+            <li>Dinas Komunikasi dan Informatika</li>
+            <li>Kabupaten Mojokerto</li>
+            <li>Bidang Persandian dan Keamanan Informasi.</li>
+          </ul>
         </div>
         
         <div>
