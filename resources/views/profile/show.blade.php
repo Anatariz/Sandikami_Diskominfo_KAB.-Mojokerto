@@ -151,6 +151,63 @@
             </tbody>
         </table>
     </div>
+    
+    <div class="card mt-4" style="max-width: 900px; margin: 2rem auto 0; background-color: rgba(2, 12, 27, 0.5); border: 1px solid var(--glass-border); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); padding: 30px; overflow-x: auto;">
+        <div style="display: flex; align-items: center; margin-bottom: 25px;">
+            <div style="width: 45px; height: 45px; background-color: #e74c3c; border-radius: 10px; display: flex; justify-content: center; align-items: center; color: white; margin-right: 15px; flex-shrink: 0;">
+                <i class="ri-feedback-fill" style="font-size: 1.5rem;"></i>
+            </div>
+            <div>
+                <h3 style="color: white; margin-bottom: 2px; font-size: 1.3rem;">Pengaduan yang Diajukan</h3>
+                <p style="color: var(--color-text-muted); font-size: 0.85rem; margin-bottom: 0;">Daftar laporan atau pengaduan yang pernah Anda buat</p>
+            </div>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
+            <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); color: white; text-align: left;">
+                    <th style="padding: 12px 15px; font-weight: 600; font-size: 0.9rem;">Tanggal</th>
+                    <th style="padding: 12px 15px; font-weight: 600; font-size: 0.9rem;">Kategori</th>
+                    <th style="padding: 12px 15px; font-weight: 600; font-size: 0.9rem;">Judul Laporan</th>
+                    <th style="padding: 12px 15px; font-weight: 600; font-size: 0.9rem;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($pengaduans as $pengaduan)
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--color-text-muted); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                    <td style="padding: 15px; font-size: 0.9rem;">{{ $pengaduan->created_at->format('d M Y') }}</td>
+                    <td style="padding: 15px; font-size: 0.9rem; color: white; text-transform: capitalize;">{{ $pengaduan->kategori }}</td>
+                    <td style="padding: 15px; font-size: 0.9rem;">{{ $pengaduan->judul }}</td>
+                    <td style="padding: 15px;">
+                        @php
+                            $statusLower = strtolower($pengaduan->status ?? 'pending');
+                            $bgColor = 'rgba(127, 140, 141, 0.2)';
+                            $textColor = '#7f8c8d';
+                            
+                            if ($statusLower == 'diproses') {
+                                $bgColor = 'rgba(241, 196, 15, 0.2)';
+                                $textColor = '#f1c40f';
+                            } elseif ($statusLower == 'selesai' || $statusLower == 'approved') {
+                                $bgColor = 'rgba(46, 204, 113, 0.2)';
+                                $textColor = '#2ecc71';
+                            } elseif ($statusLower == 'ditolak' || $statusLower == 'rejected') {
+                                $bgColor = 'rgba(231, 76, 60, 0.2)';
+                                $textColor = '#e74c3c';
+                            }
+                        @endphp
+                        <span style="background-color: {{ $bgColor }}; color: {{ $textColor }}; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">{{ ucfirst($pengaduan->status ?? 'Pending') }}</span>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="4" style="padding: 30px 15px; text-align: center; color: var(--color-text-muted); font-size: 0.9rem;">
+                        Belum ada pengaduan yang pernah Anda ajukan.
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
     @endif
 @if(auth()->user()->role !== 'admin')
 </div>

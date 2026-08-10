@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('title', 'Edit Pengaduan - Sandikami')
 @section('content')
 <div class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
@@ -17,19 +17,19 @@
         </div>
     @endif
 
-    <div class="card p-4" style="background-color: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 10px;">
+    <div class="card" style="padding: 30px; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px;">
         <form action="{{ route('admin.pengaduan.update', $pengaduan->id) }}" method="POST">
             @csrf
             @method('PUT')
             
             <div class="form-group mb-3" style="margin-bottom: 1rem;">
                 <label for="judul" style="display: block; margin-bottom: 5px;">Judul Laporan</label>
-                <input type="text" id="judul" name="judul" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 5px;" value="{{ old('judul', $pengaduan->judul) }}" required>
+                <input type="text" id="judul" name="judul" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" value="{{ old('judul', $pengaduan->judul) }}" required>
             </div>
 
             <div class="form-group mb-3" style="margin-bottom: 1rem;">
                 <label for="kategori" style="display: block; margin-bottom: 5px;">Kategori</label>
-                <select id="kategori" name="kategori" class="form-control" style="width: 100%; padding: 10px; background-color: var(--color-primary); border: 1px solid var(--glass-border); color: white; border-radius: 5px;" required>
+                <select id="kategori" name="kategori" class="form-control" style="width: 100%; padding: 10px; background-color: var(--color-primary); border: 1px solid var(--border-color); color: white; border-radius: 5px;" required>
                     <option value="" disabled>-- Pilih Kategori --</option>
                     <option value="insiden keamanan informasi" {{ (old('kategori', $pengaduan->kategori) == 'insiden keamanan informasi') ? 'selected' : '' }}>Insiden keamanan informasi</option>
                     <option value="kendala email pemda" {{ (old('kategori', $pengaduan->kategori) == 'kendala email pemda') ? 'selected' : '' }}>Kendala email Pemda</option>
@@ -43,17 +43,27 @@
 
             <div class="form-group mb-3" style="margin-bottom: 1rem;">
                 <label for="nama" style="display: block; margin-bottom: 5px;">Nama Pelapor</label>
-                <input type="text" id="nama" name="nama" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 5px;" value="{{ old('nama', $pengaduan->nama) }}" required>
+                <input type="text" id="nama" name="nama" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" value="{{ old('nama', $pengaduan->nama) }}" required>
             </div>
             
             <div class="form-group mb-3" style="margin-bottom: 1rem;">
                 <label for="wa" style="display: block; margin-bottom: 5px;">No. WhatsApp</label>
-                <input type="text" id="wa" name="wa" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 5px;" value="{{ old('wa', $pengaduan->wa) }}" required>
+                <input type="text" id="wa" name="wa" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" value="{{ old('wa', $pengaduan->wa) }}" required>
             </div>
 
             <div class="form-group mb-3" style="margin-bottom: 1.5rem;">
                 <label for="pesan" style="display: block; margin-bottom: 5px;">Pesan / Detail Kejadian</label>
-                <textarea id="pesan" name="pesan" rows="5" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 5px;" required>{{ old('pesan', $pengaduan->pesan) }}</textarea>
+                <textarea id="pesan" name="pesan" rows="5" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" required>{{ old('pesan', $pengaduan->pesan) }}</textarea>
+            </div>
+
+            <div class="form-group mb-3" style="margin-bottom: 1.5rem;">
+                <label for="status" style="display: block; margin-bottom: 5px;">Status</label>
+                <select id="status" name="status" class="form-control" style="width: 100%; padding: 10px; background-color: var(--color-primary); border: 1px solid var(--border-color); color: white; border-radius: 5px;" required>
+                    <option value="Pending" {{ (old('status', $pengaduan->status) == 'Pending') ? 'selected' : '' }}>Pending</option>
+                    <option value="Diproses" {{ (old('status', $pengaduan->status) == 'Diproses') ? 'selected' : '' }}>Diproses</option>
+                    <option value="Selesai" {{ (old('status', $pengaduan->status) == 'Selesai') ? 'selected' : '' }}>Selesai</option>
+                    <option value="Ditolak" {{ (old('status', $pengaduan->status) == 'Ditolak') ? 'selected' : '' }}>Ditolak</option>
+                </select>
             </div>
 
             <div class="mt-4">

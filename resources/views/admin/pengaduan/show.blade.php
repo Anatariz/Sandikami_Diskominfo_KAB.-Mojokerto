@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('title', 'Detail Pengaduan - Sandikami')
 @section('content')
 <div class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
@@ -7,42 +7,68 @@
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary" style="background-color: #95a5a6; border-color: #95a5a6; padding: 8px 15px; color: white; text-decoration: none; border-radius: 5px;">Kembali ke Dashboard</a>
     </div>
 
-    <div class="card p-4" style="background-color: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 10px;">
+    <div class="card" style="padding: 30px; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px;">
         <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
             <tr>
-                <th style="padding: 12px; border-bottom: 1px solid var(--glass-border); width: 30%;">Judul Laporan</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);"><strong>{{ $pengaduan->judul }}</strong></td>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color); width: 30%;">Judul Laporan</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><strong>{{ $pengaduan->judul }}</strong></td>
             </tr>
             <tr>
-                <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">Tanggal Pelaporan</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $pengaduan->created_at->format('d M Y H:i:s') }}</td>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Tanggal Pelaporan</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">{{ $pengaduan->created_at->format('d M Y H:i:s') }}</td>
             </tr>
             <tr>
-                <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">Kategori</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--glass-border); text-transform: capitalize;">{{ $pengaduan->kategori }}</td>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Status</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                    @php
+                        $statusLower = strtolower($pengaduan->status ?? 'pending');
+                        $bgColor = '#7f8c8d'; // abu-abu (menunggu/pending)
+                        $textColor = 'white';
+                        $statusText = ucfirst($pengaduan->status ?? 'Pending');
+                        
+                        if ($statusLower == 'diproses') {
+                            $bgColor = '#f1c40f'; // kuning
+                            $textColor = 'black';
+                            $statusText = 'Diproses';
+                        } elseif ($statusLower == 'selesai' || $statusLower == 'approved') {
+                            $bgColor = '#2ecc71'; // hijau
+                            $statusText = 'Selesai';
+                        } elseif ($statusLower == 'ditolak' || $statusLower == 'rejected') {
+                            $bgColor = '#e74c3c'; // merah
+                            $statusText = 'Ditolak';
+                        } elseif ($statusLower == 'pending' || $statusLower == 'menunggu') {
+                            $statusText = 'Pending';
+                        }
+                    @endphp
+                    <span class="badge" style="font-size: 1rem; padding: 5px 10px; background-color: {{ $bgColor }}; color: {{ $textColor }}; border-radius: 3px;">{{ $statusText }}</span>
+                </td>
             </tr>
             <tr>
-                <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">Nama Pelapor</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $pengaduan->nama }}</td>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Kategori</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color); text-transform: capitalize;">{{ $pengaduan->kategori }}</td>
             </tr>
             <tr>
-                <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">No WA / Telepon</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">{{ $pengaduan->wa }}</td>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Nama Pelapor</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">{{ $pengaduan->nama }}</td>
             </tr>
             <tr>
-                <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">Pesan / Detail Kejadian</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--glass-border); white-space: pre-line;">{{ $pengaduan->pesan }}</td>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">No WA / Telepon</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">{{ $pengaduan->wa }}</td>
+            </tr>
+            <tr>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Pesan / Detail Kejadian</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color); white-space: pre-line;">{{ $pengaduan->pesan }}</td>
             </tr>
             @if($pengaduan->lampiran)
             <tr>
-                <th style="padding: 12px; border-bottom: 1px solid var(--glass-border);">File Lampiran</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--glass-border);">
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">File Lampiran</th>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
                     <a href="{{ asset('storage/' . $pengaduan->lampiran) }}" target="_blank" class="btn btn-sm btn-primary" style="padding: 5px 10px; background-color: #3498db; color: white; text-decoration: none; border-radius: 3px;">Lihat Lampiran</a>
                 </td>
             </tr>
             @endif
         </table>
-        <div class="mt-4" style="margin-top: 1.5rem;">
+        <div style="margin-top: 1.5rem;">
             <a href="{{ route('admin.pengaduan.edit', $pengaduan->id) }}" class="btn btn-warning" style="background-color: #f1c40f; border-color: #f1c40f; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Edit Data</a>
         </div>
     </div>

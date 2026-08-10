@@ -84,6 +84,7 @@ class AdminController extends Controller
             'wa' => 'required|string|max:20',
             'kategori' => 'required|string|max:255',
             'pesan' => 'required|string',
+            'status' => 'required|string',
         ]);
 
         $pengaduan->update($request->all());

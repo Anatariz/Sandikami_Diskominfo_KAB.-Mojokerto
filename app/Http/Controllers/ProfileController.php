@@ -11,7 +11,8 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $layanans = $user->role !== 'admin' ? $user->layanans()->latest()->get() : collect();
-        return view('profile.show', compact('user', 'layanans'));
+        $pengaduans = $user->role !== 'admin' ? $user->pengaduans()->latest()->get() : collect();
+        return view('profile.show', compact('user', 'layanans', 'pengaduans'));
     }
 
     public function edit()

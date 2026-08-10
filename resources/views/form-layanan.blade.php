@@ -48,12 +48,13 @@
                     <label class="form-label" for="{{ $field['name'] }}">{{ $field['label'] }} {!! $field['required'] ? '*' : '' !!}</label>
                     
                     @if($field['type'] === 'textarea')
-                        <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" rows="4" {{ $field['required'] ? 'required' : '' }}></textarea>
+                        <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" rows="4" {{ $field['required'] ? 'required' : '' }}>{{ old($field['name']) }}</textarea>
                     @elseif($field['type'] === 'file')
-                        <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" {{ $field['required'] ? 'required' : '' }}>
+                        <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
                     @else
-                        <input type="{{ $field['type'] }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" {{ $field['required'] ? 'required' : '' }}>
+                        <input type="{{ $field['type'] }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" value="{{ old($field['name']) }}" {{ $field['required'] ? 'required' : '' }}>
                     @endif
+                    @error($field['name']) <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
                 </div>
             @endforeach
         </div>
@@ -67,12 +68,13 @@
                 <label class="form-label" for="{{ $field['name'] }}">{{ $field['label'] }} {!! $field['required'] ? '*' : '' !!}</label>
                 
                 @if($field['type'] === 'textarea')
-                    <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" rows="4" {{ $field['required'] ? 'required' : '' }}></textarea>
+                    <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" rows="4" {{ $field['required'] ? 'required' : '' }}>{{ old($field['name']) }}</textarea>
                 @elseif($field['type'] === 'file')
-                    <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" {{ $field['required'] ? 'required' : '' }}>
+                    <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
                 @else
-                    <input type="{{ $field['type'] }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control" {{ $field['required'] ? 'required' : '' }}>
+                    <input type="{{ $field['type'] }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" value="{{ old($field['name']) }}" {{ $field['required'] ? 'required' : '' }}>
                 @endif
+                @error($field['name']) <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
             </div>
         @endforeach
         @endif
@@ -99,4 +101,16 @@
     </div>
   </div>
 </section>
+
+@if ($errors->any())
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const firstInvalid = document.querySelector('.is-invalid');
+    if (firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalid.focus();
+    }
+  });
+</script>
+@endif
 @endsection

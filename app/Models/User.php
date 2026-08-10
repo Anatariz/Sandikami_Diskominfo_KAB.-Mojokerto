@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(LayananRequest::class);
     }
+
+    public function pengaduans()
+    {
+        return $this->hasMany(Pengaduan::class);
+    }
 }

@@ -29,6 +29,7 @@ class PengaduanController extends Controller
         }
 
         Pengaduan::create([
+            'user_id' => auth()->id(),
             'judul' => $request->judul,
             'nama' => $request->nama,
             'wa' => $request->wa,

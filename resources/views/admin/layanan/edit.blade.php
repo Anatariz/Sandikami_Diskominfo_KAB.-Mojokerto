@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('title', 'Edit Layanan - Sandikami')
 @section('content')
 <div class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
@@ -17,29 +17,29 @@
         </div>
     @endif
 
-    <div class="card p-4" style="background-color: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 10px;">
+    <div class="card" style="padding: 30px; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px;">
         <form action="{{ route('admin.layanan.update', $layanan->id) }}" method="POST">
             @csrf
             @method('PUT')
             
             <div class="form-group mb-3" style="margin-bottom: 1rem;">
                 <label for="jenis_layanan" style="display: block; margin-bottom: 5px;">Jenis Layanan (Read Only)</label>
-                <input type="text" id="jenis_layanan" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: #ccc; border-radius: 5px;" value="{{ strtoupper($layanan->jenis_layanan) }}" readonly>
+                <input type="text" id="jenis_layanan" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: #ccc; border-radius: 5px;" value="{{ strtoupper($layanan->jenis_layanan) }}" readonly>
             </div>
 
             <div class="form-group mb-3" style="margin-bottom: 1rem;">
                 <label for="nama_lengkap" style="display: block; margin-bottom: 5px;">Nama Lengkap</label>
-                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 5px;" value="{{ old('nama_lengkap', $layanan->nama_lengkap) }}" required>
+                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" value="{{ old('nama_lengkap', $layanan->nama_lengkap) }}" required>
             </div>
             
             <div class="form-group mb-3" style="margin-bottom: 1rem;">
                 <label for="perangkat_daerah" style="display: block; margin-bottom: 5px;">Perangkat Daerah</label>
-                <input type="text" id="perangkat_daerah" name="perangkat_daerah" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white; border-radius: 5px;" value="{{ old('perangkat_daerah', $layanan->perangkat_daerah) }}" required>
+                <input type="text" id="perangkat_daerah" name="perangkat_daerah" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" value="{{ old('perangkat_daerah', $layanan->perangkat_daerah) }}" required>
             </div>
 
             <div class="form-group mb-3" style="margin-bottom: 1.5rem;">
                 <label for="status" style="display: block; margin-bottom: 5px;">Status</label>
-                <select id="status" name="status" class="form-control" style="width: 100%; padding: 10px; background-color: #1a1a2e; border: 1px solid var(--glass-border); color: white; border-radius: 5px;" required>
+                <select id="status" name="status" class="form-control" style="width: 100%; padding: 10px; background-color: #1a1a2e; border: 1px solid var(--border-color); color: white; border-radius: 5px;" required>
                     <option value="Menunggu" {{ (old('status', $layanan->status) == 'Menunggu') ? 'selected' : '' }}>Menunggu</option>
                     <option value="Diproses" {{ (old('status', $layanan->status) == 'Diproses') ? 'selected' : '' }}>Diproses</option>
                     <option value="Selesai" {{ (old('status', $layanan->status) == 'Selesai') ? 'selected' : '' }}>Selesai</option>

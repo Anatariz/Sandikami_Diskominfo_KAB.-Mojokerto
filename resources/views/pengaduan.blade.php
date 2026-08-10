@@ -20,41 +20,48 @@
         </div>
       @endif
 
+      <!-- Individual errors will be displayed under each field -->
+
       <form action="{{ route('pengaduan.submit') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           <label class="form-label" for="judul">Judul Pengajuan <span class="text-danger">*</span></label>
-          <input type="text" id="judul" name="judul" class="form-control" required placeholder="Contoh: Kendala Lupa Password Akun TTE">
+          <input type="text" id="judul" name="judul" class="form-control @error('judul') is-invalid @enderror" value="{{ old('judul') }}" required placeholder="Contoh: Kendala Lupa Password Akun TTE">
+          @error('judul') <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
         </div>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
           <div class="form-group">
             <label class="form-label" for="nama">Nama Pelapor <span class="text-danger">*</span></label>
-            <input type="text" id="nama" name="nama" class="form-control" required>
+            <input type="text" id="nama" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama', auth()->user()->name) }}" required>
+            @error('nama') <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
           </div>
           <div class="form-group">
             <label class="form-label" for="wa">No. WhatsApp <span class="text-danger">*</span></label>
-            <input type="tel" id="wa" name="wa" class="form-control" required>
+            <input type="tel" id="wa" name="wa" class="form-control @error('wa') is-invalid @enderror" value="{{ old('wa') }}" required>
+            @error('wa') <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
           </div>
         </div>
 
         <div class="form-group">
           <label class="form-label" for="kategori">Kategori Pengajuan <span class="text-danger">*</span></label>
-          <select id="kategori" name="kategori" class="form-control" required>
-            <option value="" disabled selected>-- Pilih Kategori --</option>
-            <option value="insiden">Insiden keamanan informasi</option>
-            <option value="email">Kendala email Pemda</option>
-            <option value="tte">Kendala TTE</option>
-            <option value="retas">Website/aplikasi terindikasi diretas</option>
-            <option value="phishing">Dugaan phishing</option>
-            <option value="konsultasi">Permintaan konsultasi</option>
-            <option value="lainnya">Lainnya</option>
+          <select id="kategori" name="kategori" class="form-control @error('kategori') is-invalid @enderror" required>
+            <option value="" disabled {{ old('kategori') ? '' : 'selected' }}>-- Pilih Kategori --</option>
+            <option value="insiden" {{ old('kategori') == 'insiden' ? 'selected' : '' }}>Insiden keamanan informasi</option>
+            <option value="email" {{ old('kategori') == 'email' ? 'selected' : '' }}>Kendala email Pemda</option>
+            <option value="tte" {{ old('kategori') == 'tte' ? 'selected' : '' }}>Kendala TTE</option>
+            <option value="retas" {{ old('kategori') == 'retas' ? 'selected' : '' }}>Website/aplikasi terindikasi diretas</option>
+            <option value="phishing" {{ old('kategori') == 'phishing' ? 'selected' : '' }}>Dugaan phishing</option>
+            <option value="konsultasi" {{ old('kategori') == 'konsultasi' ? 'selected' : '' }}>Permintaan konsultasi</option>
+            <option value="lainnya" {{ old('kategori') == 'lainnya' ? 'selected' : '' }}>Lainnya</option>
           </select>
+          @error('kategori') <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-group">
           <label class="form-label" for="pesan">Pesan / Detail Kendala <span class="text-danger">*</span></label>
-          <textarea id="pesan" name="pesan" class="form-control" rows="5" required placeholder="Jelaskan permasalahan Anda secara rinci..."></textarea>
+          <textarea id="pesan" name="pesan" class="form-control @error('pesan') is-invalid @enderror" rows="5" required placeholder="Jelaskan permasalahan Anda secara rinci...">{{ old('pesan') }}</textarea>
+          @error('pesan') <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
         </div>
 
         <div class="form-group">
@@ -64,8 +71,9 @@
               <i class="ri-upload-cloud-2-line mr-2" style="font-size: 1.5rem; margin-right: 10px;"></i>
               <span>Upload Screenshot/File Pendukung</span>
             </div>
-            <input type="file" name="lampiran" id="lampiran">
+            <input type="file" name="lampiran" id="lampiran" class="@error('lampiran') is-invalid @enderror">
           </div>
+          @error('lampiran') <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
         </div>
 
         <hr style="border-color: var(--glass-border); margin: 30px 0;">
@@ -90,11 +98,23 @@
         </div>
 
         <div style="margin-top: 30px;">
-          <button type="submit" class="btn btn-accent btn-block" style="padding: 15px; font-size: 1.1rem;"><i class="ri-send-plane-fill mr-2"></i> Kirim Laporan Pengaduan</button>
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;"><i class="ri-send-plane-fill mr-2"></i> Kirim Laporan Pengaduan</button>
         </div>
 
       </form>
     </div>
   </div>
 </section>
+
+@if ($errors->any())
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const firstInvalid = document.querySelector('.is-invalid');
+    if (firstInvalid) {
+      firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalid.focus();
+    }
+  });
+</script>
+@endif
 @endsection

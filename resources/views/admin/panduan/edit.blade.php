@@ -26,7 +26,7 @@
                     @error('content') <span style="color: #e74c3c; font-size: 0.85rem;">{{ $message }}</span> @enderror
                 </div>
                 
-                <div class="mt-4 pt-3" style="border-top: 1px solid var(--glass-border);">
+                <div class="mt-4 pt-3" style="border-top: 1px solid var(--border-color);">
                     <button type="submit" class="btn btn-warning" style="background-color: #f1c40f; color: black; padding: 10px 20px;">Update Konten</button>
                     <a href="{{ route('admin.panduan.index') }}" class="btn btn-secondary" style="padding: 10px 20px; margin-left: 10px;">Batal</a>
                 </div>
