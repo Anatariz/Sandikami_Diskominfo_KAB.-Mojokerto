@@ -25,7 +25,8 @@ class LayananController extends Controller
 
         $rules = [
             'persetujuan' => 'accepted',
-            'kebenaran' => 'accepted'
+            'kebenaran' => 'accepted',
+            'captcha_answer' => 'required|same:captcha_expected'
         ];
 
         // Build dynamic rules based on schema

@@ -31,7 +31,7 @@
       <div class="glass-card service-card">
 
         <h3>{{ $layanan->nama_layanan }}</h3>
-        <p class="mb-3 text-text-muted">{{ $layanan->deskripsi }}</p>
+        <p class="mb-3 text-text-muted">{{ Str::limit(strip_tags($layanan->deskripsi), 120) }}</p>
         <a href="{{ route('layanan.form', ['type' => $layanan->jenis_layanan]) }}" class="text-primary">Selengkapnya &rarr;</a>
       </div>
       @empty
@@ -50,26 +50,59 @@
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item">
-        <h3>1,250+</h3>
-        <p>Pengguna TTE</p>
+        <h3>{{ $stats['tte'] }}</h3>
+        <p>Pengguna Layanan TTE</p>
       </div>
       <div class="stat-item">
-        <h3>3,400+</h3>
-        <p>Pengguna E-Mail</p>
+        <h3>{{ $stats['email'] }}</h3>
+        <p>Pengguna Layanan Email</p>
       </div>
       <div class="stat-item">
-        <h3>45+</h3>
-        <p>Security Assessment</p>
+        <h3>{{ $stats['assessment'] }}</h3>
+        <p>Pelaksanaan Security Assesment</p>
       </div>
       <div class="stat-item">
-        <h3>120+</h3>
-        <p>Insiden Ditangani</p>
+        <h3>{{ $stats['insiden'] }}</h3>
+        <p>Penanganan Insiden</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Panduan Populer Removed -->
+<!-- Berita Terbaru -->
+<section id="berita" class="section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="page-title">Berita <span>Terbaru</span></h2>
+      <p class="page-subtitle">Informasi dan berita terkini seputar keamanan siber dan layanan Sandikami.</p>
+    </div>
+    
+    <div class="news-grid">
+      @forelse($beritas as $berita)
+      <div class="glass-card news-card">
+        <div class="news-img">
+          @if($berita->gambar)
+            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="{{ $berita->judul }}" style="width: 100%; height: 100%; object-fit: cover;">
+          @else
+            <i class="ri-newspaper-line" style="font-size: 3rem;"></i>
+          @endif
+        </div>
+        <div class="news-content">
+          <span class="news-date"><i class="ri-calendar-event-line mr-1"></i> {{ $berita->created_at->format('d M Y') }}</span>
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px;">{{ $berita->judul }}</h3>
+          <p class="text-text-muted" style="font-size: 0.9rem;">{{ Str::limit($berita->ringkasan, 100) }}</p>
+          <a href="{{ route('berita.show', $berita->slug) }}" class="btn btn-sm btn-outline-primary mt-3">Baca Selengkapnya</a>
+        </div>
+      </div>
+      @empty
+        <div style="grid-column: 1 / -1; text-align: center; color: var(--color-text-muted); padding: 40px;">
+            Belum ada berita terbaru.
+        </div>
+      @endforelse
+    </div>
+  </div>
+</section>
+
 
 @endsection
 

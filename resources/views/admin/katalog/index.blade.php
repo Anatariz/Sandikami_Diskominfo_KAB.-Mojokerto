@@ -6,7 +6,7 @@
 @section('content')
 <div class="card mb-4" style="display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--primary);">
     <div>
-        <h2 class="mb-1" style="font-size: 1.25rem;">Katalog Layanan (Dynamic Forms)</h2>
+        <h2 class="mb-1" style="font-size: 1.25rem;">Katalog Layanan </h2>
         <p class="text-text-muted mb-0" style="font-size: 0.9rem;">Konfigurasi jenis layanan yang tersedia beserta field formulirnya.</p>
     </div>
     <div>

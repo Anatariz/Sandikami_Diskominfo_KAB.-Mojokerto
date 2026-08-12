@@ -90,6 +90,7 @@
             const label = data ? data.label : '';
             const type = data ? data.type : 'text';
             const required = data ? (data.required === true || data.required === 'true') : true;
+            const options = data && data.options ? data.options.join(', ') : '';
             
             const fieldHTML = `
                 <div class="field-item" style="background-color: rgba(0,0,0,0.15); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed var(--border-color); position: relative;">
@@ -109,8 +110,14 @@
                                 <option value="textarea" ${type === 'textarea' ? 'selected' : ''}>Teks Panjang (Paragraf)</option>
                                 <option value="file" ${type === 'file' ? 'selected' : ''}>Upload File / Berkas</option>
                                 <option value="email" ${type === 'email' ? 'selected' : ''}>Email</option>
+                                <option value="select" ${type === 'select' ? 'selected' : ''}>Pilihan (Dropdown)</option>
                             </select>
                         </div>
+                    </div>
+                    
+                    <div class="options-container" style="display: ${type === 'select' ? 'block' : 'none'}; margin-top: 15px;">
+                        <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Pilihan (Pisahkan dengan koma) *</label>
+                        <input type="text" class="form-control field-options" placeholder="Contoh: Baru, Perpanjangan, Kendala TTE" style="padding: 8px;" value="${options}">
                     </div>
                     
                     <div style="margin-top: 15px; display: flex; align-items: center; gap: 10px;">
@@ -135,8 +142,25 @@
                 e.target.closest('.field-item').remove();
             }
         }
+        
+        function changeTypeHandler(e) {
+            if (e.target.classList.contains('field-type')) {
+                const item = e.target.closest('.field-item');
+                const optionsContainer = item.querySelector('.options-container');
+                if (e.target.value === 'select') {
+                    optionsContainer.style.display = 'block';
+                    optionsContainer.querySelector('.field-options').setAttribute('required', 'required');
+                } else {
+                    optionsContainer.style.display = 'none';
+                    optionsContainer.querySelector('.field-options').removeAttribute('required');
+                }
+            }
+        }
+
         containerPemohon.addEventListener('click', removeFieldHandler);
         containerLayanan.addEventListener('click', removeFieldHandler);
+        containerPemohon.addEventListener('change', changeTypeHandler);
+        containerLayanan.addEventListener('change', changeTypeHandler);
 
         function extractSchema(container) {
             const items = container.querySelectorAll('.field-item');
@@ -152,7 +176,13 @@
                             .replace(/^_|_$/g, '');
                 
                 if (!name) name = 'field_' + index;
-                schema.push({ name, label, type, required });
+                let schemaObj = { name, label, type, required };
+                if (type === 'select') {
+                    const optionsInput = item.querySelector('.field-options').value;
+                    schemaObj.options = optionsInput.split(',').map(s => s.trim()).filter(s => s !== '');
+                }
+                
+                schema.push(schemaObj);
             });
             return schema;
         }

@@ -16,7 +16,7 @@
 <header class="page-header" style="padding: 100px 0 40px;">
   <div class="container">
     <h1 class="page-title">Formulir <span>{{ $layanan->nama_layanan }}</span></h1>
-    <p class="page-subtitle">{{ $layanan->deskripsi }}</p>
+    <p class="page-subtitle">{!! $layanan->deskripsi !!}</p>
   </div>
 </header>
 
@@ -49,8 +49,22 @@
                     
                     @if($field['type'] === 'textarea')
                         <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" rows="4" {{ $field['required'] ? 'required' : '' }}>{{ old($field['name']) }}</textarea>
+                    @elseif($field['type'] === 'select')
+                        <select id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
+                            <option value="" disabled selected>-- Pilih --</option>
+                            @if(isset($field['options']) && is_array($field['options']))
+                                @foreach($field['options'] as $opt)
+                                    <option value="{{ $opt }}" {{ old($field['name']) == $opt ? 'selected' : '' }}>{{ $opt }}</option>
+                                @endforeach
+                            @endif
+                        </select>
                     @elseif($field['type'] === 'file')
                         <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
+                    @elseif($field['type'] === 'checkbox')
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="{{ $field['name'] }}" name="{{ $field['name'] }}" value="1" class="@error($field['name']) is-invalid @enderror" {{ old($field['name']) ? 'checked' : '' }} {{ $field['required'] ? 'required' : '' }}>
+                            <span>Setuju</span>
+                        </label>
                     @else
                         <input type="{{ $field['type'] }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" value="{{ old($field['name']) }}" {{ $field['required'] ? 'required' : '' }}>
                     @endif
@@ -69,8 +83,22 @@
                 
                 @if($field['type'] === 'textarea')
                     <textarea id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" rows="4" {{ $field['required'] ? 'required' : '' }}>{{ old($field['name']) }}</textarea>
+                @elseif($field['type'] === 'select')
+                    <select id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
+                        <option value="" disabled selected>-- Pilih --</option>
+                        @if(isset($field['options']) && is_array($field['options']))
+                            @foreach($field['options'] as $opt)
+                                <option value="{{ $opt }}" {{ old($field['name']) == $opt ? 'selected' : '' }}>{{ $opt }}</option>
+                            @endforeach
+                        @endif
+                    </select>
                 @elseif($field['type'] === 'file')
                     <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
+                @elseif($field['type'] === 'checkbox')
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="{{ $field['name'] }}" name="{{ $field['name'] }}" value="1" class="@error($field['name']) is-invalid @enderror" {{ old($field['name']) ? 'checked' : '' }} {{ $field['required'] ? 'required' : '' }}>
+                        <span>Setuju</span>
+                    </label>
                 @else
                     <input type="{{ $field['type'] }}" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" value="{{ old($field['name']) }}" {{ $field['required'] ? 'required' : '' }}>
                 @endif
@@ -92,6 +120,20 @@
                 <span>Saya menyatakan bahwa seluruh data yang diisi pada formulir ini adalah benar dan dapat dipertanggungjawabkan.</span>
             </label>
         </div>
+        
+        <div class="mb-4">
+            <label class="form-label">Verifikasi Captcha *</label>
+            @php
+                $num1 = rand(1, 9);
+                $num2 = rand(1, 9);
+            @endphp
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="background: var(--color-primary-lighter); padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; user-select: none;">{{ $num1 }} + {{ $num2 }} =</span>
+                <input type="hidden" name="captcha_expected" value="{{ $num1 + $num2 }}">
+                <input type="number" name="captcha_answer" class="form-control" style="max-width: 150px;" required placeholder="Hasil">
+            </div>
+        </div>
+
 
         <div style="margin-top: 40px;">
             <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;"><i class="ri-send-plane-fill mr-2"></i>Kirim Pengajuan Layanan</button>

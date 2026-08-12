@@ -9,7 +9,19 @@ class PageController extends Controller
     public function index()
     {
         $layanans = \App\Models\LayananKatalog::where('status', 'active')->take(3)->get();
-        return view('home', compact('layanans'));
+        
+        $beritas = \App\Models\Berita::where('status', 'published')->latest()->take(3)->get();
+        
+        $panduans = \App\Models\PageContent::where('slug', 'like', 'panduan-%')->take(3)->get();
+        
+        $stats = [
+            'tte' => \App\Models\LayananRequest::where('jenis_layanan', 'tte')->count(),
+            'email' => \App\Models\LayananRequest::where('jenis_layanan', 'email')->count(),
+            'assessment' => \App\Models\LayananRequest::whereIn('jenis_layanan', ['assessment', 'pentest'])->count(),
+            'insiden' => \App\Models\Pengaduan::count(),
+        ];
+        
+        return view('home', compact('layanans', 'beritas', 'panduans', 'stats'));
     }
 
     public function profilTentang()
@@ -30,7 +42,17 @@ class PageController extends Controller
         return view('profil.program-kerja', compact('content'));
     }
 
-    // Berita removed
+    public function beritaIndex()
+    {
+        $beritas = \App\Models\Berita::where('status', 'published')->latest()->paginate(9);
+        return view('berita.index', compact('beritas'));
+    }
+
+    public function beritaShow($slug)
+    {
+        $berita = \App\Models\Berita::where('slug', $slug)->firstOrFail();
+        return view('berita.show', compact('berita'));
+    }
 
     public function panduanInsiden()
     {

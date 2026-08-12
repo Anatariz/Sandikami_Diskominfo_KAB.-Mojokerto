@@ -44,6 +44,7 @@
             <a href="{{ route('profil.program-kerja') }}" class="dropdown-item">Program Kerja</a>
           </div>
         </div>
+        <a href="{{ route('berita.index') }}" class="{{ request()->is('*berita*') ? 'active' : '' }}">Berita</a>
         <div class="dropdown">
           <a href="#" class="dropdown-toggle {{ request()->routeIs('layanan*') ? 'active' : '' }}">
             Layanan <i class="ri-arrow-down-s-line"></i>

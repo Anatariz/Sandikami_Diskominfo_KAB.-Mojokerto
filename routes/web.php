@@ -16,6 +16,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Halaman Publik (Tanpa Login)
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
+Route::get('/berita', [PageController::class, 'beritaIndex'])->name('berita.index');
+Route::get('/berita/{slug}', [PageController::class, 'beritaShow'])->name('berita.show');
 
 // Profil
 Route::prefix('profil')->name('profil.')->group(function () {
