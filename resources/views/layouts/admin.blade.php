@@ -315,6 +315,16 @@
         }
         .admin-dropdown:hover .admin-dropdown-content,
         .admin-dropdown:focus-within .admin-dropdown-content { display: block; }
+        /* Pagination */
+        .pagination { display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; gap: 5px; align-items: center; justify-content: center; }
+        .pagination .page-item .page-link { display: flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 10px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: var(--text-main); text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; font-size: 0.9rem; }
+        .pagination .page-item:not(.disabled):not(.active) .page-link:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); color: white; }
+        .pagination .page-item.active .page-link { background: var(--primary); color: white; border-color: var(--primary); font-weight: 600; }
+        .pagination .page-item.disabled .page-link { opacity: 0.4; cursor: not-allowed; background: transparent; }
+        .d-sm-none { display: none !important; } /* Hide bootstrap mobile view */
+        .d-none.d-sm-flex { display: flex !important; flex-direction: column; gap: 15px; align-items: center; width: 100%; } /* Style the container */
+        nav p.small.text-muted { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; text-align: center; } /* Style the 'Showing x to y' text */
+        nav p.small.text-muted .fw-semibold { font-weight: 700; color: white; }
 
     </style>
     @stack('styles')

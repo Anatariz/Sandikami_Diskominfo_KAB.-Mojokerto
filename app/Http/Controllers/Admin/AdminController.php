@@ -14,18 +14,58 @@ class AdminController extends Controller
         $layanans = LayananRequest::orderBy('created_at', 'desc')->take(5)->get();
         $pengaduans = Pengaduan::orderBy('created_at', 'desc')->take(5)->get();
         
-        return view('admin.dashboard', compact('layanans', 'pengaduans'));
+        $total_pengajuan = LayananRequest::count();
+        $total_pengaduan = Pengaduan::count();
+        
+        return view('admin.dashboard', compact('layanans', 'pengaduans', 'total_pengajuan', 'total_pengaduan'));
     }
 
-    public function indexLayanan()
+    public function indexLayanan(Request $request)
     {
-        $layanans = LayananRequest::orderBy('created_at', 'desc')->get();
+        $query = LayananRequest::query();
+
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->start_date);
+        }
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->end_date);
+        }
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('nama_lengkap', 'like', '%' . $request->search . '%')
+                  ->orWhere('jenis_layanan', 'like', '%' . $request->search . '%')
+                  ->orWhere('perangkat_daerah', 'like', '%' . $request->search . '%');
+            });
+        }
+        if ($request->filled('status') && $request->status !== 'semua') {
+            $query->where('status', $request->status);
+        }
+
+        $layanans = $query->orderBy('created_at', 'desc')->paginate(10)->appends($request->query());
         return view('admin.layanan.index', compact('layanans'));
     }
 
-    public function indexPengaduan()
+    public function indexPengaduan(Request $request)
     {
-        $pengaduans = Pengaduan::orderBy('created_at', 'desc')->get();
+        $query = Pengaduan::query();
+
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->start_date);
+        }
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->end_date);
+        }
+        if ($request->filled('search')) {
+            $query->where(function($q) use ($request) {
+                $q->where('nama', 'like', '%' . $request->search . '%')
+                  ->orWhere('judul', 'like', '%' . $request->search . '%');
+            });
+        }
+        if ($request->filled('status') && $request->status !== 'semua') {
+            $query->where('status', $request->status);
+        }
+
+        $pengaduans = $query->orderBy('created_at', 'desc')->paginate(10)->appends($request->query());
         return view('admin.pengaduan.index', compact('pengaduans'));
     }
 

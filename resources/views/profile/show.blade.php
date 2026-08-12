@@ -81,7 +81,7 @@
                 </div>
                 <div>
                     <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); font-weight: 600; margin-bottom: 2px;">Bergabung Sejak</div>
-                    <div style="color: white; font-size: 1.05rem;">{{ $user->created_at->format('d F Y') }}</div>
+                    <div style="color: white; font-size: 1.05rem;">{{ $user->created_at->translatedFormat('d F Y') }}</div>
                 </div>
             </div>
         </div>
@@ -128,7 +128,7 @@
             <tbody>
                 @forelse($layanans as $layanan)
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--color-text-muted); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
-                    <td style="padding: 15px; font-size: 0.9rem;">{{ $layanan->created_at->format('d M Y') }}</td>
+                    <td style="padding: 15px; font-size: 0.9rem;">{{ $layanan->created_at->translatedFormat('d M Y') }}</td>
                     <td style="padding: 15px; font-size: 0.9rem; color: white;">{{ strtoupper(str_replace('-', ' ', $layanan->jenis_layanan)) }}</td>
                     <td style="padding: 15px; font-size: 0.9rem;">{{ $layanan->nama_lengkap }}</td>
                     <td style="padding: 15px;">
@@ -175,7 +175,7 @@
             <tbody>
                 @forelse($pengaduans as $pengaduan)
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--color-text-muted); transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
-                    <td style="padding: 15px; font-size: 0.9rem;">{{ $pengaduan->created_at->format('d M Y') }}</td>
+                    <td style="padding: 15px; font-size: 0.9rem;">{{ $pengaduan->created_at->translatedFormat('d M Y') }}</td>
                     <td style="padding: 15px; font-size: 0.9rem; color: white; text-transform: capitalize;">{{ $pengaduan->kategori }}</td>
                     <td style="padding: 15px; font-size: 0.9rem;">{{ $pengaduan->judul }}</td>
                     <td style="padding: 15px;">

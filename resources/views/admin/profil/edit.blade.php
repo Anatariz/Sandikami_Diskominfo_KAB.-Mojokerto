@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="form-group mb-4">
-                    <label class="form-label" for="content">Isi Teks / Konten (Gunakan Enter untuk ganti baris)</label>
+                    <label class="form-label" for="content">Isi Teks / Konten (Mendukung Tag HTML)</label>
                     <textarea name="content" id="content" class="form-control @error('content') is-invalid @enderror" rows="15" required>{{ old('content', $page->content) }}</textarea>
                     @error('content') <span style="color: #e74c3c; font-size: 0.85rem;">{{ $message }}</span> @enderror
                 </div>

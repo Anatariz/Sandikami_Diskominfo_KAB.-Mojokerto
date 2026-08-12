@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Tanggal Pengajuan</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">{{ $layanan->created_at->format('d M Y H:i:s') }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">{{ $layanan->created_at->translatedFormat('d M Y H:i:s') }}</td>
             </tr>
             <tr>
                 <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Status</th>

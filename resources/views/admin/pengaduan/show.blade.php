@@ -15,7 +15,7 @@
             </tr>
             <tr>
                 <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Tanggal Pelaporan</th>
-                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">{{ $pengaduan->created_at->format('d M Y H:i:s') }}</td>
+                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">{{ $pengaduan->created_at->translatedFormat('d M Y H:i:s') }}</td>
             </tr>
             <tr>
                 <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Status</th>
