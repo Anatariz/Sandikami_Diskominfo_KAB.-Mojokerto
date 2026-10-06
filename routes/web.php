@@ -18,6 +18,7 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
 Route::get('/berita', [PageController::class, 'beritaIndex'])->name('berita.index');
 Route::get('/berita/{slug}', [PageController::class, 'beritaShow'])->name('berita.show');
+Route::get('/captcha/refresh', [\App\Http\Controllers\CaptchaController::class, 'refresh'])->name('captcha.refresh');
 
 // Profil
 Route::prefix('profil')->name('profil.')->group(function () {

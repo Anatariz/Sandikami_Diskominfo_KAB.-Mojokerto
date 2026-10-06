@@ -133,18 +133,7 @@
             </label>
         </div>
         
-        <div class="mb-4">
-            <label class="form-label">Verifikasi Captcha *</label>
-            @php
-                $num1 = rand(1, 9);
-                $num2 = rand(1, 9);
-            @endphp
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <span style="background: var(--color-primary-lighter); padding: 10px 20px; border-radius: 6px; font-weight: bold; font-size: 1.2rem; letter-spacing: 2px; user-select: none;">{{ $num1 }} + {{ $num2 }} =</span>
-                <input type="hidden" name="captcha_expected" value="{{ $num1 + $num2 }}">
-                <input type="number" name="captcha_answer" class="form-control" style="max-width: 150px;" required placeholder="Hasil">
-            </div>
-        </div>
+        @include('components.captcha')
 
 
         <div style="margin-top: 40px;">

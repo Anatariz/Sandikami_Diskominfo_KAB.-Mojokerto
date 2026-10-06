@@ -89,13 +89,7 @@
           </div>
         </div>
 
-        <div class="form-group" style="max-width: 200px;">
-          <label class="form-label">Captcha</label>
-          <div style="background: rgba(0,0,0,0.5); padding: 10px; text-align: center; font-family: monospace; letter-spacing: 5px; font-size: 1.2rem; margin-bottom: 10px; border-radius: 4px; color: #fff;">
-            M 4 Q 8 A
-          </div>
-          <input type="text" class="form-control" placeholder="Masukkan kode" required>
-        </div>
+        @include('components.captcha')
 
         <div style="margin-top: 30px;">
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;"><i class="ri-send-plane-fill mr-2"></i> Kirim Laporan Pengaduan</button>

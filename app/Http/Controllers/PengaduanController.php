@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengaduan;
+use App\Helpers\CaptchaHelper;
 
 class PengaduanController extends Controller
 {
@@ -20,8 +21,20 @@ class PengaduanController extends Controller
             'wa' => 'required|string|max:20',
             'kategori' => 'required|string',
             'pesan' => 'required|string',
-            'lampiran' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048'
+            'lampiran' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'persetujuan' => 'accepted',
+            'captcha' => 'required|string',
+            'captcha_hash' => 'required|string',
+        ], [
+            'persetujuan.accepted' => 'Anda harus menyetujui pemrosesan data untuk melanjutkan.',
+            'captcha.required' => 'Kode captcha wajib diisi.',
         ]);
+
+        if (!CaptchaHelper::verify($request->input('captcha'), $request->input('captcha_hash'))) {
+            return back()->withInput()->withErrors([
+                'captcha' => 'Kode captcha salah atau tidak sesuai. Silakan coba lagi.'
+            ]);
+        }
 
         $path = null;
         if ($request->hasFile('lampiran')) {

@@ -439,7 +439,7 @@
         <header class="admin-topbar">
             <div class="topbar-title">@yield('page_title', 'Panel Kontrol Administrator')</div>
             <div class="topbar-actions" style="display: flex; align-items: center; gap: 15px;">
-                <a href="{{ route('home') }}" target="_blank" class="btn btn-secondary"><i class="ri-external-link-line mr-1"></i> Lihat Portal</a>
+                <a href="{{ route('home') }}" target="_self" class="btn btn-secondary"><i class="ri-global-line mr-1"></i> Lihat Portal</a>
 
                 <div class="admin-dropdown">
                     <a href="#" style="color: white; text-decoration: none; width: 40px; height: 40px; background-color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 2px solid rgba(255,255,255,0.2);">

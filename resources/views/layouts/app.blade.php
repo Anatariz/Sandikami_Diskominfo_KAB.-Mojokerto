@@ -166,7 +166,7 @@
 
   @auth
     @if(auth()->user()->role === 'admin')
-      <a href="{{ route('admin.dashboard') }}" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background-color: #004b87; color: white; padding: 12px 24px; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px; text-decoration: none; border: 2px solid #00a8e8; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      <a href="{{ route('admin.dashboard') }}" target="_self" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background-color: #004b87; color: white; padding: 12px 24px; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px; text-decoration: none; border: 2px solid #00a8e8; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         <i class="ri-dashboard-line" style="font-size: 1.2rem;"></i> Kembali ke Admin
       </a>
     @endif

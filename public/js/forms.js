@@ -208,8 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     <div class="form-group" style="max-width: 200px;">
       <label class="form-label">Captcha</label>
-      <div style="background: rgba(0,0,0,0.5); padding: 10px; text-align: center; font-family: monospace; letter-spacing: 5px; font-size: 1.2rem; margin-bottom: 10px; border-radius: 4px; color: #fff;">
-        X 9 F 2 Q
+      <div id="forms-captcha-box" style="background: rgba(0,0,0,0.5); padding: 10px; text-align: center; font-family: monospace; letter-spacing: 5px; font-size: 1.2rem; margin-bottom: 10px; border-radius: 4px; color: #fff;">
+        ` + Array.from({length: 5}, () => '23456789ABCDEFGHJKLMNPQRSTUVWXYZ'[Math.floor(Math.random() * 30)]).join(' ') + `
       </div>
       <input type="text" class="form-control" placeholder="Masukkan kode di atas" required>
     </div>

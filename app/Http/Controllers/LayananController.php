@@ -26,7 +26,8 @@ class LayananController extends Controller
         $rules = [
             'persetujuan' => 'accepted',
             'kebenaran' => 'accepted',
-            'captcha_answer' => 'required|same:captcha_expected'
+            'captcha' => 'required|string',
+            'captcha_hash' => 'required|string',
         ];
 
         // Build dynamic rules based on schema
@@ -50,7 +51,17 @@ class LayananController extends Controller
             $rules[$field['name']] = implode('|', $rule);
         }
 
-        $validated = $request->validate($rules);
+        $validated = $request->validate($rules, [
+            'persetujuan.accepted' => 'Anda harus menyetujui syarat dan ketentuan.',
+            'kebenaran.accepted' => 'Anda harus menyatakan kebenaran data.',
+            'captcha.required' => 'Kode captcha wajib diisi.',
+        ]);
+
+        if (!\App\Helpers\CaptchaHelper::verify($request->input('captcha'), $request->input('captcha_hash'))) {
+            return back()->withInput()->withErrors([
+                'captcha' => 'Kode captcha salah atau tidak sesuai. Silakan coba lagi.'
+            ]);
+        }
 
         // Process file uploads dynamically
         $dataTambahan = [];
