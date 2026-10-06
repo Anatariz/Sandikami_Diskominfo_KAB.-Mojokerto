@@ -61,7 +61,13 @@
                             <i class="ri-user-fill"></i>
                         </div>
                     @endif
-                    <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*" style="background-color: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); color: white;">
+                    <div class="file-upload-wrapper" style="flex: 1;">
+                        <div class="file-upload-display">
+                            <i class="ri-upload-cloud-2-line mr-2" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                            <span>Upload Foto Profil Baru</span>
+                        </div>
+                        <input type="file" id="avatar" name="avatar" accept="image/*" ondragenter="this.parentElement.classList.add('dragover')" ondragleave="this.parentElement.classList.remove('dragover')" ondrop="this.parentElement.classList.remove('dragover')" onchange="const d = this.parentElement.querySelector('span'); if(d) { d.textContent = this.files[0] ? this.files[0].name : 'Upload Foto Profil Baru'; d.style.color = 'var(--color-secondary)'; }">
+                    </div>
                 </div>
                 <small style="color: var(--color-text-muted); display: block; margin-top: 5px;">
                     <i class="ri-information-line"></i> Kosongkan jika tidak ingin mengubah foto. Format yang didukung: JPG, PNG, GIF (maksimal 2MB)

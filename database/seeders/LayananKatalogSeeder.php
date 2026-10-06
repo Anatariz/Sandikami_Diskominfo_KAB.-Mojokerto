@@ -23,7 +23,7 @@ class LayananKatalogSeeder extends Seeder
             [
                 'jenis_layanan' => 'email',
                 'nama_layanan' => 'Penerbitan E-Mail Pemda',
-                'deskripsi' => "Layanan ini digunakan untuk mengajukan pembuatan akun surat elektronik (e-mail) resmi Pemerintah Kabupaten Mojokerto dengan domain @mojokertokab.go.id. E-mail resmi digunakan sebagai media komunikasi kedinasan antar instansi maupun dengan pihak eksternal secara aman dan profesional.<br><br>\n\n<b>Syarat:</b>\n<ul>\n<li>Pemohon merupakan ASN, PPPK / pegawai yang berwenang di lingkungan Pemerintah Kabupaten Mojokerto.</li>\n<li>Mengisi formulir permohonan secara lengkap.</li>\n<li>Melampirkan surat permohonan yang telah ditandatangani oleh pejabat yang berwenang.</li>\n<li>Nomor WhatsApp aktif untuk keperluan konfirmasi.</li>\n<li>Belum memiliki akun e-mail resmi / pengajuan merupakan akun baru sesuai kebutuhan organisasi.</li>\n</ul>\n\n<b>Output:</b>\n<ul>\n<li>Akun e-mail resmi Pemerintah Kabupaten Mojokerto.</li>\n<li>Informasi username akun.</li>\n</ul>",
+                'deskripsi' => "Layanan ini digunakan untuk mengajukan pembuatan akun surat elektronik (e-mail) resmi Pemerintah Kabupaten Mojokerto dengan domain @mojokertokab.go.id. E-mail resmi digunakan sebagai media komunikasi kedinasan antar instansi maupun dengan pihak eksternal secara aman dan profesional.",
                 'ikon' => 'ri-mail-send-line',
                 'form_schema' => [
                     'pemohon' => [
@@ -44,7 +44,7 @@ class LayananKatalogSeeder extends Seeder
             [
                 'jenis_layanan' => 'tte',
                 'nama_layanan' => 'Pengajuan Tanda Tangan Elektronik',
-                'deskripsi' => "Layanan ini digunakan untuk mengajukan penerbitan Sertifikat Elektronik sebagai dasar penggunaan Tanda Tangan Elektronik (TTE) pada aplikasi pemerintahan dan dokumen elektronik sesuai ketentuan yang berlaku.<br><br>\n\n<b>Syarat:</b>\n<ul>\n<li>Pemohon merupakan ASN yang berwenang menggunakan Tanda Tangan Elektronik.</li>\n<li>Memiliki e-mail resmi Pemerintah Kabupaten Mojokerto yang masih aktif.</li>\n<li>Mengisi formulir permohonan secara lengkap.</li>\n<li>Melampirkan surat permohonan dari perangkat daerah.</li>\n<li>Nomor WhatsApp aktif untuk proses verifikasi.</li>\n</ul>\n\n<b>Output:</b>\n<ul>\n<li>Permohonan diteruskan untuk proses penerbitan Sertifikat Elektronik.</li>\n<li>Informasi status permohonan.</li>\n<li>Sertifikat Elektronik/TTE aktif setelah proses penerbitan selesai.</li>\n</ul>",
+                'deskripsi' => "Layanan ini digunakan untuk mengajukan penerbitan Sertifikat Elektronik sebagai dasar penggunaan Tanda Tangan Elektronik (TTE) pada aplikasi pemerintahan dan dokumen elektronik sesuai ketentuan yang berlaku.",
                 'ikon' => 'ri-fingerprint-2-line',
                 'form_schema' => [
                     'pemohon' => [
@@ -66,7 +66,7 @@ class LayananKatalogSeeder extends Seeder
             [
                 'jenis_layanan' => 'pentest',
                 'nama_layanan' => 'Pengujian Keamanan Aplikasi',
-                'deskripsi' => "Layanan ini digunakan untuk mengajukan pengujian keamanan (Vulnerability Assessment) terhadap website atau aplikasi milik Pemerintah Kabupaten Mojokerto guna mengidentifikasi potensi kerentanan keamanan informasi dan memberikan rekomendasi perbaikan.<br><br>\n\n<b>Syarat:</b>\n<ul>\n<li>Website atau aplikasi merupakan milik Pemerintah Kabupaten Mojokerto.</li>\n<li>Pemohon merupakan pengelola atau PIC aplikasi.</li>\n<li>Mengisi formulir permohonan secara lengkap.</li>\n<li>Melampirkan surat permohonan resmi.</li>\n<li>Memberikan informasi alamat website atau aplikasi yang akan diuji.</li>\n<li>Bersedia memberikan informasi teknis apabila diperlukan selama proses assessment.</li>\n</ul>\n\n<b>Output:</b>\n<ul>\n<li>Pelaksanaan Vulnerability Assessment.</li>\n<li>Laporan hasil pengujian keamanan.</li>\n<li>Daftar temuan kerentanan beserta tingkat risikonya.</li>\n<li>Rekomendasi mitigasi dan perbaikan keamanan.</li>\n</ul>",
+                'deskripsi' => "Layanan ini digunakan untuk mengajukan pengujian keamanan (Vulnerability Assessment) terhadap website atau aplikasi milik Pemerintah Kabupaten Mojokerto guna mengidentifikasi potensi kerentanan keamanan informasi dan memberikan rekomendasi perbaikan.",
                 'ikon' => 'ri-search-eye-line',
                 'form_schema' => [
                     'pemohon' => [
@@ -91,7 +91,7 @@ class LayananKatalogSeeder extends Seeder
             [
                 'jenis_layanan' => 'ssl',
                 'nama_layanan' => 'Permohonan SSL',
-                'deskripsi' => "Layanan ini digunakan untuk mengajukan pemasangan atau perpanjangan Sertifikat SSL/TLS pada website atau aplikasi Pemerintah Kabupaten Mojokerto guna menjamin keamanan komunikasi data melalui protokol HTTPS.<br><br>\n\n<b>Syarat:</b>\n<ul>\n<li>Domain atau subdomain merupakan milik Pemerintah Kabupaten Mojokerto.</li>\n<li>Mengisi formulir permohonan secara lengkap.</li>\n<li>Melampirkan surat permohonan.</li>\n<li>Menyampaikan informasi alamat IP server dan lokasi hosting.</li>\n<li>Pemohon merupakan pengelola website atau aplikasi.</li>\n</ul>\n\n<b>Output:</b>\n<ul>\n<li>Sertifikat SSL diterbitkan atau diperpanjang.</li>\n<li>File sertifikat SSL.</li>\n</ul>",
+                'deskripsi' => "Layanan ini digunakan untuk mengajukan pemasangan atau perpanjangan Sertifikat SSL/TLS pada website atau aplikasi Pemerintah Kabupaten Mojokerto guna menjamin keamanan komunikasi data melalui protokol HTTPS.",
                 'ikon' => 'ri-lock-2-line',
                 'form_schema' => [
                     'pemohon' => [
@@ -128,7 +128,7 @@ class LayananKatalogSeeder extends Seeder
             [
                 'jenis_layanan' => 'awareness',
                 'nama_layanan' => 'Security Awareness',
-                'deskripsi' => "Layanan ini digunakan untuk mengajukan kegiatan sosialisasi, edukasi, bimbingan teknis, workshop, maupun penyuluhan mengenai keamanan informasi kepada perangkat daerah di lingkungan Pemerintah Kabupaten Mojokerto.<br><br>\n\n<b>Syarat:</b>\n<ul>\n<li>Pengajuan dilakukan oleh perangkat daerah.</li>\n<li>Mengisi formulir permohonan.</li>\n<li>Menjelaskan kebutuhan kegiatan.</li>\n<li>Mengusulkan waktu pelaksanaan.</li>\n<li>Melampirkan surat permohonan apabila diperlukan.</li>\n</ul>\n\n<b>Output:</b>\n<ul>\n<li>Jadwal kegiatan Security Awareness.</li>\n<li>Materi sosialisasi atau pelatihan.</li>\n<li>Dokumentasi kegiatan.</li>\n<li>Daftar hadir peserta (apabila diperlukan).</li>\n</ul>",
+                'deskripsi' => "Layanan ini digunakan untuk mengajukan kegiatan sosialisasi, edukasi, bimbingan teknis, workshop, maupun penyuluhan mengenai keamanan informasi kepada perangkat daerah di lingkungan Pemerintah Kabupaten Mojokerto.",
                 'ikon' => 'ri-group-line',
                 'form_schema' => [
                     'pemohon' => [

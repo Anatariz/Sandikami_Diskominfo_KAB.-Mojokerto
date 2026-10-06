@@ -1,59 +1,197 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛡️ Sandikami — Sistem Informasi Layanan Dinas Komunikasi dan Informatika Kab. Mojokerto
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web berbasis **Laravel** untuk mengelola layanan, pengaduan, dan informasi Diskominfo Kabupaten Mojokerto.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Prasyarat
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Pastikan perangkat kamu sudah terinstal:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Software | Versi Minimal |
+|----------|--------------|
+| PHP | 8.2+ |
+| Composer | 2.x |
+| MySQL / MariaDB | 8.0+ |
+| Node.js & NPM | 18.x+ |
+| Git | Terbaru |
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 🚀 Langkah-Langkah Menjalankan Website
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Clone Repository
 
-## Laravel Sponsors
+```bash
+git clone https://github.com/Anatariz/Sandikami_Diskominfo_KAB.-Mojokerto.git
+cd Sandikami_Diskominfo_KAB.-Mojokerto
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+### 2. Install Dependency PHP (Composer)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+composer install
+```
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Salin File Environment
 
-## Code of Conduct
+```bash
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> **Windows (Command Prompt):**
+> ```cmd
+> copy .env.example .env
+> ```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Generate Application Key
 
-## License
+```bash
+php artisan key:generate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+### 5. Konfigurasi Database
+
+Buka file `.env` dan sesuaikan konfigurasi database:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sandikami
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+> Pastikan database dengan nama `sandikami` sudah dibuat terlebih dahulu di MySQL/MariaDB.
+>
+> ```sql
+> CREATE DATABASE sandikami;
+> ```
+
+---
+
+### 6. Jalankan Migrasi & Seeder Database
+
+```bash
+php artisan migrate --seed
+```
+
+> Perintah ini akan membuat semua tabel dan mengisi data awal (termasuk akun admin default).
+
+---
+
+### 7. Install Dependency Frontend (NPM)
+
+```bash
+npm install
+```
+
+---
+
+### 8. Build Asset Frontend
+
+Untuk **Development** (dengan hot-reload):
+
+```bash
+npm run dev
+```
+
+Untuk **Production** (build final):
+
+```bash
+npm run build
+```
+
+---
+
+### 9. Jalankan Server Lokal
+
+```bash
+php artisan serve
+```
+
+Website akan berjalan di: **[http://localhost:8000](http://localhost:8000)**
+
+---
+
+### 10. (Opsional) Jalankan Queue Worker
+
+Jika ada fitur antrian (queue), jalankan perintah berikut di terminal terpisah:
+
+```bash
+php artisan queue:work
+```
+
+---
+
+## 🔑 Akun Terdaftar (Default)
+
+Akun berikut dibuat secara otomatis saat menjalankan `php artisan migrate --seed`.
+
+### 👑 Admin
+
+| Field | Value |
+|-------|-------|
+| **Email** | `admin@mojokertokab.go.id` |
+| **Password** | `admin123` |
+| **Role** | Admin |
+| **URL Login** | [http://localhost:8000/login](http://localhost:8000/login) |
+| **Dashboard** | [http://localhost:8000/admin/dashboard](http://localhost:8000/admin/dashboard) |
+
+> ⚠️ **Penting:** Segera ganti password admin setelah pertama kali login di lingkungan produksi!
+
+---
+
+### 👤 User (Masyarakat)
+
+Akun user **tidak dibuat otomatis** melalui seeder. User dapat mendaftar secara mandiri melalui halaman registrasi.
+
+| Field | Value |
+|-------|-------|
+| **URL Registrasi** | [http://localhost:8000/register](http://localhost:8000/register) |
+| **URL Login** | [http://localhost:8000/login](http://localhost:8000/login) |
+
+> Setelah registrasi, user mendapatkan role `user` secara otomatis dan dapat mengakses layanan serta fitur pengaduan.
+
+---
+
+## 🗂️ Struktur Akses
+
+| Role | Halaman |
+|------|---------|
+| **Admin** | `/admin/dashboard` — Manajemen layanan, pengaduan, konten halaman |
+| **User** | `/` — Halaman utama, layanan publik, pengaduan, profil |
+
+---
+
+## 🛠️ Perintah Artisan yang Sering Dipakai
+
+```bash
+# Reset database dan isi ulang seeder
+php artisan migrate:fresh --seed
+
+# Bersihkan cache aplikasi
+php artisan optimize:clear
+
+# Lihat semua route
+php artisan route:list
+
+# Jalankan queue worker
+php artisan queue:work
+```
+
+---
+
+## 📞 Kontak
+
+**Dinas Komunikasi dan Informatika Kabupaten Mojokerto**
+Website: [diskominfo.mojokertokab.go.id](https://diskominfo.mojokertokab.go.id)

@@ -19,10 +19,9 @@
             <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
                 <thead>
                     <tr style="background-color: rgba(255,255,255,0.1);">
-                        <th style="padding: 15px; border-bottom: 1px solid var(--border-color);">Halaman Profil</th>
-                        <th style="padding: 15px; border-bottom: 1px solid var(--border-color);">URL / Slug</th>
-                        <th style="padding: 15px; border-bottom: 1px solid var(--border-color);">Terakhir Diperbarui</th>
-                        <th style="padding: 15px; border-bottom: 1px solid var(--border-color); text-align: right;">Aksi</th>
+                        <th style="padding: 15px; border-bottom: 1px solid var(--border-color); width: 40%;">Halaman Profil</th>
+                        <th style="padding: 15px; border-bottom: 1px solid var(--border-color); width: 40%;">Terakhir Diperbarui</th>
+                        <th style="padding: 15px; border-bottom: 1px solid var(--border-color); text-align: right; width: 20%;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +38,6 @@
                                 <strong>{{ $page->slug }}</strong>
                             @endif
                         </td>
-                        <td style="padding: 15px; border-bottom: 1px solid var(--border-color);">/profil/{{ $page->slug }}</td>
                         <td style="padding: 15px; border-bottom: 1px solid var(--border-color);">{{ $page->updated_at->translatedFormat('d M Y H:i') }}</td>
                         <td style="padding: 15px; border-bottom: 1px solid var(--border-color); text-align: right;">
                             <a href="{{ route('admin.profil.edit', $page->id) }}" class="btn btn-sm btn-warning" style="background-color: #f1c40f; color: black; padding: 6px 12px; font-size: 0.8rem;">Edit Tulisan</a>

@@ -9,10 +9,18 @@ use Illuminate\Support\Str;
 
 class KatalogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $layanans = LayananKatalog::orderBy('created_at', 'desc')->get();
-        return view('admin.katalog.index', compact('layanans'));
+        $query = LayananKatalog::query();
+
+        if ($request->filled('kategori')) {
+            $query->where('kategori', $request->kategori);
+        }
+
+        $layanans = $query->orderBy('nama_layanan')->get();
+        $kategoris = LayananKatalog::select('kategori')->distinct()->orderBy('kategori')->pluck('kategori');
+
+        return view('admin.katalog.index', compact('layanans', 'kategoris'));
     }
 
     public function create()
@@ -24,13 +32,14 @@ class KatalogController extends Controller
     {
         $request->validate([
             'nama_layanan' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'ikon' => 'nullable|string|max:100',
-            'form_schema' => 'required|json'
+            'kategori'     => 'required|string|max:100',
+            'deskripsi'    => 'required|string',
+            'ikon'         => 'nullable|string|max:100',
+            'form_schema'  => 'required|json'
         ]);
 
         $slug = Str::slug($request->nama_layanan);
-        
+
         // Ensure slug is unique
         if (LayananKatalog::where('jenis_layanan', $slug)->exists()) {
             $slug = $slug . '-' . time();
@@ -38,11 +47,12 @@ class KatalogController extends Controller
 
         LayananKatalog::create([
             'jenis_layanan' => $slug,
-            'nama_layanan' => $request->nama_layanan,
-            'deskripsi' => $request->deskripsi,
-            'ikon' => $request->ikon ?? 'ri-file-list-3-line',
-            'form_schema' => json_decode($request->form_schema, true),
-            'status' => 'active'
+            'nama_layanan'  => $request->nama_layanan,
+            'kategori'      => $request->kategori,
+            'deskripsi'     => $request->deskripsi,
+            'ikon'          => $request->ikon ?? 'ri-file-list-3-line',
+            'form_schema'   => json_decode($request->form_schema, true),
+            'status'        => 'active'
         ]);
 
         return redirect()->route('admin.katalog.index')->with('success', 'Layanan baru berhasil ditambahkan!');
@@ -57,16 +67,17 @@ class KatalogController extends Controller
     public function update(Request $request, string $id)
     {
         $layanan = LayananKatalog::findOrFail($id);
-        
+
         $request->validate([
             'nama_layanan' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'ikon' => 'nullable|string|max:100',
-            'form_schema' => 'required|json'
+            'kategori'     => 'required|string|max:100',
+            'deskripsi'    => 'required|string',
+            'ikon'         => 'nullable|string|max:100',
+            'form_schema'  => 'required|json'
         ]);
 
         $slug = Str::slug($request->nama_layanan);
-        
+
         // Ensure slug is unique, excluding self
         if (LayananKatalog::where('jenis_layanan', $slug)->where('id', '!=', $id)->exists()) {
             $slug = $slug . '-' . time();
@@ -74,10 +85,11 @@ class KatalogController extends Controller
 
         $layanan->update([
             'jenis_layanan' => $slug,
-            'nama_layanan' => $request->nama_layanan,
-            'deskripsi' => $request->deskripsi,
-            'ikon' => $request->ikon ?? 'ri-file-list-3-line',
-            'form_schema' => json_decode($request->form_schema, true)
+            'nama_layanan'  => $request->nama_layanan,
+            'kategori'      => $request->kategori,
+            'deskripsi'     => $request->deskripsi,
+            'ikon'          => $request->ikon ?? 'ri-file-list-3-line',
+            'form_schema'   => json_decode($request->form_schema, true)
         ]);
 
         return redirect()->route('admin.katalog.index')->with('success', 'Layanan berhasil diperbarui!');

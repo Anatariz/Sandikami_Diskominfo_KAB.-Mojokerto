@@ -74,6 +74,12 @@ Route::middleware(['auth', 'is_admin'])->group(function () {
 
     // CMS Panduan (Insiden, SOP, Produk Hukum)
     Route::resource('admin/panduan', \App\Http\Controllers\Admin\PanduanController::class, ['as' => 'admin'])->only(['index', 'edit', 'update']);
+
+    // CMS Berita
+    Route::resource('admin/berita', \App\Http\Controllers\Admin\BeritaController::class, ['as' => 'admin']);
+
+    // CKEditor Image Upload
+    Route::post('/admin/upload-image', [AdminController::class, 'uploadImage'])->name('admin.upload.image');
 });
 
 

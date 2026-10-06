@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <i class="ri-upload-cloud-2-line mr-2" style="font-size: 1.5rem; margin-right: 10px;"></i>
           <span>${field.label}</span>
         </div>
-        <input type="file" name="${field.id}" id="${field.id}" ${field.required ? 'required' : ''}>
+        <input type="file" name="${field.id}" id="${field.id}" ${field.required ? 'required' : ''} ondragenter="this.parentElement.classList.add('dragover')" ondragleave="this.parentElement.classList.remove('dragover')" ondrop="this.parentElement.classList.remove('dragover')">
       </div>`;
     } else if (field.type === 'checkbox') {
       html += `<div class="form-check">

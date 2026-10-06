@@ -9,6 +9,7 @@ class LayananKatalog extends Model
     protected $fillable = [
         'jenis_layanan',
         'nama_layanan',
+        'kategori',
         'deskripsi',
         'ikon',
         'form_schema',
@@ -18,4 +19,9 @@ class LayananKatalog extends Model
     protected $casts = [
         'form_schema' => 'array',
     ];
+
+    public function requests()
+    {
+        return $this->hasMany(LayananRequest::class, 'jenis_layanan', 'jenis_layanan');
+    }
 }

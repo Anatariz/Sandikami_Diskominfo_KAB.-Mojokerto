@@ -24,6 +24,26 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label" for="kategori">Kategori Layanan *</label>
+                    <input type="text" id="kategori" name="kategori" class="form-control" required
+                           list="kategori-suggestions"
+                           placeholder="Pilih atau ketik kategori..."
+                           style="text-transform: uppercase;">
+                    <datalist id="kategori-suggestions">
+                        <option value="KONSULTASI">
+                        <option value="PENGAJUAN">
+                        <option value="PEMELIHARAAN">
+                        <option value="PELATIHAN">
+                        <option value="INFRASTRUKTUR">
+                        <option value="KEAMANAN">
+                        <option value="INFORMASI">
+                    </datalist>
+                    <small style="color: var(--text-muted); font-size: 0.78rem; margin-top: 4px; display: block;">
+                        💡 Digunakan untuk mengelompokkan layanan. Pilih dari daftar atau tulis sendiri.
+                    </small>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label" for="deskripsi">Deskripsi Singkat *</label>
                     <textarea id="deskripsi" name="deskripsi" class="form-control" rows="3" required placeholder="Layanan untuk pendaftaran email resmi bagi pegawai..."></textarea>
                 </div>

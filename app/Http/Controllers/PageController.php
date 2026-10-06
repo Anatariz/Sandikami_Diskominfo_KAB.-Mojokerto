@@ -14,14 +14,12 @@ class PageController extends Controller
         
         $panduans = \App\Models\PageContent::where('slug', 'like', 'panduan-%')->take(3)->get();
         
-        $stats = [
-            'tte' => \App\Models\LayananRequest::where('jenis_layanan', 'tte')->count(),
-            'email' => \App\Models\LayananRequest::where('jenis_layanan', 'email')->count(),
-            'assessment' => \App\Models\LayananRequest::whereIn('jenis_layanan', ['assessment', 'pentest'])->count(),
-            'insiden' => \App\Models\Pengaduan::count(),
-        ];
+        $topServices = \App\Models\LayananKatalog::withCount('requests')
+            ->orderBy('requests_count', 'desc')
+            ->take(4)
+            ->get();
         
-        return view('home', compact('layanans', 'beritas', 'panduans', 'stats'));
+        return view('home', compact('layanans', 'beritas', 'panduans', 'topServices'));
     }
 
     public function profilTentang()

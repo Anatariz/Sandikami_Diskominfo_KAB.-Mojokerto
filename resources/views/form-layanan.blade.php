@@ -59,7 +59,13 @@
                             @endif
                         </select>
                     @elseif($field['type'] === 'file')
-                        <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
+                        <div class="file-upload-wrapper">
+                            <div class="file-upload-display">
+                                <i class="ri-upload-cloud-2-line mr-2" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                                <span>Upload File</span>
+                            </div>
+                            <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="@error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }} ondragenter="this.parentElement.classList.add('dragover')" ondragleave="this.parentElement.classList.remove('dragover')" ondrop="this.parentElement.classList.remove('dragover')" onchange="const d = this.parentElement.querySelector('span'); if(d) { d.textContent = this.files[0] ? this.files[0].name : 'Upload File'; d.style.color = 'var(--color-secondary)'; }">
+                        </div>
                     @elseif($field['type'] === 'checkbox')
                         <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                             <input type="checkbox" id="{{ $field['name'] }}" name="{{ $field['name'] }}" value="1" class="@error($field['name']) is-invalid @enderror" {{ old($field['name']) ? 'checked' : '' }} {{ $field['required'] ? 'required' : '' }}>
@@ -93,7 +99,13 @@
                         @endif
                     </select>
                 @elseif($field['type'] === 'file')
-                    <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }}>
+                    <div class="file-upload-wrapper">
+                        <div class="file-upload-display">
+                            <i class="ri-upload-cloud-2-line mr-2" style="font-size: 1.5rem; margin-right: 10px;"></i>
+                            <span>Upload File</span>
+                        </div>
+                        <input type="file" id="{{ $field['name'] }}" name="{{ $field['name'] }}" class="@error($field['name']) is-invalid @enderror" {{ $field['required'] ? 'required' : '' }} ondragenter="this.parentElement.classList.add('dragover')" ondragleave="this.parentElement.classList.remove('dragover')" ondrop="this.parentElement.classList.remove('dragover')" onchange="const d = this.parentElement.querySelector('span'); if(d) { d.textContent = this.files[0] ? this.files[0].name : 'Upload File'; d.style.color = 'var(--color-secondary)'; }">
+                    </div>
                 @elseif($field['type'] === 'checkbox')
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                         <input type="checkbox" id="{{ $field['name'] }}" name="{{ $field['name'] }}" value="1" class="@error($field['name']) is-invalid @enderror" {{ old($field['name']) ? 'checked' : '' }} {{ $field['required'] ? 'required' : '' }}>

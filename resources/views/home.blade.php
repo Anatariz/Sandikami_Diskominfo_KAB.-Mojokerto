@@ -49,22 +49,12 @@
 <section class="section stats-section" style="margin-bottom: 4rem;">
   <div class="container">
     <div class="stats-grid">
+      @foreach($topServices as $service)
       <div class="stat-item">
-        <h3>{{ $stats['tte'] }}</h3>
-        <p>Pengguna Layanan TTE</p>
+        <h3>{{ $service->requests_count }}</h3>
+        <p>{{ $service->nama_layanan }}</p>
       </div>
-      <div class="stat-item">
-        <h3>{{ $stats['email'] }}</h3>
-        <p>Pengguna Layanan Email</p>
-      </div>
-      <div class="stat-item">
-        <h3>{{ $stats['assessment'] }}</h3>
-        <p>Pelaksanaan Security Assesment</p>
-      </div>
-      <div class="stat-item">
-        <h3>{{ $stats['insiden'] }}</h3>
-        <p>Penanganan Insiden</p>
-      </div>
+      @endforeach
     </div>
   </div>
 </section>

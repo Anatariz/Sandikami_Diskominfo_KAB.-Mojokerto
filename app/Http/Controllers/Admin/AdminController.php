@@ -71,7 +71,7 @@ class AdminController extends Controller
 
     public function showLayanan($id)
     {
-        $layanan = LayananRequest::findOrFail($id);
+        $layanan = LayananRequest::with('user')->findOrFail($id);
         return view('admin.layanan.show', compact('layanan'));
     }
 
@@ -104,7 +104,7 @@ class AdminController extends Controller
 
     public function showPengaduan($id)
     {
-        $pengaduan = Pengaduan::findOrFail($id);
+        $pengaduan = Pengaduan::with('user')->findOrFail($id);
         return view('admin.pengaduan.show', compact('pengaduan'));
     }
 
@@ -138,5 +138,21 @@ class AdminController extends Controller
         $pengaduan->delete();
 
         return redirect()->route('admin.dashboard')->with('success', 'Data pengaduan berhasil dihapus.');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+            
+            $request->file('upload')->storeAs('public/editor_images', $fileName);
+            
+            $url = asset('storage/editor_images/' . $fileName);
+            
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        }
     }
 }

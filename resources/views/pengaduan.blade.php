@@ -71,7 +71,7 @@
               <i class="ri-upload-cloud-2-line mr-2" style="font-size: 1.5rem; margin-right: 10px;"></i>
               <span>Upload Screenshot/File Pendukung</span>
             </div>
-            <input type="file" name="lampiran" id="lampiran" class="@error('lampiran') is-invalid @enderror">
+            <input type="file" name="lampiran" id="lampiran" class="@error('lampiran') is-invalid @enderror" ondragenter="this.parentElement.classList.add('dragover')" ondragleave="this.parentElement.classList.remove('dragover')" ondrop="this.parentElement.classList.remove('dragover')" onchange="const d = this.parentElement.querySelector('span'); if(d) { d.textContent = this.files[0] ? this.files[0].name : 'Upload Screenshot/File Pendukung'; d.style.color = 'var(--color-secondary)'; }">
           </div>
           @error('lampiran') <span class="text-danger" style="font-size: 0.85rem; margin-top: 5px; display: block;">{{ $message }}</span> @enderror
         </div>

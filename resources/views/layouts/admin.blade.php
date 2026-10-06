@@ -307,6 +307,42 @@
         }
         .alert-success { background-color: rgba(16, 185, 129, 0.1); color: #10B981; border-color: rgba(16, 185, 129, 0.2); }
 
+        /* File Input Custom */
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-upload-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            height: 100%;
+            width: 100%;
+            z-index: 10;
+        }
+        .file-upload-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px dashed var(--primary);
+            border-radius: 6px;
+            background-color: rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: all 0.2s;
+            color: var(--text-muted);
+        }
+        .file-upload-wrapper:hover .file-upload-display,
+        .file-upload-wrapper.dragover .file-upload-display {
+            border-color: #fff;
+            background-color: rgba(0, 168, 232, 0.1);
+            color: #fff;
+        }
+
         /* Dropdown */
         .admin-dropdown { position: relative; display: inline-flex; align-items: center; }
         .admin-dropdown-content {
@@ -373,6 +409,11 @@
             <li>
                 <a href="{{ route('admin.katalog.index') }}" class="{{ request()->routeIs('admin.katalog.*') ? 'active' : '' }}">
                     <i class="ri-list-check-2"></i> Katalog Layanan
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.berita.index') }}" class="{{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
+                    <i class="ri-newspaper-line"></i> Kelola Berita
                 </a>
             </li>
             <li>
