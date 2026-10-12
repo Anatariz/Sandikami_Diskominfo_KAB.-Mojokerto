@@ -29,8 +29,8 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="bidang">Divisi</label>
-          <input type="bidang" id="bidang" name="bidang" class="form-control" value="{{ old('bidang') }}" required>
+          <label class="form-label" for="divisi">Divisi</label>
+          <input type="text" id="divisi" name="divisi" class="form-control" value="{{ old('divisi') }}" required>
         </div>
 
         <div class="form-group">

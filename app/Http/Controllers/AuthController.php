@@ -41,12 +41,14 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'divisi' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $user = \App\Models\User::create([
             'name' => $request->name,
+            'divisi' => $request->divisi,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => 'user',

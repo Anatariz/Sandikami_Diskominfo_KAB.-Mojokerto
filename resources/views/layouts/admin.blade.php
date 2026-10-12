@@ -405,7 +405,7 @@
                 </a>
             </li>
 
-            <li class="menu-heading">Manajemen Konten (CMS)</li>
+            <li class="menu-heading">Manajemen Layanan & Konten</li>
             <li>
                 <a href="{{ route('admin.katalog.index') }}" class="{{ request()->routeIs('admin.katalog.*') ? 'active' : '' }}">
                     <i class="ri-list-check-2"></i> Katalog Layanan
