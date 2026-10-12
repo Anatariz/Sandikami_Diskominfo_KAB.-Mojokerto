@@ -44,7 +44,7 @@
     <div class="card p-0 mb-5" style="overflow-x: auto;">
         <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
             <thead>
-                <tr style="background-color: rgba(255,255,255,0.1);">
+                <tr>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Tanggal</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Layanan</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Pemohon</th>
@@ -81,7 +81,7 @@
     <div class="card p-0" style="overflow-x: auto;">
         <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
             <thead>
-                <tr style="background-color: rgba(255,255,255,0.1);">
+                <tr>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Tanggal</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Kategori</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Judul</th>

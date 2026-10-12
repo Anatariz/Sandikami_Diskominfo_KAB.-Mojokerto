@@ -18,7 +18,7 @@
         <div class="card p-0" style="overflow-x: auto;">
             <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
                 <thead>
-                    <tr style="background-color: rgba(255,255,255,0.1);">
+                    <tr>
                         <th style="padding: 15px; border-bottom: 1px solid var(--border-color); width: 40%;">Halaman Profil</th>
                         <th style="padding: 15px; border-bottom: 1px solid var(--border-color); width: 40%;">Terakhir Diperbarui</th>
                         <th style="padding: 15px; border-bottom: 1px solid var(--border-color); text-align: right; width: 20%;">Aksi</th>

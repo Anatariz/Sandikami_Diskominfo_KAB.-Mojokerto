@@ -8,10 +8,10 @@
     </label>
     
     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-        <div class="captcha-code-box" style="flex: 1; background: rgba(0, 20, 45, 0.85); border: 1px solid rgba(0, 216, 255, 0.4); padding: 10px 16px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 1.35rem; font-weight: 800; letter-spacing: 7px; color: #00d8ff; user-select: none; text-align: center; box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), 0 0 10px rgba(0, 216, 255, 0.15);">
+        <div class="captcha-code-box" style="flex: 1; background: #f0f7ff; border: 1.5px solid #bfdbfe; padding: 10px 16px; border-radius: 8px; font-family: 'Courier New', Courier, monospace; font-size: 1.35rem; font-weight: 800; letter-spacing: 7px; color: #004b87; user-select: none; text-align: center; box-shadow: inset 0 2px 4px rgba(0,75,135,0.06);">
             {{ $captcha['display'] }}
         </div>
-        <button type="button" class="btn-refresh-captcha" onclick="refreshCaptchaCode(this)" title="Ganti kode captcha" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); color: #e0f2fe; width: 44px; height: 44px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: all 0.2s ease;">
+        <button type="button" class="btn-refresh-captcha" onclick="refreshCaptchaCode(this)" title="Ganti kode captcha" style="background: #ffffff; border: 1.5px solid #cbd5e1; color: #004b87; width: 44px; height: 44px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: all 0.2s ease;">
             <i class="ri-refresh-line"></i>
         </button>
     </div>
@@ -44,9 +44,9 @@
         display: inline-block;
     }
     .btn-refresh-captcha:hover {
-        background: rgba(0, 216, 255, 0.2) !important;
-        border-color: #00d8ff !important;
-        color: #00d8ff !important;
+        background: #e0effe !important;
+        border-color: #004b87 !important;
+        color: #004b87 !important;
         transform: scale(1.05);
     }
 </style>

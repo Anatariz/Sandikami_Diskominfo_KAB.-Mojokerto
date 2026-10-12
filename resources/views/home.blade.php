@@ -100,22 +100,27 @@
 <style>
   .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 80px; }
   .hero-content { max-width: 800px; position: relative; z-index: 2; }
-  .hero-title { font-size: 4rem; margin-bottom: 20px; background: linear-gradient(90deg, #FFFFFF, var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-title { font-size: 4rem; margin-bottom: 20px; background: linear-gradient(90deg, #003366, #0066cc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
   .hero-subtitle { font-size: 1.2rem; color: var(--color-text-muted); margin-bottom: 40px; }
   .hero-actions { display: flex; gap: 20px; flex-wrap: wrap; }
   .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
   .service-card { text-align: center; }
-  .service-icon { font-size: 3rem; color: var(--color-secondary); margin-bottom: 20px; display: inline-block; width: 80px; height: 80px; line-height: 80px; background: rgba(0, 216, 255, 0.1); border-radius: 50%; transition: all var(--transition-normal); }
-  .service-card:hover .service-icon { background: var(--color-secondary); color: var(--color-primary); transform: scale(1.1); }
-  .stats-section { background: linear-gradient(135deg, var(--color-primary-lighter), rgba(17, 34, 64, 0.5)); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
+  .service-card h3 { color: var(--color-primary); margin-bottom: 12px; }
+  .service-icon { font-size: 3rem; color: var(--color-primary); margin-bottom: 20px; display: inline-block; width: 80px; height: 80px; line-height: 80px; background: #e0effe; border-radius: 50%; transition: all var(--transition-normal); }
+  .service-card:hover .service-icon { background: var(--color-primary); color: #ffffff; transform: scale(1.1); }
+  
+  /* Layout contrast: Stats section has a rich Kominfo Blue gradient background */
+  .stats-section { background: linear-gradient(135deg, #004b87 0%, #0062a8 100%); border-top: 1px solid #bfdbfe; border-bottom: 1px solid #bfdbfe; box-shadow: 0 4px 20px rgba(0, 75, 135, 0.12); }
   .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; }
-  .stat-item h3 { font-size: 3.5rem; color: var(--color-accent); margin-bottom: 10px; }
-  .stat-item p { color: var(--color-text); font-weight: 500; }
+  .stat-item h3 { font-size: 3.5rem; color: #ffffff; margin-bottom: 10px; font-weight: 800; }
+  .stat-item p { color: #e0f2fe; font-weight: 500; font-size: 1.05rem; }
+  
   .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
   .news-card { padding: 0; overflow: hidden; }
-  .news-img { height: 200px; background: var(--color-primary-lighter); width: 100%; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); }
+  .news-img { height: 200px; background: #e2e8f0; width: 100%; display: flex; align-items: center; justify-content: center; color: var(--color-primary); }
   .news-content { padding: 25px; }
-  .news-date { font-size: 0.85rem; color: var(--color-secondary); margin-bottom: 10px; display: block; }
+  .news-content h3 { color: #0f172a; }
+  .news-date { font-size: 0.85rem; color: var(--color-primary); margin-bottom: 10px; display: block; font-weight: 600; }
   @media (max-width: 768px) { .hero-title { font-size: 2.5rem; } }
 </style>
 @endpush

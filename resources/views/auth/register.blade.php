@@ -7,12 +7,12 @@
   <div class="container">
     <div class="glass-card" style="max-width: 500px; margin: 0 auto;">
       <div class="text-center mb-4">
-        <h2 style="color: var(--color-accent); font-size: 2rem; margin-bottom: 10px;">Daftar Akun</h2>
+        <h2 style="color: var(--color-primary); font-size: 2rem; margin-bottom: 10px;">Daftar Akun</h2>
         <p class="text-text-muted">Buat akun untuk dapat mengajukan layanan di portal Sandikami.</p>
       </div>
       
       @if($errors->any())
-        <div style="background-color: var(--color-danger, #e74c3c); color: white; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
+        <div style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
             <ul style="margin: 0; padding-left: 20px;">
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -48,7 +48,7 @@
           <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required>
         </div>
         
-        <button type="submit" class="btn btn-accent btn-block" style="padding: 15px; font-size: 1.1rem; margin-top: 10px;">
+        <button type="submit" class="btn btn-primary btn-block" style="padding: 15px; font-size: 1.1rem; margin-top: 10px;">
             <i class="ri-user-add-line mr-2"></i> Daftar Sekarang
         </button>
         

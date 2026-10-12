@@ -26,8 +26,11 @@
     <div class="form-wrapper glass-card">
       
       @if(session('success'))
-        <div style="background-color: var(--color-success); color: white; padding: 15px; border-radius: 6px; margin-bottom: 20px;">
-          {{ session('success') }}
+        <div style="background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="ri-checkbox-circle-fill" style="font-size: 1.5rem; color: #059669; flex-shrink: 0;"></i>
+            <div>{{ session('success') }}</div>
+          </div>
         </div>
       @endif
 

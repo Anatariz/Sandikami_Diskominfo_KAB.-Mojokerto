@@ -12,17 +12,17 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         :root {
-            /* Warna yang diadaptasi dari style.css (Kominfo Blue) */
-            --sidebar-bg: #004b87; /* --color-primary */
-            --sidebar-hover: #005c9e; /* --color-primary-light */
-            --sidebar-text: #e0f2fe; /* --color-text */
-            --sidebar-active-bg: #006eb8; /* --color-primary-lighter */
-            --main-bg: #001a33; /* --color-bg */
-            --text-main: #e0f2fe; /* --color-text */
-            --text-muted: #93c5fd; /* --color-text-muted */
-            --card-bg: rgba(0, 75, 135, 0.3); /* Glass effect matching portal */
-            --primary: #00a8e8; /* --color-secondary (sebagai highlight) */
-            --border-color: rgba(255, 255, 255, 0.1);
+            /* Tema Biru & Putih (Blue & White Theme) */
+            --sidebar-bg: #003e73; /* Rich Kominfo Deep Blue */
+            --sidebar-hover: #005299; 
+            --sidebar-text: #e0f2fe; 
+            --sidebar-active-bg: #0062b8; 
+            --main-bg: #f4f7fb; /* Clean Soft Light Background */
+            --text-main: #0f172a; /* Slate 900 for clear readability */
+            --text-muted: #64748b; /* Slate 500 */
+            --card-bg: #ffffff; /* Pure White Card */
+            --primary: #004b87; /* Kominfo Blue */
+            --border-color: #e2e8f0;
         }
 
         * {
@@ -38,16 +38,15 @@
             display: flex;
             min-height: 100vh;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(0, 216, 255, 0.05), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(255, 193, 7, 0.05), transparent 25%);
+                radial-gradient(circle at 12% 20%, rgba(0, 102, 204, 0.04), transparent 28%),
+                radial-gradient(circle at 88% 40%, rgba(2, 132, 199, 0.03), transparent 28%);
             background-attachment: fixed;
         }
 
         .admin-sidebar {
             width: 260px;
-            background-color: rgba(0, 75, 135, 0.6);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid var(--border-color);
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
             color: var(--sidebar-text);
             position: fixed;
             height: 100vh;
@@ -55,6 +54,7 @@
             display: flex;
             flex-direction: column;
             z-index: 100;
+            box-shadow: 2px 0 12px rgba(0, 75, 135, 0.08);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -66,7 +66,7 @@
             position: fixed;
             top: 90px;
             left: 0;
-            background-color: var(--primary); /* Menggunakan warna aksen tema (biru) */
+            background-color: var(--primary);
             color: white;
             border: none;
             width: 45px;
@@ -74,7 +74,7 @@
             border-radius: 0 25px 25px 0;
             cursor: pointer;
             z-index: 99;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 2px 2px 10px rgba(0, 75, 135, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,8 +92,8 @@
             position: absolute;
             top: 20px;
             right: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
             color: white;
             width: 32px;
             height: 32px;
@@ -107,8 +107,8 @@
         }
 
         .sidebar-close-btn:hover {
-            background: rgba(16, 40, 202, 0.2);
-            color: #2117d7ff;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
         }
 
         .sidebar-brand {
@@ -119,11 +119,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
         }
 
         .sidebar-brand i {
-            color: var(--primary);
+            color: #7dd3fc;
         }
 
         .sidebar-menu {
@@ -150,13 +150,13 @@
         .sidebar-menu a:hover {
             background-color: var(--sidebar-hover);
             color: white;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid #7dd3fc;
         }
 
         .sidebar-menu a.active {
             background-color: var(--sidebar-active-bg);
             color: white;
-            border-left: 4px solid var(--primary);
+            border-left: 4px solid #7dd3fc;
         }
 
         .menu-heading {
@@ -164,13 +164,13 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.6);
             font-weight: 600;
         }
 
         .sidebar-user {
             padding: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255,255,255,0.12);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -179,14 +179,14 @@
         .sidebar-user-avatar {
             width: 48px;
             height: 48px;
-            background-color: var(--color-primary);
+            background-color: rgba(255, 255, 255, 0.15);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 1.5rem;
             color: white;
-            box-shadow: 0 4px 10px rgba(0, 168, 232, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             overflow: hidden;
         }    
 
@@ -197,7 +197,7 @@
         }
 
         .sidebar-user-info small {
-            color: rgba(255,255,255,0.7);
+            color: #bae6fd;
             font-size: 0.75rem;
         }
 
@@ -217,9 +217,9 @@
 
         .admin-topbar {
             height: 70px;
-            background-color: rgba(0, 26, 51, 0.85);
-            backdrop-filter: blur(10px);
+            background-color: #ffffff;
             border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 1px 4px rgba(0, 75, 135, 0.05);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -252,9 +252,8 @@
         /* Utilities */
         .card {
             background-color: var(--card-bg);
-            backdrop-filter: blur(10px);
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 75, 135, 0.05);
             border: 1px solid var(--border-color);
             padding: 30px;
             margin-bottom: 20px;
@@ -272,31 +271,82 @@
             font-size: 0.9rem;
         }
         
-        .btn-primary { background-color: var(--sidebar-hover); color: white; border: 1px solid var(--primary); }
-        .btn-primary:hover { background-color: var(--sidebar-active-bg); }
-        .btn-secondary { background-color: rgba(255,255,255,0.1); color: var(--text-main); border: 1px solid var(--border-color); }
-        .btn-secondary:hover { background-color: rgba(255,255,255,0.2); }
+        .btn-primary { 
+            background-color: var(--primary); 
+            color: white; 
+            border: 1px solid var(--primary); 
+        }
+        .btn-primary:hover { 
+            background-color: #003666; 
+        }
+        .btn-secondary { 
+            background-color: #ffffff; 
+            color: var(--text-main); 
+            border: 1px solid #cbd5e1; 
+        }
+        .btn-secondary:hover { 
+            background-color: #f1f5f9; 
+            border-color: #94a3b8; 
+        }
         .btn-danger { background-color: #EF4444; color: white; }
 
-        .table { width: 100%; border-collapse: collapse; color: var(--text-main); }
-        .table th, .table td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); text-align: left; }
-        .table th { font-weight: 600; color: var(--primary); background-color: rgba(0, 75, 135, 0.4); border-bottom: 2px solid var(--border-color); }
-        .table tbody tr:hover { background-color: rgba(255, 255, 255, 0.05); }
+        /* Admin Tables - Light Blue Slightly Transparent Theme */
+        .card:has(.table), .card.p-0 {
+            background-color: rgba(240, 247, 255, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(191, 219, 254, 0.8);
+            box-shadow: 0 4px 18px rgba(0, 75, 135, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            color: var(--text-main); 
+            background-color: rgba(240, 247, 255, 0.65); 
+        }
+        
+        .table th, .table td { 
+            padding: 13px 16px; 
+            border-bottom: 1px solid rgba(191, 219, 254, 0.65); 
+            text-align: left; 
+        }
+        
+        .table thead tr, .table th { 
+            font-weight: 700; 
+            color: var(--primary); 
+            background-color: rgba(219, 234, 254, 0.85) !important; 
+            border-bottom: 2px solid rgba(147, 197, 253, 0.85); 
+        }
+        
+        .table tbody tr {
+            background-color: rgba(255, 255, 255, 0.45);
+            transition: background-color 0.2s ease;
+        }
+        
+        .table tbody tr:nth-child(even) {
+            background-color: rgba(224, 242, 254, 0.35);
+        }
+        
+        .table tbody tr:hover { 
+            background-color: rgba(186, 230, 253, 0.6) !important; 
+        }
         
         .form-control {
             width: 100%;
             padding: 10px 15px;
-            border: 1px solid var(--border-color);
-            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
             color: var(--text-main);
             border-radius: 6px;
             font-family: inherit;
             margin-top: 5px;
             font-size: 0.95rem;
         }
-        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0, 168, 232, 0.2); }
-        .form-control::placeholder { color: var(--text-muted); opacity: 0.5; }
-        .form-label { font-weight: 600; font-size: 0.9rem; color: var(--text-muted); }
+        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 75, 135, 0.15); }
+        .form-control::placeholder { color: var(--text-muted); opacity: 0.7; }
+        .form-label { font-weight: 600; font-size: 0.9rem; color: #1e293b; }
         .form-group { margin-bottom: 20px; }
 
         .alert {
@@ -305,7 +355,7 @@
             margin-bottom: 20px;
             border: 1px solid transparent;
         }
-        .alert-success { background-color: rgba(16, 185, 129, 0.1); color: #10B981; border-color: rgba(16, 185, 129, 0.2); }
+        .alert-success { background-color: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
 
         /* File Input Custom */
         .file-upload-wrapper {
@@ -329,38 +379,38 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            border: 2px dashed var(--primary);
+            border: 2px dashed #93c5fd;
             border-radius: 6px;
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: #f8fafc;
             text-align: center;
             transition: all 0.2s;
             color: var(--text-muted);
         }
         .file-upload-wrapper:hover .file-upload-display,
         .file-upload-wrapper.dragover .file-upload-display {
-            border-color: #fff;
-            background-color: rgba(0, 168, 232, 0.1);
-            color: #fff;
+            border-color: var(--primary);
+            background-color: #f0f7ff;
+            color: var(--primary);
         }
 
         /* Dropdown */
         .admin-dropdown { position: relative; display: inline-flex; align-items: center; }
         .admin-dropdown-content {
-            display: none; position: absolute; top: 100%; right: 0; background-color: var(--sidebar-hover);
-            min-width: 280px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 100; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); padding: 15px; margin-top: 10px;
+            display: none; position: absolute; top: 100%; right: 0; background-color: #ffffff;
+            min-width: 280px; box-shadow: 0 10px 25px rgba(0, 75, 135, 0.12); z-index: 100; border-radius: 8px; border: 1px solid var(--border-color); padding: 15px; margin-top: 10px;
         }
         .admin-dropdown:hover .admin-dropdown-content,
         .admin-dropdown:focus-within .admin-dropdown-content { display: block; }
         /* Pagination */
         .pagination { display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; gap: 5px; align-items: center; justify-content: center; }
-        .pagination .page-item .page-link { display: flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 10px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: var(--text-main); text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; font-size: 0.9rem; }
-        .pagination .page-item:not(.disabled):not(.active) .page-link:hover { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.2); color: white; }
+        .pagination .page-item .page-link { display: flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 10px; border-radius: 8px; background: #ffffff; color: var(--text-main); text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; font-size: 0.9rem; }
+        .pagination .page-item:not(.disabled):not(.active) .page-link:hover { background: #f0f7ff; border-color: #bfdbfe; color: var(--primary); }
         .pagination .page-item.active .page-link { background: var(--primary); color: white; border-color: var(--primary); font-weight: 600; }
         .pagination .page-item.disabled .page-link { opacity: 0.4; cursor: not-allowed; background: transparent; }
         .d-sm-none { display: none !important; } /* Hide bootstrap mobile view */
         .d-none.d-sm-flex { display: flex !important; flex-direction: column; gap: 15px; align-items: center; width: 100%; } /* Style the container */
         nav p.small.text-muted { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; text-align: center; } /* Style the 'Showing x to y' text */
-        nav p.small.text-muted .fw-semibold { font-weight: 700; color: white; }
+        nav p.small.text-muted .fw-semibold { font-weight: 700; color: #0f172a; }
 
     </style>
     @stack('styles')
@@ -452,23 +502,23 @@
                     
                     <div class="admin-dropdown-content">
                         <!-- Profile Info -->
-                        <div style="display: flex; gap: 15px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 10px;">
-                            <div style="width: 50px; height: 50px; background-color: var(--primary); border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.2);">
+                        <div style="display: flex; gap: 15px; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 10px;">
+                            <div style="width: 50px; height: 50px; background-color: var(--primary); border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 2px solid #bfdbfe;">
                                 @if(auth()->user()->avatar)
                                     <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
                                 @else
                                     <i class="ri-user-fill" style="color: white; font-size: 1.5rem;"></i>
                                 @endif
                             </div>
-                            <div style="overflow: hidden; color: white;">
+                            <div style="overflow: hidden; color: #0f172a;">
                                 <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
                                 <div style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->email }}</div>
                             </div>
                         </div>
                         
                         <!-- Actions -->
-                        <a href="{{ route('profile.show') }}" style="display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; margin-bottom: 5px; color: white; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.backgroundColor='rgba(0, 216, 255, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
-                            <i class="ri-user-settings-line"></i> Profil Akun
+                        <a href="{{ route('profile.show') }}" style="display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; margin-bottom: 5px; color: #0f172a; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#f0f7ff'; this.style.color='var(--primary)'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#0f172a'">
+                            <i class="ri-user-settings-line" style="color: var(--primary);"></i> Profil Akun
                         </a>
                         
                         <form action="{{ route('logout') }}" method="POST" style="margin: 0;">

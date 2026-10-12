@@ -35,14 +35,14 @@
         </div>
         <div style="display: flex; gap: 10px;">
             <button type="submit" class="btn" style="background-color: var(--primary); color: white; padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer;"><i class="ri-search-line"></i> Filter</button>
-            <a href="{{ route('admin.layanan.index') }}" class="btn" style="background-color: rgba(255,255,255,0.1); color: white; padding: 8px 20px; border-radius: 8px; text-decoration: none; border: 1px solid var(--border-color);"><i class="ri-refresh-line"></i> Reset</a>
+            <a href="{{ route('admin.layanan.index') }}" class="btn" style="background-color: #ffffff; color: var(--text-main); padding: 8px 20px; border-radius: 8px; text-decoration: none; border: 1px solid #cbd5e1;"><i class="ri-refresh-line"></i> Reset</a>
         </div>
     </form>
 
     <div class="card p-0 mb-5" style="overflow-x: auto;">
         <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
             <thead>
-                <tr style="background-color: rgba(255,255,255,0.1);">
+                <tr>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Tanggal</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Layanan</th>
                     <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Pemohon</th>

@@ -13,7 +13,7 @@
       
       {{-- Notifikasi Sukses --}}
       @if(session('success'))
-        <div style="background-color: rgba(16, 185, 129, 0.2); border: 1px solid var(--color-success); color: white; padding: 14px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+        <div style="background-color: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; padding: 14px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
           <i class="ri-checkbox-circle-fill" style="color: var(--color-success); font-size: 1.4rem; flex-shrink: 0;"></i>
           <div>{{ session('success') }}</div>
         </div>
@@ -21,38 +21,38 @@
 
       {{-- Notifikasi Terkunci (Lockout setelah 3 kali gagal) --}}
       @if(session('lockout'))
-        <div style="background-color: rgba(239, 68, 68, 0.15); border: 1px solid var(--color-danger); color: white; padding: 18px; border-radius: 10px; margin-bottom: 22px;">
+        <div style="background-color: #fff1f2; border: 1px solid #fecdd3; color: #9f1239; padding: 18px; border-radius: 10px; margin-bottom: 22px;">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
             <i class="ri-alarm-warning-fill" style="color: var(--color-danger); font-size: 1.5rem; flex-shrink: 0;"></i>
-            <strong style="font-size: 1.05rem; color: #fff;">Percobaan Gagal (Maksimal 3 Kali)</strong>
+            <strong style="font-size: 1.05rem; color: #881337;">Percobaan Gagal (Maksimal 3 Kali)</strong>
           </div>
-          <p style="font-size: 0.92rem; color: var(--color-text); margin-bottom: 12px; line-height: 1.5;">
+          <p style="font-size: 0.92rem; color: #4c0519; margin-bottom: 12px; line-height: 1.5;">
             {{ $errors->first('email') ?? 'Anda telah salah memasukkan email atau kata sandi sebanyak 3 kali.' }}
           </p>
 
           {{-- Kotak Timer Jeda Waktu --}}
-          <div id="cooldown-box" style="background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 10px 14px; text-align: center; margin-bottom: 14px;">
-            <i class="ri-time-line" style="color: var(--color-accent); font-size: 1.2rem; vertical-align: middle; margin-right: 4px;"></i>
-            <span>Jeda waktu: <strong id="countdown" style="color: var(--color-accent); font-size: 1.25rem;">{{ session('seconds_remaining', 60) }}</strong> detik sebelum dapat mencoba lagi.</span>
+          <div id="cooldown-box" style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 10px 14px; text-align: center; margin-bottom: 14px; color: #1e3a8a;">
+            <i class="ri-time-line" style="color: var(--color-primary); font-size: 1.2rem; vertical-align: middle; margin-right: 4px;"></i>
+            <span>Jeda waktu: <strong id="countdown" style="color: var(--color-primary); font-size: 1.25rem;">{{ session('seconds_remaining', 60) }}</strong> detik sebelum dapat mencoba lagi.</span>
           </div>
 
           {{-- Kotak Saran Memilih Lupa Password --}}
-          <div style="background: rgba(0, 168, 232, 0.12); border-left: 4px solid var(--color-secondary); padding: 12px 14px; border-radius: 6px;">
-            <div style="font-weight: 600; color: #fff; display: flex; align-items: center; gap: 6px; margin-bottom: 5px;">
-              <i class="ri-lightbulb-fill" style="color: var(--color-accent); font-size: 1.1rem;"></i>
+          <div style="background: #f0f7ff; border-left: 4px solid var(--color-primary); padding: 12px 14px; border-radius: 6px;">
+            <div style="font-weight: 600; color: #0f172a; display: flex; align-items: center; gap: 6px; margin-bottom: 5px;">
+              <i class="ri-lightbulb-fill" style="color: var(--color-primary); font-size: 1.1rem;"></i>
               <span>Saran: Gunakan Fitur Lupa Password</span>
             </div>
-            <p style="font-size: 0.88rem; color: var(--color-text-muted); margin-bottom: 10px; line-height: 1.4;">
+            <p style="font-size: 0.88rem; color: #334155; margin-bottom: 10px; line-height: 1.4;">
               Jika Anda tidak mengingat kata sandi Anda, jangan terus mencoba. Anda disarankan untuk melakukan reset kata sandi agar akun tidak terkunci kembali.
             </p>
-            <a href="{{ route('password.request') }}" class="btn btn-outline" style="font-size: 0.88rem; padding: 7px 16px; display: inline-flex; align-items: center; gap: 6px; border-color: var(--color-secondary); color: var(--color-secondary); background: rgba(0, 168, 232, 0.1);">
+            <a href="{{ route('password.request') }}" class="btn btn-outline" style="font-size: 0.88rem; padding: 7px 16px; display: inline-flex; align-items: center; gap: 6px; border-color: var(--color-primary); color: var(--color-primary); background: #ffffff;">
               <i class="ri-key-2-line"></i> Pilih Lupa Password Sekarang
             </a>
           </div>
         </div>
       @elseif($errors->any())
         {{-- Notifikasi Error Biasa (Sebelum Terkunci 3 Kali) --}}
-        <div style="background-color: var(--color-danger, #e74c3c); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+        <div style="background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
           <ul style="margin: 0; padding-left: 20px;">
             @foreach($errors->all() as $error)
               <li>{{ $error }}</li>
@@ -60,9 +60,9 @@
           </ul>
 
           @if(session('show_forgot_password_suggestion'))
-            <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid #fee2e2; font-size: 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
               <span><i class="ri-information-line"></i> Lupa kata sandi Anda?</span>
-              <a href="{{ route('password.request') }}" style="color: var(--color-accent); font-weight: 600; text-decoration: underline;">
+              <a href="{{ route('password.request') }}" style="color: var(--color-primary); font-weight: 600; text-decoration: underline;">
                 Pilih Lupa Password di sini &rarr;
               </a>
             </div>

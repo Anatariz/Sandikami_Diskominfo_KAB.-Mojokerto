@@ -75,7 +75,7 @@
         @auth
           <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px; display: flex; align-items: center;">
             <div class="dropdown">
-              <a href="#" class="dropdown-toggle" style="color: white; text-decoration: none; width: 35px; height: 35px; background-color: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease; overflow: hidden;">
+              <a href="#" class="dropdown-toggle" style="color: var(--color-primary); text-decoration: none; width: 36px; height: 36px; background-color: #e0effe; border: 1.5px solid #bfdbfe; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease; overflow: hidden;">
                   @if(auth()->user()->avatar)
                       <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
                   @else
@@ -93,7 +93,7 @@
                         @endif
                     </div>
                     <div style="overflow: hidden;">
-                        <div style="font-weight: 600; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
+                        <div style="font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
                         <div style="font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->email }}</div>
                     </div>
                 </div>

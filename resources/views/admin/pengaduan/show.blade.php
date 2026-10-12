@@ -83,7 +83,7 @@
     @endif
 
     {{-- ===== DETAIL PENGADUAN ===== --}}
-    <div class="card" style="padding: 30px; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px;">
+    <div class="card" style="padding: 30px; background-color: rgba(240, 247, 255, 0.75); border: 1px solid rgba(191, 219, 254, 0.8); border-radius: 10px; overflow-x: auto;">
         <table class="table" style="width: 100%; border-collapse: collapse; text-align: left;">
             <tr>
                 <th style="padding: 12px; border-bottom: 1px solid var(--border-color); width: 30%;">Judul Laporan</th>
