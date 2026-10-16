@@ -1,11 +1,48 @@
-// Navbar Toggle
+// Navbar Toggle & Mobile Navigation
 document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
 
   if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       navLinks.classList.toggle('show');
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navLinks.classList.contains('show') && !navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+        navLinks.classList.remove('show');
+      }
+    });
+
+    // Mobile Dropdown Accordion
+    const mobileDropdownToggles = navLinks.querySelectorAll('.dropdown > .dropdown-toggle');
+    mobileDropdownToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          e.stopPropagation();
+          const parentDropdown = toggle.closest('.dropdown');
+          if (parentDropdown) {
+            // Close other open mobile dropdowns
+            navLinks.querySelectorAll('.dropdown.open').forEach(d => {
+              if (d !== parentDropdown) d.classList.remove('open');
+            });
+            parentDropdown.classList.toggle('open');
+          }
+        }
+      });
+    });
+
+    // Close drawer when regular link is clicked
+    const directLinks = navLinks.querySelectorAll('a:not(.dropdown-toggle)');
+    directLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navLinks.classList.remove('show');
+        }
+      });
     });
   }
 
@@ -14,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuItems = document.querySelectorAll('.nav-links a');
   
   menuItems.forEach(item => {
-    // Basic match, could be improved based on exact paths
     if (item.getAttribute('href') !== '/' && currentLocation.includes(item.getAttribute('href'))) {
       item.classList.add('active');
     }

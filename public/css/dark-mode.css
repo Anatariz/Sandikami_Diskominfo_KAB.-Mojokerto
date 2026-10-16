@@ -223,6 +223,28 @@ html.theme-transition *:after {
     border-top: 1px solid #1e2e4a !important;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8) !important;
   }
+  [data-theme="dark"] .nav-links a {
+    color: #e2e8f0 !important;
+    border-bottom: 1px solid #1e2e4a !important;
+  }
+  [data-theme="dark"] .nav-links a:hover,
+  [data-theme="dark"] .nav-links a.active {
+    color: #38bdf8 !important;
+  }
+  [data-theme="dark"] .nav-links .dropdown {
+    border-bottom: 1px solid #1e2e4a !important;
+  }
+  [data-theme="dark"] .nav-links .dropdown .dropdown-menu {
+    background-color: rgba(30, 46, 74, 0.5) !important;
+    border-left: 2px solid #38bdf8 !important;
+  }
+  [data-theme="dark"] .nav-links .dropdown .dropdown-item {
+    color: #cbd5e1 !important;
+  }
+  [data-theme="dark"] .nav-links .dropdown .dropdown-item:hover {
+    color: #38bdf8 !important;
+    background-color: rgba(56, 189, 248, 0.1) !important;
+  }
 }
 
 /* Cards & Glass-card */

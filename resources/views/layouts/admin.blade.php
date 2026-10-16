@@ -655,12 +655,135 @@
         nav p.small.text-muted { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px; text-align: center; } /* Style the 'Showing x to y' text */
         nav p.small.text-muted .fw-semibold { font-weight: 700; color: #0f172a; }
 
+        /* Mobile & Responsive Admin Styles */
+        .mobile-sidebar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 6px;
+            align-items: center;
+            justify-content: center;
+        }
+        .mobile-sidebar-toggle:hover {
+            background-color: rgba(0, 75, 135, 0.08);
+        }
+        [data-theme="dark"] .mobile-sidebar-toggle {
+            color: #38bdf8;
+        }
+        [data-theme="dark"] .mobile-sidebar-toggle:hover {
+            background-color: rgba(56, 189, 248, 0.15);
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(2px);
+            z-index: 1099;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (max-width: 991px) {
+            .mobile-sidebar-toggle {
+                display: inline-flex;
+            }
+
+            .sidebar-toggle-btn {
+                display: none !important;
+            }
+
+            .admin-sidebar {
+                transform: translateX(-100%);
+                z-index: 1100;
+                box-shadow: 4px 0 25px rgba(0, 0, 0, 0.35);
+            }
+
+            body.sidebar-open .admin-sidebar {
+                transform: translateX(0);
+            }
+
+            body.sidebar-open .sidebar-overlay {
+                display: block;
+                opacity: 1;
+            }
+
+            .admin-main {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+
+            .admin-topbar {
+                padding: 0 16px;
+                height: 60px;
+            }
+
+            .topbar-title {
+                font-size: 1rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 200px;
+            }
+
+            .topbar-actions {
+                gap: 8px;
+            }
+
+            .admin-content {
+                padding: 16px 12px;
+            }
+
+            .card {
+                padding: 18px 14px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .topbar-title {
+                font-size: 0.92rem;
+                max-width: 140px;
+            }
+
+            .topbar-actions .btn-secondary {
+                padding: 6px 10px;
+                font-size: 0.82rem;
+            }
+
+            .topbar-actions .btn-secondary span {
+                display: none;
+            }
+
+            .topbar-actions .theme-toggle-btn,
+            .topbar-actions .admin-profile-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 1.1rem;
+            }
+
+            .admin-dropdown-content {
+                right: -6px;
+                width: calc(100vw - 24px);
+                max-width: 280px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/dark-mode.css') }}?v={{ filemtime(public_path('css/dark-mode.css')) }}">
     @stack('styles')
 </head>
 <body>
     @if(!request()->routeIs('profile.*'))
+    <!-- Sidebar Backdrop Overlay for Mobile -->
+    <div class="sidebar-overlay" onclick="document.body.classList.remove('sidebar-open')"></div>
+
     <!-- Toggle Button for Hidden Sidebar -->
     <button id="sidebar-toggle" class="sidebar-toggle-btn" onclick="document.body.classList.toggle('sidebar-hidden')">
         <i class="ri-menu-line"></i>
@@ -671,7 +794,7 @@
     @if(!request()->routeIs('profile.*'))
     <aside class="admin-sidebar">
         <!-- Close Button for Sidebar -->
-        <button id="sidebar-close" class="sidebar-close-btn" onclick="document.body.classList.toggle('sidebar-hidden')">
+        <button id="sidebar-close" class="sidebar-close-btn" onclick="document.body.classList.toggle('sidebar-hidden'); document.body.classList.remove('sidebar-open');">
             <i class="ri-close-line"></i>
         </button>
 
@@ -731,9 +854,14 @@
     <main class="admin-main" style="{{ request()->routeIs('profile.*') ? 'margin-left: 0;' : '' }}">
         @if(!request()->routeIs('profile.*'))
         <header class="admin-topbar">
-            <div class="topbar-title">@yield('page_title', 'Panel Kontrol Administrator')</div>
+            <div style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                <button type="button" class="mobile-sidebar-toggle" id="mobile-sidebar-toggle" onclick="document.body.classList.toggle('sidebar-open')" aria-label="Buka Menu Sidebar">
+                    <i class="ri-menu-2-line"></i>
+                </button>
+                <div class="topbar-title">@yield('page_title', 'Panel Kontrol Administrator')</div>
+            </div>
             <div class="topbar-actions" style="display: flex; align-items: center; gap: 15px;">
-                <a href="{{ route('home') }}" target="_self" class="btn btn-secondary"><i class="ri-global-line mr-1"></i> Lihat Portal</a>
+                <a href="{{ route('home') }}" target="_self" class="btn btn-secondary"><i class="ri-global-line mr-1"></i> <span>Lihat Portal</span></a>
 
                 <!-- Dark Mode Toggle -->
                 <button type="button" class="theme-toggle-btn" aria-label="Ganti Mode Gelap / Terang" title="Ganti Mode Gelap / Terang">

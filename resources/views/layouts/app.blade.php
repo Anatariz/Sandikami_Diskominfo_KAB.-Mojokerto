@@ -99,7 +99,7 @@
         </button>
 
         @auth
-          <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px; display: flex; align-items: center;">
+          <div class="mobile-auth-wrapper" style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px; display: flex; align-items: center;">
             <div class="dropdown profile-dropdown">
               <a href="#" class="dropdown-toggle" title="Profil Akun" style="color: var(--color-primary); text-decoration: none; width: 36px; height: 36px; background-color: #e0effe; border: 1.5px solid #bfdbfe; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.15s ease; overflow: hidden; cursor: pointer;">
                   @if(auth()->user()->avatar)
@@ -139,7 +139,7 @@
             </div>
           </div>
         @else
-          <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px;">
+          <div class="mobile-auth-wrapper" style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px;">
             <a href="{{ route('login') }}" class="btn btn-sm btn-primary">Masuk</a>
           </div>
         @endauth
@@ -192,7 +192,7 @@
 
   @auth
     @if(auth()->user()->role === 'admin')
-      <a href="{{ route('admin.dashboard') }}" target="_self" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background-color: #004b87; color: white; padding: 12px 24px; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px; text-decoration: none; border: 2px solid #00a8e8; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+      <a href="{{ route('admin.dashboard') }}" target="_self" class="admin-floating-badge" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background-color: #004b87; color: white; padding: 12px 24px; border-radius: 50px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px; text-decoration: none; border: 2px solid #00a8e8; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         <i class="ri-dashboard-line" style="font-size: 1.2rem;"></i> Kembali ke Admin
       </a>
     @endif
