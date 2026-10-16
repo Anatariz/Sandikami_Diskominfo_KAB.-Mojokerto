@@ -10,6 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Dark Mode Inline Script (Prevents White Flash) -->
+    <script>
+      (function() {
+        var savedTheme = localStorage.getItem('sandikami_theme');
+        var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
     <style>
         :root {
             /* Tema Biru & Putih (Blue & White Theme) */
@@ -22,7 +35,10 @@
             --text-muted: #64748b; /* Slate 500 */
             --card-bg: #ffffff; /* Pure White Card */
             --primary: #004b87; /* Kominfo Blue */
-            --border-color: #e2e8f0;
+            --border-color: #bae6fd; /* Soft Sky Blue (Biru Muda / Biru Langit) */
+            --border-sky: #7dd3fc; /* Sky Blue 300 */
+            --border-light-blue: #93c5fd; /* Light Blue 300 */
+            --input-border: #93c5fd; /* Input Border Biru Langit */
         }
 
         * {
@@ -30,6 +46,10 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            scrollbar-gutter: stable;
         }
 
         body {
@@ -252,9 +272,9 @@
         /* Utilities */
         .card {
             background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 75, 135, 0.05);
-            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 75, 135, 0.05);
+            border: 1.5px solid var(--border-color);
             padding: 30px;
             margin-bottom: 20px;
         }
@@ -262,7 +282,7 @@
         .btn {
             display: inline-block;
             padding: 8px 16px;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
             border: none;
@@ -274,27 +294,67 @@
         .btn-primary { 
             background-color: var(--primary); 
             color: white; 
-            border: 1px solid var(--primary); 
+            border: 1.5px solid var(--primary); 
         }
         .btn-primary:hover { 
             background-color: #003666; 
+            border-color: #003666;
         }
         .btn-secondary { 
             background-color: #ffffff; 
-            color: var(--text-main); 
-            border: 1px solid #cbd5e1; 
+            color: var(--primary); 
+            border: 1.5px solid var(--input-border); 
         }
         .btn-secondary:hover { 
-            background-color: #f1f5f9; 
-            border-color: #94a3b8; 
+            background-color: #f0f9ff; 
+            border-color: var(--border-sky); 
+            color: #0284c7;
         }
         .btn-danger { background-color: #EF4444; color: white; }
+
+        /* Admin Filter Card (Sky Blue / Light Blue Theme) */
+        .admin-filter-card {
+            margin-bottom: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-end;
+            background-color: #ffffff;
+            padding: 16px 20px;
+            border-radius: 12px;
+            border: 1.5px solid var(--input-border);
+            box-shadow: 0 4px 18px rgba(147, 197, 253, 0.18);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .admin-filter-card:hover {
+            border-color: var(--border-sky);
+            box-shadow: 0 6px 22px rgba(147, 197, 253, 0.25);
+        }
+        .admin-filter-card label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+            display: block;
+        }
+        .admin-filter-card .form-control {
+            margin-top: 0;
+            padding: 9px 12px;
+            border: 1.5px solid var(--input-border);
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: var(--text-main);
+        }
+        .admin-filter-card .form-control:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+        }
 
         /* Admin Tables - Light Blue Slightly Transparent Theme */
         .card:has(.table), .card.p-0 {
             background-color: rgba(240, 247, 255, 0.75);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(191, 219, 254, 0.8);
+            border: 1.5px solid rgba(147, 197, 253, 0.85);
             box-shadow: 0 4px 18px rgba(0, 75, 135, 0.05);
             border-radius: 12px;
             overflow: hidden;
@@ -335,19 +395,107 @@
         
         .form-control {
             width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #cbd5e1;
+            padding: 10px 14px;
+            border: 1.5px solid var(--input-border);
             background-color: #ffffff;
             color: var(--text-main);
-            border-radius: 6px;
+            border-radius: 8px;
             font-family: inherit;
             margin-top: 5px;
             font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
-        .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 75, 135, 0.15); }
+        .form-control:focus { outline: none; border-color: #0284c7; box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25); }
         .form-control::placeholder { color: var(--text-muted); opacity: 0.7; }
+        
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23004b87' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 12px) center;
+            background-size: 14px 14px;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
         .form-label { font-weight: 600; font-size: 0.9rem; color: #1e293b; }
         .form-group { margin-bottom: 20px; }
+
+        /* Form Builder Dynamic Field Items (Blue & Gradient on Hover/Typing) */
+        .field-item {
+            background-color: #f0f7ff;
+            padding: 18px 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1.5px solid #bae6fd;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(186, 230, 253, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .field-item:hover {
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #dbeafe 100%);
+            border-color: #7dd3fc;
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.22);
+            transform: translateY(-2px);
+        }
+
+        .field-item:focus-within {
+            background: linear-gradient(135deg, #dbeafe 0%, #bae6fd 45%, #e0f2fe 100%);
+            border-color: #0284c7;
+            box-shadow: 0 10px 28px rgba(2, 132, 199, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .field-item label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #334155;
+            display: block;
+            margin-bottom: 6px;
+            transition: color 0.2s ease;
+        }
+
+        .field-item:hover label,
+        .field-item:focus-within label {
+            color: #0369a1;
+        }
+
+        .field-item .form-control {
+            background-color: #ffffff;
+            border: 1.5px solid #93c5fd;
+            border-radius: 8px;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .field-item .form-control:focus {
+            background-color: #ffffff;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3.5px rgba(56, 189, 248, 0.3);
+        }
+
+        .field-item .btn-remove-field {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 1.3rem;
+            line-height: 1;
+            opacity: 0.75;
+            transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+        }
+
+        .field-item .btn-remove-field:hover {
+            opacity: 1;
+            color: #dc2626;
+            transform: scale(1.18);
+        }
 
         .alert {
             padding: 15px;
@@ -393,14 +541,109 @@
             color: var(--primary);
         }
 
-        /* Dropdown */
-        .admin-dropdown { position: relative; display: inline-flex; align-items: center; }
-        .admin-dropdown-content {
-            display: none; position: absolute; top: 100%; right: 0; background-color: #ffffff;
-            min-width: 280px; box-shadow: 0 10px 25px rgba(0, 75, 135, 0.12); z-index: 100; border-radius: 8px; border: 1px solid var(--border-color); padding: 15px; margin-top: 10px;
+        /* Ikon Akun / Profil Topbar (gaya sama dengan tombol tema) */
+        .topbar-actions .admin-profile-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: rgba(0, 75, 135, 0.08);
+            border: 1.5px solid rgba(0, 75, 135, 0.25);
+            color: var(--primary);
+            font-size: 1.25rem;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0, 75, 135, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .admin-dropdown:hover .admin-dropdown-content,
-        .admin-dropdown:focus-within .admin-dropdown-content { display: block; }
+        .topbar-actions .admin-profile-btn:hover {
+            border-color: var(--primary);
+            transform: scale(1.08);
+            box-shadow: 0 4px 14px rgba(0, 75, 135, 0.2);
+        }
+        .topbar-actions .admin-profile-btn img { width: 100%; height: 100%; object-fit: cover; }
+        [data-theme="dark"] .topbar-actions .admin-profile-btn {
+            background: rgba(56, 189, 248, 0.12);
+            border-color: rgba(56, 189, 248, 0.35);
+            color: #38bdf8;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+        }
+        [data-theme="dark"] .topbar-actions .admin-profile-btn:hover {
+            background: rgba(56, 189, 248, 0.22);
+            border-color: #38bdf8;
+            color: #38bdf8;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+        }
+
+        /* Dropdown Akun (mengikuti dropdown profil portal) */
+        .admin-dropdown { position: relative; display: inline-flex; align-items: center; }
+        .topbar-actions .admin-dropdown-toggle { cursor: pointer; padding: 0; font-family: inherit; }
+        .admin-dropdown-content {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 280px;
+            margin-top: 15px;
+            padding: 15px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 75, 135, 0.12);
+            z-index: 1050;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .admin-dropdown.open .admin-dropdown-content {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        .admin-dropdown-header {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            padding-bottom: 15px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .admin-dropdown-avatar {
+            width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            background-color: #e0effe; border: 1.5px solid #bfdbfe;
+            color: var(--primary); font-size: 1.3rem;
+        }
+        .admin-dropdown-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .admin-dropdown-meta { overflow: hidden; }
+        .admin-dropdown-name { font-weight: 600; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .admin-dropdown-email { font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .admin-dropdown-item {
+            display: flex; align-items: center; gap: 10px; width: 100%;
+            padding: 10px; margin-bottom: 5px; border-radius: 6px; border: none; background: none;
+            color: var(--text-main); font-family: inherit; font-size: inherit; font-weight: 500;
+            text-align: left; text-decoration: none; cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .admin-dropdown-item:hover { background: #f0f7ff; color: var(--primary); }
+        .admin-dropdown-item.is-danger { color: #ef4444; margin-bottom: 0; }
+        .admin-dropdown-item.is-danger:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+        [data-theme="dark"] .admin-dropdown-content { background: #131d33 !important; border-color: #1e2e4a !important; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6) !important; }
+        [data-theme="dark"] .admin-dropdown-avatar { background-color: #e0effe; border-color: #bfdbfe; color: #38bdf8; }
+        [data-theme="dark"] .admin-dropdown-content .admin-dropdown-name { color: #f8fafc !important; }
+        [data-theme="dark"] .admin-dropdown-content .admin-dropdown-item { color: #e2e8f0 !important; }
+        [data-theme="dark"] .admin-dropdown-content .admin-dropdown-item:hover { background: #1a2744 !important; color: #38bdf8 !important; }
+        [data-theme="dark"] .admin-dropdown-content .admin-dropdown-item.is-danger { color: #f87171 !important; }
+        [data-theme="dark"] .admin-dropdown-content .admin-dropdown-item.is-danger:hover { background: rgba(239, 68, 68, 0.12) !important; color: #f87171 !important; }
+        [data-theme="dark"] .topbar-actions .admin-dropdown-toggle { background: rgba(56, 189, 248, 0.12) !important; border-color: rgba(56, 189, 248, 0.35) !important; color: #38bdf8 !important; }
+        [data-theme="dark"] .topbar-actions .admin-dropdown-toggle:hover,
+        [data-theme="dark"] .admin-dropdown.open .admin-dropdown-toggle { background: rgba(56, 189, 248, 0.22) !important; border-color: #38bdf8 !important; }
+
         /* Pagination */
         .pagination { display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; gap: 5px; align-items: center; justify-content: center; }
         .pagination .page-item .page-link { display: flex; align-items: center; justify-content: center; min-width: 36px; height: 36px; padding: 0 10px; border-radius: 8px; background: #ffffff; color: var(--text-main); text-decoration: none; border: 1px solid var(--border-color); transition: all 0.3s ease; font-size: 0.9rem; }
@@ -413,6 +656,7 @@
         nav p.small.text-muted .fw-semibold { font-weight: 700; color: #0f172a; }
 
     </style>
+    <link rel="stylesheet" href="{{ asset('css/dark-mode.css') }}?v={{ filemtime(public_path('css/dark-mode.css')) }}">
     @stack('styles')
 </head>
 <body>
@@ -491,40 +735,45 @@
             <div class="topbar-actions" style="display: flex; align-items: center; gap: 15px;">
                 <a href="{{ route('home') }}" target="_self" class="btn btn-secondary"><i class="ri-global-line mr-1"></i> Lihat Portal</a>
 
+                <!-- Dark Mode Toggle -->
+                <button type="button" class="theme-toggle-btn" aria-label="Ganti Mode Gelap / Terang" title="Ganti Mode Gelap / Terang">
+                    <i class="ri-moon-line theme-icon-moon"></i>
+                    <i class="ri-sun-line theme-icon-sun"></i>
+                </button>
+
+                <!-- Ikon Akun / Profil + Dropdown (klik untuk membuka) -->
                 <div class="admin-dropdown">
-                    <a href="#" style="color: white; text-decoration: none; width: 40px; height: 40px; background-color: var(--primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; overflow: hidden; border: 2px solid rgba(255,255,255,0.2);">
+                    <button type="button" id="admin-profile-toggle" class="admin-profile-btn admin-dropdown-toggle" title="{{ auth()->user()->name }}" aria-label="Menu Akun" aria-haspopup="true">
                         @if(auth()->user()->avatar)
-                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar {{ auth()->user()->name }}">
                         @else
-                            <i class="ri-user-fill" style="font-size: 1.2rem;"></i>
+                            <i class="ri-user-fill"></i>
                         @endif
-                    </a>
-                    
-                    <div class="admin-dropdown-content">
-                        <!-- Profile Info -->
-                        <div style="display: flex; gap: 15px; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 10px;">
-                            <div style="width: 50px; height: 50px; background-color: var(--primary); border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 2px solid #bfdbfe;">
+                    </button>
+
+                    <div class="admin-dropdown-content" role="menu">
+                        <div class="admin-dropdown-header">
+                            <div class="admin-dropdown-avatar">
                                 @if(auth()->user()->avatar)
-                                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar {{ auth()->user()->name }}">
                                 @else
-                                    <i class="ri-user-fill" style="color: white; font-size: 1.5rem;"></i>
+                                    <i class="ri-user-fill"></i>
                                 @endif
                             </div>
-                            <div style="overflow: hidden; color: #0f172a;">
-                                <div style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->email }}</div>
+                            <div class="admin-dropdown-meta">
+                                <div class="admin-dropdown-name">{{ auth()->user()->name }}</div>
+                                <div class="admin-dropdown-email">{{ auth()->user()->email }}</div>
                             </div>
                         </div>
-                        
-                        <!-- Actions -->
-                        <a href="{{ route('profile.show') }}" style="display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; margin-bottom: 5px; color: #0f172a; text-decoration: none; transition: background 0.2s;" onmouseover="this.style.backgroundColor='#f0f7ff'; this.style.color='var(--primary)'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#0f172a'">
-                            <i class="ri-user-settings-line" style="color: var(--primary);"></i> Profil Akun
+
+                        <a href="{{ route('profile.show') }}" id="admin-menu-akun" class="admin-dropdown-item" role="menuitem">
+                            <i class="ri-user-settings-line"></i> Lihat Akun
                         </a>
-                        
+
                         <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
                             @csrf
-                            <button type="submit" style="display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: none; border: none; cursor: pointer; color: #ef4444; padding: 10px; border-radius: 6px; font-family: inherit; font-size: inherit; transition: background 0.2s;" onmouseover="this.style.backgroundColor='rgba(239, 68, 68, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
-                                <i class="ri-logout-box-line"></i> Sign out
+                            <button type="submit" id="admin-menu-logout" class="admin-dropdown-item is-danger" role="menuitem">
+                                <i class="ri-logout-box-line"></i> Logout
                             </button>
                         </form>
                     </div>
@@ -538,6 +787,7 @@
         </div>
     </main>
 
+    <script src="{{ asset('js/theme.js') }}?v={{ filemtime(public_path('js/theme.js')) }}"></script>
     @stack('scripts')
 </body>
 </html>

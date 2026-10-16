@@ -113,19 +113,19 @@
             const options = data && data.options ? data.options.join(', ') : '';
             
             const fieldHTML = `
-                <div class="field-item" style="background-color: rgba(0,0,0,0.15); padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed var(--border-color); position: relative;">
-                    <button type="button" class="btn-remove-field" style="position: absolute; right: 10px; top: 10px; background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem;">
+                <div class="field-item">
+                    <button type="button" class="btn-remove-field" title="Hapus Kolom">
                         <i class="ri-close-circle-fill"></i>
                     </button>
                     
                     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
                         <div>
-                            <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Label / Nama Kolom *</label>
-                            <input type="text" class="form-control field-label" required placeholder="Contoh: Scan KTP, Alasan Pengajuan..." style="padding: 8px;" value="${label}">
+                            <label>Label / Nama Kolom *</label>
+                            <input type="text" class="form-control field-label" required placeholder="Contoh: Scan KTP, Alasan Pengajuan..." style="padding: 9px 12px;" value="${label}">
                         </div>
                         <div>
-                            <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Tipe Inputan *</label>
-                            <select class="form-control field-type" required style="padding: 8px; height: 38px;">
+                            <label>Tipe Inputan *</label>
+                            <select class="form-control field-type" required style="padding: 9px 12px; height: 42px;">
                                 <option value="text" ${type === 'text' ? 'selected' : ''}>Teks Pendek</option>
                                 <option value="textarea" ${type === 'textarea' ? 'selected' : ''}>Teks Panjang (Paragraf)</option>
                                 <option value="file" ${type === 'file' ? 'selected' : ''}>Upload File / Berkas</option>
@@ -136,13 +136,13 @@
                     </div>
                     
                     <div class="options-container" style="display: ${type === 'select' ? 'block' : 'none'}; margin-top: 15px;">
-                        <label style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 5px;">Pilihan (Pisahkan dengan koma) *</label>
-                        <input type="text" class="form-control field-options" placeholder="Contoh: Baru, Perpanjangan, Kendala TTE" style="padding: 8px;" value="${options}">
+                        <label>Pilihan (Pisahkan dengan koma) *</label>
+                        <input type="text" class="form-control field-options" placeholder="Contoh: Baru, Perpanjangan, Kendala TTE" style="padding: 9px 12px;" value="${options}">
                     </div>
                     
                     <div style="margin-top: 15px; display: flex; align-items: center; gap: 10px;">
                         <input type="checkbox" class="field-required" ${required ? 'checked' : ''} id="req_${fieldCount}">
-                        <label for="req_${fieldCount}" style="font-size: 0.85rem; color: var(--text-main); cursor: pointer;">Wajib diisi oleh pemohon (Required)</label>
+                        <label for="req_${fieldCount}" style="font-size: 0.85rem; color: var(--text-main); cursor: pointer; margin-bottom: 0;">Wajib diisi oleh pemohon (Required)</label>
                     </div>
                 </div>
             `;

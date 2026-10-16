@@ -108,8 +108,8 @@
   width: 100%;
   padding: 12px 15px;
   background-color: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  border: 1.5px solid #93c5fd;
+  border-radius: 8px;
   color: #0f172a;
   font-family: var(--font-primary);
   transition: all var(--transition-fast);
@@ -121,8 +121,8 @@
 
 .form-control:focus {
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0, 75, 135, 0.15);
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
   background-color: #ffffff;
 }
 

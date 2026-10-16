@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Detail Pengaduan - Sandikami')
 @section('content')
-<div class="container" style="padding-top: 8rem; padding-bottom: 4rem;">
+<div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
         <h1 class="mb-0">Detail Pengaduan / Laporan Insiden</h1>
         <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary" style="background-color: #95a5a6; border-color: #95a5a6; padding: 8px 15px; color: white; text-decoration: none; border-radius: 5px;">Kembali ke Dashboard</a>

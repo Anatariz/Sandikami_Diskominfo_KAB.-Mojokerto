@@ -6,12 +6,26 @@
   <title>@yield('title', 'Portal Sandikami | Diskominfo Kab. Mojokerto')</title>
   
   <!-- CSS -->
-  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
   <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/dark-mode.css') }}?v={{ filemtime(public_path('css/dark-mode.css')) }}">
   
   <!-- Icons -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   @stack('styles')
+
+  <!-- Dark Mode Inline Script (Prevents White Flash) -->
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('sandikami_theme');
+      var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 <body>
 
@@ -28,9 +42,15 @@
         </div>
       </a>
       
-      <button class="menu-toggle">
-        <i class="ri-menu-line"></i>
-      </button>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button type="button" class="theme-toggle-btn mobile-toggle" aria-label="Ganti Mode Gelap / Terang" title="Ganti Mode Gelap / Terang">
+          <i class="ri-moon-line theme-icon-moon"></i>
+          <i class="ri-sun-line theme-icon-sun"></i>
+        </button>
+        <button class="menu-toggle" aria-label="Toggle navigation menu">
+          <i class="ri-menu-line"></i>
+        </button>
+      </div>
       
       <div class="nav-links">
         <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Beranda</a>
@@ -72,10 +92,16 @@
         <a href="{{ route('pengaduan') }}" class="{{ request()->routeIs('pengaduan') ? 'active' : '' }}">Pengaduan</a>
         <a href="{{ route('kontak') }}" class="{{ request()->routeIs('kontak') ? 'active' : '' }}">Kontak</a>
 
+        <!-- Dark Mode Toggle Button (Desktop) -->
+        <button type="button" class="theme-toggle-btn desktop-toggle" aria-label="Ganti Mode Gelap / Terang" title="Ganti Mode Gelap / Terang">
+          <i class="ri-moon-line theme-icon-moon"></i>
+          <i class="ri-sun-line theme-icon-sun"></i>
+        </button>
+
         @auth
           <div style="margin-left: 20px; border-left: 1px solid var(--glass-border); padding-left: 20px; display: flex; align-items: center;">
-            <div class="dropdown">
-              <a href="#" class="dropdown-toggle" style="color: var(--color-primary); text-decoration: none; width: 36px; height: 36px; background-color: #e0effe; border: 1.5px solid #bfdbfe; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease; overflow: hidden;">
+            <div class="dropdown profile-dropdown">
+              <a href="#" class="dropdown-toggle" title="Profil Akun" style="color: var(--color-primary); text-decoration: none; width: 36px; height: 36px; background-color: #e0effe; border: 1.5px solid #bfdbfe; border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.15s ease; overflow: hidden; cursor: pointer;">
                   @if(auth()->user()->avatar)
                       <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
                   @else
@@ -85,22 +111,22 @@
               <div class="dropdown-menu" style="right: 0; left: auto; padding: 15px; width: 280px; margin-top: 15px;">
                 <!-- Profile Info -->
                 <div style="display: flex; gap: 15px; align-items: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; margin-bottom: 10px;">
-                    <div style="width: 50px; height: 50px; background-color: var(--color-primary); border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+                    <div style="width: 44px; height: 44px; background-color: #e0effe; border: 1.5px solid #bfdbfe; color: var(--color-primary); border-radius: 50%; overflow: hidden; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
                         @if(auth()->user()->avatar)
                             <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
                         @else
-                            <i class="ri-user-fill" style="color: white; font-size: 1.5rem;"></i>
+                            <i class="ri-user-fill" style="font-size: 1.3rem;"></i>
                         @endif
                     </div>
                     <div style="overflow: hidden;">
-                        <div style="font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
+                        <div class="dropdown-user-name" style="font-weight: 600; color: var(--color-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->name }}</div>
                         <div style="font-size: 0.8rem; color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ auth()->user()->email }}</div>
                     </div>
                 </div>
                 
                 <!-- Actions -->
                 <a href="{{ route('profile.show') }}" class="dropdown-item" style="padding: 10px; border-radius: 6px; margin-bottom: 5px; display: flex; align-items: center; gap: 10px;">
-                    <i class="ri-user-settings-line"></i> Profil Akun
+                    <i class="ri-user-settings-line"></i> Profil
                 </a>
                 
                 <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
@@ -173,6 +199,7 @@
   @endauth
 
   <script src="{{ asset('js/main.js') }}"></script>
+  <script src="{{ asset('js/theme.js') }}?v={{ filemtime(public_path('js/theme.js')) }}"></script>
   @stack('scripts')
 </body>
 </html>

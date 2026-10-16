@@ -47,7 +47,7 @@
                 </div>
                 <div>
                     <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted); font-weight: 600; margin-bottom: 2px;">Email</div>
-                    <div style="color: #0f172a; font-size: 1.05rem; font-weight: 500;">{{ $user->email }}</div>
+                    <div style="color: var(--color-text, #0f172a); font-size: 1.05rem; font-weight: 500;">{{ $user->email }}</div>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted); font-weight: 600; margin-bottom: 2px;">Jabatan</div>
-                    <div style="color: #0f172a; font-size: 1.05rem; font-weight: 500;">{{ $user->jabatan }}</div>
+                    <div style="color: var(--color-text, #0f172a); font-size: 1.05rem; font-weight: 500;">{{ $user->jabatan }}</div>
                 </div>
             </div>
             @endif
@@ -70,7 +70,7 @@
                 </div>
                 <div>
                     <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted); font-weight: 600; margin-bottom: 2px;">Perangkat Daerah / Divisi</div>
-                    <div style="color: #0f172a; font-size: 1.05rem; font-weight: 500;">{{ $user->divisi }}</div>
+                    <div style="color: var(--color-text, #0f172a); font-size: 1.05rem; font-weight: 500;">{{ $user->divisi }}</div>
                 </div>
             </div>
             @endif
@@ -81,7 +81,7 @@
                 </div>
                 <div>
                     <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-muted); font-weight: 600; margin-bottom: 2px;">Bergabung Sejak</div>
-                    <div style="color: #0f172a; font-size: 1.05rem; font-weight: 500;">{{ $user->created_at->translatedFormat('d F Y') }}</div>
+                    <div style="color: var(--color-text, #0f172a); font-size: 1.05rem; font-weight: 500;">{{ $user->created_at->translatedFormat('d F Y') }}</div>
                 </div>
             </div>
         </div>
@@ -93,11 +93,11 @@
             </a>
             @endif
             @if(auth()->user()->role === 'admin')
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary" style="background-color: #ffffff; border: 1.5px solid var(--color-primary); color: var(--color-primary); padding: 10px 24px; border-radius: 30px; transition: all 0.3s ease; text-decoration: none;">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary profile-back-btn" style="border: 1.5px solid var(--color-primary); color: var(--color-primary); padding: 10px 24px; border-radius: 30px; transition: all 0.3s ease; text-decoration: none;">
                 <i class="ri-arrow-left-line"></i> Kembali ke Dashboard
             </a>
             @else
-            <a href="{{ route('home') }}" class="btn btn-secondary" style="background-color: #ffffff; border: 1.5px solid var(--color-primary); color: var(--color-primary); padding: 10px 24px; border-radius: 30px; transition: all 0.3s ease; text-decoration: none;">
+            <a href="{{ route('home') }}" class="btn btn-secondary profile-back-btn" style="border: 1.5px solid var(--color-primary); color: var(--color-primary); padding: 10px 24px; border-radius: 30px; transition: all 0.3s ease; text-decoration: none;">
                 <i class="ri-home-line"></i> Kembali ke Beranda
             </a>
             @endif

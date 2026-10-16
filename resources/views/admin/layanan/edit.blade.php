@@ -17,29 +17,29 @@
         </div>
     @endif
 
-    <div class="card" style="padding: 30px; background-color: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 10px;">
+    <div class="card">
         <form action="{{ route('admin.layanan.update', $layanan->id) }}" method="POST">
             @csrf
             @method('PUT')
             
-            <div class="form-group mb-3" style="margin-bottom: 1rem;">
-                <label for="jenis_layanan" style="display: block; margin-bottom: 5px;">Jenis Layanan (Read Only)</label>
-                <input type="text" id="jenis_layanan" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: #ccc; border-radius: 5px;" value="{{ strtoupper($layanan->jenis_layanan) }}" readonly>
+            <div class="form-group mb-3">
+                <label for="jenis_layanan" class="form-label">Jenis Layanan (Read Only)</label>
+                <input type="text" id="jenis_layanan" class="form-control" style="background-color: #f8fafc;" value="{{ strtoupper($layanan->jenis_layanan) }}" readonly>
             </div>
 
-            <div class="form-group mb-3" style="margin-bottom: 1rem;">
-                <label for="nama_lengkap" style="display: block; margin-bottom: 5px;">Nama Lengkap</label>
-                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" value="{{ old('nama_lengkap', $layanan->nama_lengkap) }}" required>
+            <div class="form-group mb-3">
+                <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
+                <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control" value="{{ old('nama_lengkap', $layanan->nama_lengkap) }}" required>
             </div>
             
-            <div class="form-group mb-3" style="margin-bottom: 1rem;">
-                <label for="perangkat_daerah" style="display: block; margin-bottom: 5px;">Perangkat Daerah</label>
-                <input type="text" id="perangkat_daerah" name="perangkat_daerah" class="form-control" style="width: 100%; padding: 10px; background-color: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: white; border-radius: 5px;" value="{{ old('perangkat_daerah', $layanan->perangkat_daerah) }}" required>
+            <div class="form-group mb-3">
+                <label for="perangkat_daerah" class="form-label">Perangkat Daerah</label>
+                <input type="text" id="perangkat_daerah" name="perangkat_daerah" class="form-control" value="{{ old('perangkat_daerah', $layanan->perangkat_daerah) }}" required>
             </div>
 
-            <div class="form-group mb-3" style="margin-bottom: 1.5rem;">
-                <label for="status" style="display: block; margin-bottom: 5px;">Status</label>
-                <select id="status" name="status" class="form-control" style="width: 100%; padding: 10px; background-color: #1a1a2e; border: 1px solid var(--border-color); color: white; border-radius: 5px;" required>
+            <div class="form-group mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-control" required>
                     <option value="Menunggu" {{ (old('status', $layanan->status) == 'Menunggu') ? 'selected' : '' }}>Menunggu</option>
                     <option value="Diproses" {{ (old('status', $layanan->status) == 'Diproses') ? 'selected' : '' }}>Diproses</option>
                     <option value="Selesai" {{ (old('status', $layanan->status) == 'Selesai') ? 'selected' : '' }}>Selesai</option>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="mt-4">
-                <button type="submit" class="btn btn-success" style="background-color: #2ecc71; border-color: #2ecc71; padding: 10px 20px; color: white; border-radius: 5px; border: none; cursor: pointer;">Simpan Perubahan</button>
+                <button type="submit" class="btn btn-primary" style="padding: 10px 24px; border-radius: 8px;">Simpan Perubahan</button>
             </div>
         </form>
     </div>

@@ -30,9 +30,9 @@
 
         <a href="{{ route('admin.katalog.index') }}"
            style="
-               padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
+               padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
                text-decoration: none; transition: all .2s;
-               {{ !request('kategori') ? 'background: var(--primary); color: white;' : 'background: rgba(255,255,255,0.07); color: var(--text-muted); border: 1px solid var(--border-color);' }}
+               {{ !request('kategori') ? 'background: var(--primary); color: white; border: 1.5px solid var(--primary);' : 'background: #ffffff; color: var(--text-muted); border: 1.5px solid var(--border-color);' }}
            ">
             Semua ({{ \App\Models\LayananKatalog::count() }})
         </a>
@@ -40,9 +40,9 @@
         @foreach($kategoris as $kat)
         <a href="{{ route('admin.katalog.index', ['kategori' => $kat]) }}"
            style="
-               padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
+               padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 600;
                text-decoration: none; transition: all .2s; text-transform: uppercase;
-               {{ request('kategori') === $kat ? 'background: var(--primary); color: white;' : 'background: rgba(255,255,255,0.07); color: var(--text-muted); border: 1px solid var(--border-color);' }}
+               {{ request('kategori') === $kat ? 'background: var(--primary); color: white; border: 1.5px solid var(--primary);' : 'background: #ffffff; color: var(--text-muted); border: 1.5px solid var(--border-color);' }}
            ">
             {{ strtoupper($kat) }} ({{ \App\Models\LayananKatalog::where('kategori', $kat)->count() }})
         </a>

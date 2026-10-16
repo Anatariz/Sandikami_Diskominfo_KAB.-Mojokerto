@@ -213,6 +213,23 @@ img {
   transform: translateY(0);
 }
 
+/* Profile avatar dropdown: open only on click (.open), never on hover/focus */
+.dropdown.profile-dropdown:hover .dropdown-menu,
+.dropdown.profile-dropdown:focus-within .dropdown-menu {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(15px);
+  pointer-events: none;
+}
+
+.dropdown.profile-dropdown.open .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
 .nav-links .dropdown-item {
   display: block;
   padding: 12px 20px;
